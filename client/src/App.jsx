@@ -1,14 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import AnonRoute from "./components/AnonRoute";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import ErrorPage from "./pages/ErrorPage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Project 3 <code>template</code> Globtrotters
-        </p>
+        <Navbar />
+        <Switch>
+          <PrivateRoute exact path="/profile" component={ProfilePage} />
+          <AnonRoute exact path="/signup" component={SignupPage} />
+          <AnonRoute exact path="/login" component={LoginPage} />
+          <AnonRoute exact path="/" component={HomePage} />
+          <AnonRoute component={ErrorPage} />
+        </Switch>
       </header>
     </div>
   );

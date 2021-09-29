@@ -12,6 +12,8 @@
 # Icon must end with two \r
 Icon
 
+#Package-lock
+package-lock.json
 
 # Thumbnails
 ._*

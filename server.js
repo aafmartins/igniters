@@ -1,24 +1,23 @@
-require('dotenv/config')
+require("dotenv/config");
 
-const createError = require('http-errors');
-const express = require('express');
+const createError = require("http-errors");
+const express = require("express");
 
-const {
-  isAuthenticated
-} = require("./middleware/jwt.middleware"); // <== IMPORT
+const { isAuthenticated } = require("./middleware/jwt.middleware"); // <== IMPORT
 
 const server = express();
 
 // Functional curling style of loading configuration
-require('./config/db')
-require('./config/global')(server)
+require("./config/db");
+require("./config/global")(server);
 
 // Handling routes here 👇
 const authRouter = require("./routes/auth.routes");
-server.use("/auth", authRouter);
-
-// const apiRouter = require('./routes/api');
-// server.use('/api', apiRouter);
+server.use("/api/auth", authRouter);
+const userRouter = require("./routes/user.routes");
+server.use("/api/users", isAuthenticated, userRouter);
+const apiRouter = require("./routes/api");
+server.use("/api", apiRouter);
 // const usersRouter = require('./routes/users');
 // server.use('/users', usersRouter);
 
@@ -31,12 +30,12 @@ server.use(function (req, res, next) {
 server.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
   res.json({
-    error: err
+    error: err,
   });
 });
 

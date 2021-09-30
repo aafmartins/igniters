@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import React from "react";
 
 const API_URL = "http://localhost:3000/api";
 
-function AddOrganizationPage(props) {
+function EditOrganizationPage(props) {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -14,7 +13,32 @@ function AddOrganizationPage(props) {
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = (e) => {
+  const orgId = props.match.params.id;
+
+  useEffect(() => {
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
+
+    // Send the token through the request "Authorization" Headers
+    axios
+      .get(`${API_URL}/orgs/${orgId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        const oneOrg = response.data;
+        setName(oneOrg.name);
+        setCountry(oneOrg.country);
+        setCity(oneOrg.city);
+        setStreet(oneOrg.street);
+        setEmail(oneOrg.email);
+        setCategories(oneOrg.categories);
+        setLanguage(oneOrg.language);
+        setDescription(oneOrg.description);
+      })
+      .catch((error) => console.log(error));
+  }, [orgId]);
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
       name,
@@ -32,29 +56,32 @@ function AddOrganizationPage(props) {
 
     // Send the token through the request "Authorization" Headers
     axios
-      .post(`${API_URL}/orgs`, requestBody, {
+      .put(`${API_URL}/orgs/edit/${orgId}`, requestBody, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        // Reset the state
-        console.log(response);
-        setName("");
-        setCountry("");
-        setCity("");
-        setStreet("");
-        setEmail("");
-        setCategories("");
-        setLanguage("");
-        setDescription("");
-        // props.refreshOrgs();
+        props.history.push(`/orgs/${orgId}`);
+      });
+  };
+
+  const deleteOrganization = () => {
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
+
+    // Send the token through the request "Authorization" Headers
+    axios
+      .delete(`${API_URL}/orgs/delete/${orgId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .catch((error) => console.log(error));
+      .then(() => props.history.push("/orgs"))
+      .catch((err) => console.log(err));
   };
 
   return (
-    <div className="AddProject">
-      <h3>Add Organization</h3>
-      <form onSubmit={handleSubmit}>
+    <div className="EditProjectPage">
+      <h3>Edit the Project</h3>
+
+      <form onSubmit={handleFormSubmit}>
         <label>Name:</label>
         <input
           type="text"
@@ -126,10 +153,12 @@ function AddOrganizationPage(props) {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <button type="submit">Submit</button>
+        <button type="submit">Update Organization</button>
       </form>
+
+      <button onClick={deleteOrganization}>Delete Organization</button>
     </div>
   );
 }
 
-export default AddOrganizationPage;
+export default EditOrganizationPage;

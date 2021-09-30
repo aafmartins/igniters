@@ -16,10 +16,12 @@ const authRouter = require("./routes/auth.routes");
 server.use("/api/auth", authRouter);
 const userRouter = require("./routes/user.routes");
 server.use("/api/users", isAuthenticated, userRouter);
+const organizationRouter = require("./routes/organization.routes");
+server.use("/api", isAuthenticated, organizationRouter);
+// const reviewRouter = require("./routes/review.routes");
+// server.use("/api", isAuthenticated, reviewRouter);
 const apiRouter = require("./routes/api");
 server.use("/api", apiRouter);
-// const usersRouter = require('./routes/users');
-// server.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 server.use(function (req, res, next) {

@@ -32,10 +32,10 @@ Upload with scroll
 | `/auth/signup`     | Navbar, SignupPage, Footer           | public `<Route>`            | Signup form, link to login, navigate to question form after signup |
 | `/auth/login `     | Navbar, LoginPage, Footer            | public `<AnonRoute>`        | Login form, link to signup, navigate to profile after login        |
 | `/logout`          | n/a                                  | user only `<PrivateRoute>`  | Navigate to homepage after logout, expire session                  |
-| `/profile/me`      | NavBar, UserDetails, Footer          | user only `<PrivateRoute>`  | Shows some info about user and shows his projects                  |
+| `/profile`         | NavBar, UserDetails, Footer          | user only `<PrivateRoute>`  | Shows some info about user and shows his projects                  |
 | `/profile/edit`    | NavBar, ProfileEditForm, Footer      | user only `<PrivateRoute>`  | Edit profile details                                               |
 | `/search-orgs`     | NavBar, OrgList, Footer              | public `<PrivateRoute>`     | Shows all organization                                             |
-| `/org/create`      | NavBar, AddOrganization, Footer      | user only `<PrivateRoute>`  | Create your own organization                                       |
+| `/orgs/create `    | NavBar, AddOrganization, Footer      | user only `<PrivateRoute>`  | Create your own organization                                       |
 | `/org/:id`         | Navbar, OrgDetail, AddReview, Footer | user only `<PrivateRoute>`  | Render a single organization                                       |
 | `/org/:id/edit`    | Navbar, OrgEdit, Footer              | owner only `<PrivateRoute>` | Edit and delete your organization                                  |
 | `/search-orgs/q=?` | Navbar, SearchResults, Footer        | owner only `<PrivateRoute>` | Search organizations                                               |

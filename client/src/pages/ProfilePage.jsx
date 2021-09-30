@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
 import React from "react";
+import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import AddOrganization from "./../components/AddOrganization";
 import { AuthContext } from "./../contexts/auth.context";
 
 const API_URL = "http://localhost:3000/api";
@@ -18,12 +18,13 @@ export default function ProfilePage() {
 
     // Send the token through the request "Authorization" Headers
     axios
-      .get(`${API_URL}/api/users/${userId}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
+      .get(`${API_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
       })
       .then((response) => {
         setUser(response.data);
-        console.log("My user:", user);
       })
       .catch((error) => console.log(error));
   };
@@ -34,5 +35,19 @@ export default function ProfilePage() {
     getUser(userId);
   }, [userId]);
 
-  return <div>{!user.name ? "Loading profile..." : <AddOrganization />}</div>;
+  return (
+    <div>
+      {" "}
+      {!user.name ? (
+        "Loading profile..."
+      ) : (
+        <>
+          <h1>Hello, {user.name}!</h1>
+          <Link to="/orgs/create">
+            <button>Create an organization</button>
+          </Link>
+        </>
+      )}
+    </div>
+  );
 }

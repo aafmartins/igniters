@@ -12,6 +12,7 @@
     "dev:back": "PORT=3000 nodemon ./bin/www"
   },
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.13.2",
     "axios": "^0.21",
     "bcrypt": "^5",
     "bcryptjs": "^2.4.3",

@@ -1,24 +1,15 @@
-
 import React from "react";
-import {
-  useState,
-  useEffect,
-  useContext
-} from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {
-  AuthContext
-} from "./../contexts/auth.context";
+import { AuthContext } from "./../contexts/auth.context";
 
 const API_URL = "http://localhost:3000/api";
 
 export default function ProfilePage() {
   const [user, setUser] = useState({});
   const {
-    userToken: {
-      _id: userId
-    },
+    userToken: { _id: userId },
   } = useContext(AuthContext);
 
   const getUser = (userId) => {
@@ -29,12 +20,11 @@ export default function ProfilePage() {
     axios
       .get(`${API_URL}/users/${userId}`, {
         headers: {
-          Authorization: `Bearer ${storedToken}`
+          Authorization: `Bearer ${storedToken}`,
         },
       })
       .then((response) => {
         setUser(response.data);
-        console.log("My user:", user);
       })
       .catch((error) => console.log(error));
   };
@@ -45,13 +35,19 @@ export default function ProfilePage() {
     getUser(userId);
   }, [userId]);
 
-
-  return ( <div> {!user.name ? "Loading profile..." :    
-        <>       
+  return (
+    <div>
+      {" "}
+      {!user.name ? (
+        "Loading profile..."
+      ) : (
+        <>
           <h1>Hello, {user.name}!</h1>
-          <Link to="/orgs">
+          <Link to="/orgs/create">
             <button>Create an organization</button>
           </Link>
-          </>
-          }</div> );
-  }
+        </>
+      )}
+    </div>
+  );
+}

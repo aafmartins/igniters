@@ -5,14 +5,41 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 
 const geocoder = mbxGeocoding({
-    accessToken: mapBoxToken
+  accessToken: mapBoxToken,
 });
 
 const Organization = require("../models/Organization.model");
 
 //  POST /api/orgs  -  Creates a new organization
 router.post("/orgs", (req, res, next) => {
-    const {
+  const {
+    name,
+    country,
+    city,
+    street,
+    email,
+    categories,
+    language,
+    description,
+    // creator,
+    // reviews,
+  } = req.body;
+  console.log("this is req.body", req.body);
+  console.log("req payload", req.payload);
+  geocoder
+    .forwardGeocode({
+      query: street + " " + city + " " + country,
+      limit: 1,
+    })
+    .send()
+
+    // body.features[0].geometry;
+    .then((res) => {
+      const geometry = res.body.features[0].geometry;
+
+      //   console.log("geometry", geometry);
+      //   console.log("creating organization");
+      Organization.create({
         name,
         country,
         city,
@@ -21,46 +48,23 @@ router.post("/orgs", (req, res, next) => {
         categories,
         language,
         description,
-        // creator,
+        creator: req.payload._id,
         // reviews,
-    } = req.body;
-    console.log("this is req.body", req.body)
-
-   geocoder.forwardGeocode({
-        query: country,
-      
-        limit: 1
-    }).send()
-    
-   // body.features[0].geometry;
-    .then((res) => {
-        const geometry = res.body.features[0].geometry;
-        console.log("geometry",geometry);
-        console.log("creating organization")
-        Organization.create({
-                name,
-                country,
-                city,
-                street,
-                email,
-                categories,
-                language,
-                description,
-                // creator,
-                // reviews,
-                geometry
-            })
-            .then((response) => {
-                console.log("new organization", response)
-                res.json(response)
-            })
-            .catch((err) => {
-                console.log('Organization not created!', err)
-                res.json(err)});
+        geometry,
+      })
+        .then((response) => {
+          console.log("new organization", response);
+          res.json(response);
+        })
+        .catch((err) => {
+          console.log("Organization not created!", err);
+          res.json(err);
+        });
     })
     .catch((err) => {
-        console.log('Geometry not created!', err)
-        res.json(err)})
+      console.log("Geometry not created!", err);
+      res.json(err);
+    });
 });
 
 /*

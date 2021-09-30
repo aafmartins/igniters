@@ -24,18 +24,17 @@ function App() {
             path="/orgs/edit/:id"
             component={EditOrganizationPage}
           />
-
+          <PrivateRoute
+            exact
+            path="/orgs/create"
+            component={AddOrganizationPage}
+          />
           <PrivateRoute
             exact
             path="/orgs/:id"
             component={OrganizationDetailsPage}
           />
           <PrivateRoute exact path="/orgs" component={OrganizationListPage} />
-          <PrivateRoute
-            exact
-            path="/orgs/create"
-            component={AddOrganizationPage}
-          />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />

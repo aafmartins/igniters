@@ -18,8 +18,8 @@ const userRouter = require("./routes/user.routes");
 server.use("/api/users", isAuthenticated, userRouter);
 const organizationRouter = require("./routes/organization.routes");
 server.use("/api", isAuthenticated, organizationRouter);
-// const reviewRouter = require("./routes/review.routes");
-// server.use("/api", isAuthenticated, reviewRouter);
+const reviewRouter = require("./routes/review.routes");
+server.use("/api", isAuthenticated, reviewRouter);
 const apiRouter = require("./routes/api");
 server.use("/api", apiRouter);
 

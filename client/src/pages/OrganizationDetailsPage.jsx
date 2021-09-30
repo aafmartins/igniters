@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import AddReview from "../components/AddReview";
+import ReviewCard from "../components/ReviewCard";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -44,6 +46,12 @@ function OrganizationDetailsPage(props) {
         </>
       )}
 
+      <AddReview 
+        refreshOrg={getOrg} 
+        orgId={orgId} 
+
+      />
+
       <Link to="/orgs">
         <button>Back to Organizations</button>
       </Link>
@@ -52,6 +60,15 @@ function OrganizationDetailsPage(props) {
       <Link to={`/orgs/edit/${orgId}`}>
         <button>Edit Organization</button>
       </Link>
+
+      { org && org.reviews.map((review) => {
+        console.log("sending review data: ", review)
+        return (
+          <ReviewCard key={review._id} {...review} />
+          )
+        } 
+      )}
+
     </div>
   );
 }

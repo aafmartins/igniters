@@ -22,8 +22,6 @@ server.use("/api", isAuthenticated, organizationRouter);
 // server.use("/api", isAuthenticated, reviewRouter);
 const apiRouter = require("./routes/api");
 server.use("/api", apiRouter);
-// const usersRouter = require('./routes/users');
-// server.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 server.use(function (req, res, next) {

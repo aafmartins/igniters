@@ -79,15 +79,13 @@ const saltRounds = process.env.SALT || 10;
 
 //THIS GET METHOD DISPLAYS PROFILE
 router.get("/:id", (req, res) => {
-  console.log("i am in get router");
   User.findById(req.params.id)
     // User.findById(req.session.currentUser._id)
     .then((user) => {
       // Send back the object with user data
-      console.log(user);
       res.status(200).json(user);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.json(err));
 });
 
 module.exports = router;

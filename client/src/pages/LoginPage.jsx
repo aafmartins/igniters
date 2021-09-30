@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./../contexts/auth.context";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3000/api";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");

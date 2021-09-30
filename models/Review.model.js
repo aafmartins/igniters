@@ -5,6 +5,7 @@ const reviewSchema = new Schema({
   review: {
     type: String,
     required: false,
+    maxlength: 500
   }, //not required
   rating: {
     type: Number,
@@ -19,3 +20,5 @@ const reviewSchema = new Schema({
 const Review = model("Review", reviewSchema);
 
 module.exports = Review;
+
+

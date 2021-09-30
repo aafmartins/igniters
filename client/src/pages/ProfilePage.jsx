@@ -37,7 +37,6 @@ export default function ProfilePage() {
 
   return (
     <div>
-      {" "}
       {!user.name ? (
         "Loading profile..."
       ) : (
@@ -45,6 +44,9 @@ export default function ProfilePage() {
           <h1>Hello, {user.name}!</h1>
           <Link to="/orgs/create">
             <button>Create an organization</button>
+          </Link>
+          <Link to={`/profile/edit/${userId}`}>
+            <button>Edit Profile</button>
           </Link>
         </>
       )}

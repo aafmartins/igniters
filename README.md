@@ -35,7 +35,7 @@ Upload with scroll
 | `/profile`         | NavBar, UserDetails, Footer          | user only `<PrivateRoute>`  | Shows some info about user and shows his projects                  |
 | `/profile/edit`    | NavBar, ProfileEditForm, Footer      | user only `<PrivateRoute>`  | Edit profile details                                               |
 | `/search-orgs`     | NavBar, OrgList, Footer              | public `<PrivateRoute>`     | Shows all organization                                             |
-| `/orgs/new-org`    | NavBar, AddOrganization, Footer      | user only `<PrivateRoute>`  | Create your own organization                                       |
+| `/orgs/create `    | NavBar, AddOrganization, Footer      | user only `<PrivateRoute>`  | Create your own organization                                       |
 | `/org/:id`         | Navbar, OrgDetail, AddReview, Footer | user only `<PrivateRoute>`  | Render a single organization                                       |
 | `/org/:id/edit`    | Navbar, OrgEdit, Footer              | owner only `<PrivateRoute>` | Edit and delete your organization                                  |
 | `/search-orgs/q=?` | Navbar, SearchResults, Footer        | owner only `<PrivateRoute>` | Search organizations                                               |

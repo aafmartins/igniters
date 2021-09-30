@@ -8,7 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
-import AddOrganizationPage from "./pages/AddOrganizationPage"
+import AddOrganizationPage from "./pages/AddOrganizationPage";
 
 function App() {
   return (
@@ -16,7 +16,11 @@ function App() {
       <header className="App-header">
         <Navbar />
         <Switch>
-        <PrivateRoute exact path="/orgs" component={AddOrganizationPage} />
+          <PrivateRoute
+            exact
+            path="/orgs/create"
+            component={AddOrganizationPage}
+          />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />

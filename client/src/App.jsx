@@ -12,6 +12,7 @@ import AddOrganizationPage from "./pages/AddOrganizationPage";
 import OrganizationListPage from "./pages/OrganizationListPage";
 import OrganizationDetailsPage from "./pages/OrganizationDetailsPage";
 import EditOrganizationPage from "./pages/EditOrganizationPage";
+import EditProfilePage from "./pages/EditProfilePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <header className="App-header">
         <Navbar />
         <Switch>
+
           <PrivateRoute
             exact
             path="/orgs/edit/:id"
@@ -35,7 +37,9 @@ function App() {
             component={OrganizationDetailsPage}
           />
           <PrivateRoute exact path="/orgs" component={OrganizationListPage} />
+          <PrivateRoute exact path="/profile/edit/:id" component={EditProfilePage} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
+          
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
           <AnonRoute exact path="/" component={HomePage} />

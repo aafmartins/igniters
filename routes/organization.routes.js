@@ -110,6 +110,12 @@ router.get("/orgs/:orgId", (req, res, next) => {
   // We use .populate() method to get swap the `_id`s for the actual Task documents
   Organization.findById(orgId)
     .populate("reviews")
+    .populate({
+			path: "reviews",
+			populate: {
+				path: 'reviewer', select: 'name'
+			}
+		})		
     .then((org) => {
       res.status(200).json(org)
     })

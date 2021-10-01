@@ -8,6 +8,9 @@ const API_URL = "http://localhost:3000/api";
 
 function OrganizationDetailsPage(props) {
   const [org, setOrg] = useState(null);
+
+  const [showForm, setShowForm] = useState(false)
+
   const [savedOrg, setSavedOrg] = useState([])
   const orgId = props.match.params.id;
    const storedToken = localStorage.getItem("authToken");
@@ -41,6 +44,7 @@ console.log('Authorization token', storedToken)
         },
       })
       .then((response) => {
+
         setOrg(response.data);
       })
       .catch((error) => console.log(error));
@@ -51,6 +55,11 @@ console.log('Authorization token', storedToken)
   useEffect(() => {
     getOrg();
   }, []);
+
+    //function to toggle the form AddReview hidden or showing style
+    const toggleForm = () => {
+      setShowForm(!showForm)
+    }
 
   return (
     <div className="ProjectDetails">
@@ -64,12 +73,7 @@ console.log('Authorization token', storedToken)
         </>
       )}
 
-      <AddReview 
-        refreshOrg={getOrg} 
-        orgId={orgId} 
-
-      />
-
+    
       <Link to="/orgs">
         <button>Back to Organizations</button>
       </Link>
@@ -79,9 +83,15 @@ console.log('Authorization token', storedToken)
         <button>Edit Organization</button>
       </Link>
 
+      <br/>
+      <br/>      
+      <button onClick={toggleForm} >{showForm ? "Hide Review Form" : "Add a Review"}</button>
+        <br/>
+        {showForm ? <AddReview toggleForm={toggleForm} refreshOrg={getOrg} orgId={orgId} /> : null}
+
       { org && org.reviews.map((review) => {
         return (
-          <ReviewCard key={review._id} {...review} />
+            <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
           )
         } 
       )}

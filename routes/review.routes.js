@@ -6,13 +6,12 @@ const Review = require("../models/Review.model");
 const Organization = require("../models/Organization.model");
 
 // PUT  /api/reviews/:reviewId  - Updates a specific review by id
-router.put("/reviews/:reviewId", (req, res, next) => {
+router.put("/reviews/edit/:reviewId", (req, res, next) => {
     const { reviewId } = req.params;
 
     const { 
         review, 
-        rating, 
-        reviewer 
+        rating
     } = req.body;
   
     if (!mongoose.Types.ObjectId.isValid(reviewId)) {
@@ -23,8 +22,7 @@ router.put("/reviews/:reviewId", (req, res, next) => {
     Review.findByIdAndUpdate(reviewId, 
         {
             review,
-            rating,
-            reviewer
+            rating
         }, 
         { 
             new: true 
@@ -85,7 +83,13 @@ router.post("/reviews", (req, res, next) => {
     })
       .then((newReview) => {
         return Organization.findByIdAndUpdate(orgId, {
-          $push: { reviews: newReview._id },
+                $push: {
+              reviews: {
+                $each: [newReview._id],
+                $position: 0
+              }
+            }
+          // $push: { reviews: newReview._id },$sort:{ createdAt: -1}
         });
       })
       .then((response) => {
@@ -96,5 +100,8 @@ router.post("/reviews", (req, res, next) => {
           res.json(err)
       });
   });
+
+
+  
 
 module.exports = router;

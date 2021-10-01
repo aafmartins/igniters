@@ -8,14 +8,33 @@ const API_URL = "http://localhost:3000/api";
 
 function OrganizationDetailsPage(props) {
   const [org, setOrg] = useState(null);
+
   const [showForm, setShowForm] = useState(false)
-  
+
+  const [savedOrg, setSavedOrg] = useState([])
   const orgId = props.match.params.id;
- // console.log("These are our props:", props);
+   const storedToken = localStorage.getItem("authToken");
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    // const storedToken = localStorage.getItem("authToken");
+console.log('Authorization token', storedToken)
+    axios
+      .put(`${API_URL}/orgs/${orgId}`, {},{
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+          console.log('This is our organization being saved, we hope?:', response)
+          setSavedOrg(response);
+      })
+      .catch((error) => console.log(error));
+  }
 
   const getOrg = () => {
     // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
+    // const storedToken = localStorage.getItem("authToken");
 
     // Send the token through the request "Authorization" Headers
     axios
@@ -25,7 +44,7 @@ function OrganizationDetailsPage(props) {
         },
       })
       .then((response) => {
-        //console.log("this is the response", response);
+
         setOrg(response.data);
       })
       .catch((error) => console.log(error));
@@ -50,6 +69,7 @@ function OrganizationDetailsPage(props) {
         <>
           <h1>{org.name}</h1>
           <p>{org.description}</p>
+          <button onClick={handleSave}>Save Organization</button>
         </>
       )}
 

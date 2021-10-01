@@ -22,8 +22,6 @@ function LoginPage(props) {
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log("JWT token", response.data.authToken);
-
         const token = response.data.authToken;
         logInUser(token);
         props.history.push("/");

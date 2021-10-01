@@ -33,7 +33,6 @@ router.put("/:id/edit", (req, res) => {
   const {
     id
   } = req.params;
-  console.log('Req.params from User.put route', req.params, req.body,id)
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     res.status(400).json({
@@ -47,7 +46,6 @@ router.put("/:id/edit", (req, res) => {
     password,
     email,
   } = req.body;
-  console.log('Req.body from put route', req.body);
 
   if (
     !name ||
@@ -73,7 +71,6 @@ router.put("/:id/edit", (req, res) => {
       password: hashPassword,
     })
     .then((updatedUser) => {
-      console.log('Updated user', updatedUser);
       res.json(updatedUser)
     })
     .catch((error) => {

@@ -8,12 +8,33 @@ const API_URL = "http://localhost:3000/api";
 
 function OrganizationDetailsPage(props) {
   const [org, setOrg] = useState(null);
+
+  const [showForm, setShowForm] = useState(false)
+
+  const [savedOrg, setSavedOrg] = useState([])
   const orgId = props.match.params.id;
-  console.log("These are our props:", props);
+   const storedToken = localStorage.getItem("authToken");
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    // const storedToken = localStorage.getItem("authToken");
+console.log('Authorization token', storedToken)
+    axios
+      .put(`${API_URL}/orgs/${orgId}`, {},{
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+          console.log('This is our organization being saved, we hope?:', response)
+          setSavedOrg(response);
+      })
+      .catch((error) => console.log(error));
+  }
 
   const getOrg = () => {
     // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
+    // const storedToken = localStorage.getItem("authToken");
 
     // Send the token through the request "Authorization" Headers
     axios
@@ -23,7 +44,7 @@ function OrganizationDetailsPage(props) {
         },
       })
       .then((response) => {
-        console.log("this is the response", response);
+
         setOrg(response.data);
       })
       .catch((error) => console.log(error));
@@ -35,6 +56,11 @@ function OrganizationDetailsPage(props) {
     getOrg();
   }, []);
 
+    //function to toggle the form AddReview hidden or showing style
+    const toggleForm = () => {
+      setShowForm(!showForm)
+    }
+
   return (
     <div className="ProjectDetails">
       {!org ? (
@@ -43,15 +69,11 @@ function OrganizationDetailsPage(props) {
         <>
           <h1>{org.name}</h1>
           <p>{org.description}</p>
+          <button onClick={handleSave}>Save Organization</button>
         </>
       )}
 
-      <AddReview 
-        refreshOrg={getOrg} 
-        orgId={orgId} 
-
-      />
-
+    
       <Link to="/orgs">
         <button>Back to Organizations</button>
       </Link>
@@ -61,10 +83,15 @@ function OrganizationDetailsPage(props) {
         <button>Edit Organization</button>
       </Link>
 
+      <br/>
+      <br/>      
+      <button onClick={toggleForm} >{showForm ? "Hide Review Form" : "Add a Review"}</button>
+        <br/>
+        {showForm ? <AddReview toggleForm={toggleForm} refreshOrg={getOrg} orgId={orgId} /> : null}
+
       { org && org.reviews.map((review) => {
-        console.log("sending review data: ", review)
         return (
-          <ReviewCard key={review._id} {...review} />
+            <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
           )
         } 
       )}

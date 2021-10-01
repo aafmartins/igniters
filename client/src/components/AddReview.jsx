@@ -33,6 +33,7 @@ function AddReview(props) {
         setRating(1);
       
         props.refreshOrg();
+        props.toggleForm();
       })
       .catch((error) => console.log(error));
   };

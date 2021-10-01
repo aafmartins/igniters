@@ -37,7 +37,6 @@ function AddOrganizationPage(props) {
       })
       .then((response) => {
         // Reset the state
-        console.log(response);
         setName("");
         setCountry("");
         setCity("");

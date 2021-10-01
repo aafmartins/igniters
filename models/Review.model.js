@@ -10,12 +10,16 @@ const reviewSchema = new Schema({
   rating: {
     type: Number,
     required: true,
+    
   }, //required
   reviewer: {
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,  
     ref: "User",
   },
-});
+},
+  {
+    timestamps: true
+  });
 
 const Review = model("Review", reviewSchema);
 

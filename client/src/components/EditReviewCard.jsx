@@ -28,7 +28,6 @@ export default function EditReviewCard(props) {
             setStarsValue(oneReview.rating)
             setReview(oneReview.review);
             setRating(oneReview.rating);
-            console.log("rating", oneReview.rating , "1", checkedOne, "two" ,checkedTwo , "three" , checkedThree, "four" , checkedFour, "five" , checkedFive)
           })
           .catch((error) => console.log(error));
       }, [reviewId]);
@@ -40,6 +39,8 @@ export default function EditReviewCard(props) {
           rating,
         };
     
+        setStarsValue(rating)
+
         // Get the token from the localStorage
         const storedToken = localStorage.getItem("authToken");
     
@@ -55,7 +56,11 @@ export default function EditReviewCard(props) {
       };
 
     const setStarsValue = (rating) => {
-      console.log("this is raiting in function", rating )
+      checkedOne = false;
+      checkedTwo  = false;
+      checkedThree = false;
+      checkedFour = false;
+      checkedFive = false;
       if (rating === 1) checkedOne = true;
       if (rating === 2) checkedTwo = true;
       if (rating === 3) checkedThree = true;

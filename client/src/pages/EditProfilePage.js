@@ -40,7 +40,6 @@ function EditProfilePage(props) {
       password,
       email,
     };
-    console.log('The body from handle submit:', requestBody);
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");

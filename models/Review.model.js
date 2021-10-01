@@ -9,9 +9,7 @@ const reviewSchema = new Schema({
   }, //not required
   rating: {
     type: Number,
-    required: true,
-    
-  }, //required
+  }, //not required
   reviewer: {
     type: Schema.Types.ObjectId,  
     ref: "User",

@@ -55,7 +55,10 @@ function ReviewCard(props) {
 
   return (
     <div className="ReviewCard card">
-      <h3>{rating} out 5</h3>
+      <p class="starability-result" data-rating={rating}>
+        Rated: {rating} stars
+      </p>
+
       <h4>Comment:</h4>
       <p>{comment}</p>
       <p>by: {reviewer.name}</p>

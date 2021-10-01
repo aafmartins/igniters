@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import AddReview from "../components/AddReview";
 import ReviewCard from "../components/ReviewCard";
+import { AuthContext } from "./../contexts/auth.context";
 
 const API_URL = "http://localhost:3000/api";
 
 function OrganizationDetailsPage(props) {
   const [org, setOrg] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const { userToken } = useContext(AuthContext);
   // const [isSaved, setIsSaved] = useState(false);
+  const [isCreatedByUser, setIsCreatedByUser] = useState(false);
   const orgId = props.match.params.id;
-
+  const userId = userToken._id;
   const storedToken = localStorage.getItem("authToken");
 
   const handleSave = (e) => {
@@ -27,9 +30,6 @@ function OrganizationDetailsPage(props) {
           },
         }
       )
-      // .then(() => {
-      //   setIsSaved(true);
-      // })
       .then(() => {
         props.history.push("/my-orgs");
       })
@@ -61,7 +61,13 @@ function OrganizationDetailsPage(props) {
         },
       })
       .then((response) => {
+        console.log("My organization:", response.data);
         setOrg(response.data);
+        const creatorId = response.data.creator;
+
+        if (creatorId === userId) {
+          setIsCreatedByUser(true);
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -94,10 +100,15 @@ function OrganizationDetailsPage(props) {
       </Link>
       {/* Below will need to be inside a protected route/condition - only creator
       can access edit! */}
-      <Link to={`/orgs/edit/${orgId}`}>
-        <button>Edit Organization</button>
-      </Link>
-      {/* {!isSaved ? <button onClick={handleRemove}>Remove</button> : null} */}
+      {isCreatedByUser ? (
+        <div>
+          <Link to={`/orgs/edit/${orgId}`}>
+            <button>Edit Organization</button>
+          </Link>
+        </div>
+      ) : null}
+
+      {/* {isSaved ? <button onClick={handleRemove}>Remove</button> : null} */}
       <button onClick={handleRemove}>Remove</button>
       <br />
       <br />

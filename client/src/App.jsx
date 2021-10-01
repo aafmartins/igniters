@@ -1,4 +1,5 @@
 import "./App.css";
+import "./components/stars.css"
 import { Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import AnonRoute from "./components/AnonRoute";

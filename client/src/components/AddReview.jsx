@@ -31,12 +31,13 @@ function AddReview(props) {
         // Reset the state to clear the inputs
         setReview("");
         setRating(1);
-      
         props.refreshOrg();
         props.toggleForm();
       })
       .catch((error) => console.log(error));
   };
+
+
 
   
   return (
@@ -52,13 +53,30 @@ function AddReview(props) {
           onChange={(e) => setReview(e.target.value)}
         />
 
-        <label>Rating:</label>
+        {/* <label>Rating:</label>
         <textarea
           type="Number"
           name="rating"
+          min="1"
+          max="5"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-        />
+        /> */}
+        <fieldset class="starability-basic">
+            <legend>Rating:</legend>
+            <input type="radio" id="no-rate" class="input-no-rate" name={rating} value="1" checked aria-label="No rating." />
+            <input type="radio" id="first-rate1" name={rating} value="1"  onChange={(e) => setRating(e.target.value)}/>
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name={rating} value="2"  onChange={(e) => setRating(e.target.value)}/>
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name={rating} value="3"  onChange={(e) => setRating(e.target.value)}/>
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name={rating} value="4" onChange={(e) => setRating(e.target.value)}/>
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name={rating} value="5"  onChange={(e) => setRating(e.target.value)}/>
+            <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+
 
         <button type="submit">Add Review</button>
       </form>

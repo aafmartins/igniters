@@ -8,34 +8,51 @@ const API_URL = "http://localhost:3000/api";
 
 function OrganizationDetailsPage(props) {
   const [org, setOrg] = useState(null);
-
-  const [showForm, setShowForm] = useState(false)
-
-  const [savedOrg, setSavedOrg] = useState([])
+  const [showForm, setShowForm] = useState(false);
+  // const [isSaved, setIsSaved] = useState(false);
   const orgId = props.match.params.id;
-   const storedToken = localStorage.getItem("authToken");
+
+  const storedToken = localStorage.getItem("authToken");
 
   const handleSave = (e) => {
     e.preventDefault();
-    // const storedToken = localStorage.getItem("authToken");
-console.log('Authorization token', storedToken)
+
     axios
-      .put(`${API_URL}/orgs/${orgId}`, {},{
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
-      .then((response) => {
-          console.log('This is our organization being saved, we hope?:', response)
-          setSavedOrg(response);
+      .put(
+        `${API_URL}/save-org`,
+        { orgId },
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      )
+      // .then(() => {
+      //   setIsSaved(true);
+      // })
+      .then(() => {
+        props.history.push("/my-orgs");
       })
       .catch((error) => console.log(error));
-  }
+  };
+
+  const handleRemove = () => {
+    // Send the token through the request "Authorization" Headers
+    axios
+      .put(
+        `${API_URL}/remove-saved-org`,
+        { orgId },
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      )
+      .then(() => {
+        props.history.push("/my-orgs");
+      })
+      .catch((err) => console.log(err));
+  };
 
   const getOrg = () => {
-    // Get the token from the localStorage
-    // const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .get(`${API_URL}/orgs/${orgId}`, {
@@ -44,7 +61,6 @@ console.log('Authorization token', storedToken)
         },
       })
       .then((response) => {
-
         setOrg(response.data);
       })
       .catch((error) => console.log(error));
@@ -56,10 +72,10 @@ console.log('Authorization token', storedToken)
     getOrg();
   }, []);
 
-    //function to toggle the form AddReview hidden or showing style
-    const toggleForm = () => {
-      setShowForm(!showForm)
-    }
+  //function to toggle the form AddReview hidden or showing style
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   return (
     <div className="ProjectDetails">
@@ -73,7 +89,6 @@ console.log('Authorization token', storedToken)
         </>
       )}
 
-    
       <Link to="/orgs">
         <button>Back to Organizations</button>
       </Link>
@@ -82,20 +97,24 @@ console.log('Authorization token', storedToken)
       <Link to={`/orgs/edit/${orgId}`}>
         <button>Edit Organization</button>
       </Link>
+      {/* {!isSaved ? <button onClick={handleRemove}>Remove</button> : null} */}
+      <button onClick={handleRemove}>Remove</button>
+      <br />
+      <br />
+      <button onClick={toggleForm}>
+        {showForm ? "Hide Review Form" : "Add a Review"}
+      </button>
+      <br />
+      {showForm ? (
+        <AddReview toggleForm={toggleForm} refreshOrg={getOrg} orgId={orgId} />
+      ) : null}
 
-      <br/>
-      <br/>      
-      <button onClick={toggleForm} >{showForm ? "Hide Review Form" : "Add a Review"}</button>
-        <br/>
-        {showForm ? <AddReview toggleForm={toggleForm} refreshOrg={getOrg} orgId={orgId} /> : null}
-
-      { org && org.reviews.map((review) => {
-        return (
+      {org &&
+        org.reviews.map((review) => {
+          return (
             <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
-          )
-        } 
-      )}
-
+          );
+        })}
     </div>
   );
 }

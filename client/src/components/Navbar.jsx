@@ -18,6 +18,9 @@ function Navbar() {
           <Link to="/orgs">
             <button>Organizations</button>
           </Link>
+          <Link to="/orgs/create">
+            <button>Create an organization</button>
+          </Link>
           <Link to="/profile">
             <button>Profile</button>
           </Link>
@@ -25,6 +28,9 @@ function Navbar() {
         </>
       ) : (
         <>
+          <Link to="/orgs">
+            <button>Organizations</button>
+          </Link>
           <Link to="/signup">
             <button>Signup</button>
           </Link>

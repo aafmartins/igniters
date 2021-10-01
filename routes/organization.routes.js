@@ -105,6 +105,12 @@ router.get("/orgs/:orgId", (req, res, next) => {
   // We use .populate() method to get swap the `_id`s for the actual Task documents
   Organization.findById(orgId)
     .populate("reviews")
+    .populate({
+			path: "reviews",
+			populate: {
+				path: 'reviewer', select: 'name'
+			}
+		})		
     .then((org) => res.status(200).json(org))
     .catch((error) => res.json(error));
 });
@@ -161,7 +167,7 @@ router.post("/orgs", (req, res, next) => {
 //  GET /api/orgs -  Retrieves all of the organizations
 router.get("/orgs", (req, res, next) => {
   Organization.find()
-    .populate("reviews")
+    // .populate("reviews")
     .then((allOrgs) => res.json(allOrgs))
     .catch((err) => res.json(err));
 });

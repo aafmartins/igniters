@@ -11,10 +11,10 @@ function AddReview(props) {
   
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    const { userId, organizationId } = props;
+    const { orgId } = props;
     
     const requestBody = { review, 
-        rating, userId };
+        rating, orgId };
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem('authToken');
@@ -22,7 +22,8 @@ function AddReview(props) {
     // Send the token through the request "Authorization" Headers   
     axios
       .post(
-        `${API_URL}/org/${organizationId}/reviews`,                          // please check---------------------------------------------
+        //    `${API_URL}/org/${orgId}/reviews`, 
+        `${API_URL}/reviews`,                         
         requestBody,
         { headers: { Authorization: `Bearer ${storedToken}` } }        
       )
@@ -31,7 +32,8 @@ function AddReview(props) {
         setReview("");
         setRating(1);
       
-        props.refreshOrganization();
+        props.refreshOrg();
+        props.toggleForm();
       })
       .catch((error) => console.log(error));
   };

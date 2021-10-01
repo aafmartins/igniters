@@ -12,13 +12,17 @@ import AddOrganizationPage from "./pages/AddOrganizationPage";
 import OrganizationListPage from "./pages/OrganizationListPage";
 import OrganizationDetailsPage from "./pages/OrganizationDetailsPage";
 import EditOrganizationPage from "./pages/EditOrganizationPage";
-
+import EditProfilePage from "./pages/EditProfilePage";
+import MyOrganizationsPage from "./pages/MyOrganizationsPage";
+import MySavedOrganizations from "./components/MySavedOrganizations"
+import MyCreatedOrganizations from "./components/MyCreatedOrganizations"
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <Navbar />
         <Switch>
+
           <PrivateRoute
             exact
             path="/orgs/edit/:id"
@@ -35,7 +39,13 @@ function App() {
             component={OrganizationDetailsPage}
           />
           <PrivateRoute exact path="/orgs" component={OrganizationListPage} />
+          <PrivateRoute exact path="/profile/edit/:id" component={EditProfilePage} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
+
+          <PrivateRoute exact path="/my-orgs" component={MyOrganizationsPage} />
+          <PrivateRoute exact path="/saved-orgs" component={MySavedOrganizations} />
+          <PrivateRoute exact path="/created-orgs" component={MyCreatedOrganizations} />
+          
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
           <AnonRoute exact path="/" component={HomePage} />

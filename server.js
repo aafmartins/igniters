@@ -3,9 +3,7 @@ require("dotenv/config");
 const createError = require("http-errors");
 const express = require("express");
 
-const {
-  isAuthenticated
-} = require("./middleware/jwt.middleware"); // <== IMPORT
+const { isAuthenticated } = require("./middleware/jwt.middleware"); // <== IMPORT
 
 const server = express();
 
@@ -19,7 +17,7 @@ server.use("/api/auth", authRouter);
 const userRouter = require("./routes/user.routes");
 server.use("/api/users", isAuthenticated, userRouter);
 const organizationRouter = require("./routes/organization.routes");
-server.use("/api", isAuthenticated, organizationRouter);
+server.use("/api", organizationRouter);
 const reviewRouter = require("./routes/review.routes");
 server.use("/api", isAuthenticated, reviewRouter);
 const userOrgRouter = require("./routes/user.organization.routes");

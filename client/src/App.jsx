@@ -1,5 +1,5 @@
 import "./App.css";
-import { Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import AnonRoute from "./components/AnonRoute";
 import Navbar from "./components/Navbar";
@@ -14,15 +14,14 @@ import OrganizationDetailsPage from "./pages/OrganizationDetailsPage";
 import EditOrganizationPage from "./pages/EditOrganizationPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import MyOrganizationsPage from "./pages/MyOrganizationsPage";
-import MySavedOrganizations from "./components/MySavedOrganizations"
-import MyCreatedOrganizations from "./components/MyCreatedOrganizations"
+import MySavedOrganizations from "./components/MySavedOrganizations";
+import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <Navbar />
         <Switch>
-
           <PrivateRoute
             exact
             path="/orgs/edit/:id"
@@ -38,14 +37,27 @@ function App() {
             path="/orgs/:id"
             component={OrganizationDetailsPage}
           />
-          <PrivateRoute exact path="/orgs" component={OrganizationListPage} />
-          <PrivateRoute exact path="/profile/edit/:id" component={EditProfilePage} />
+
+          <PrivateRoute
+            exact
+            path="/profile/edit/:id"
+            component={EditProfilePage}
+          />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
 
           <PrivateRoute exact path="/my-orgs" component={MyOrganizationsPage} />
-          <PrivateRoute exact path="/saved-orgs" component={MySavedOrganizations} />
-          <PrivateRoute exact path="/created-orgs" component={MyCreatedOrganizations} />
-          
+          <PrivateRoute
+            exact
+            path="/saved-orgs"
+            component={MySavedOrganizations}
+          />
+          <PrivateRoute
+            exact
+            path="/created-orgs"
+            component={MyCreatedOrganizations}
+          />
+
+          <Route exact path="/orgs" component={OrganizationListPage} />
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
           <AnonRoute exact path="/" component={HomePage} />

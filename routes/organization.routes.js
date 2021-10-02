@@ -7,7 +7,6 @@ const geocoder = mbxGeocoding({
   accessToken: mapBoxToken,
 });
 const Organization = require("../models/Organization.model");
-const User = require("../models/User.model");
 
 const { isAuthenticated } = require("../middleware/jwt.middleware"); // <== IMPORT
 
@@ -24,6 +23,7 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
     categories,
     language,
     description,
+    url,
   } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
@@ -53,6 +53,7 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
           categories,
           language,
           description,
+          url,
           creator: req.payload._id,
           // reviews,
           geometry,
@@ -140,6 +141,7 @@ router.post("/orgs", isAuthenticated, (req, res, next) => {
     categories,
     language,
     description,
+    url,
   } = req.body;
 
   geocoder
@@ -160,8 +162,8 @@ router.post("/orgs", isAuthenticated, (req, res, next) => {
         categories,
         language,
         description,
+        url,
         creator: req.payload._id,
-        // reviews,
         geometry,
       })
         .then((response) => {

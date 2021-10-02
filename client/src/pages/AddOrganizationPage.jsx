@@ -13,6 +13,7 @@ function AddOrganizationPage(props) {
   const [categories, setCategories] = useState("");
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ function AddOrganizationPage(props) {
       categories,
       language,
       description,
+      url,
     };
 
     // Get the token from the localStorage
@@ -45,6 +47,7 @@ function AddOrganizationPage(props) {
         setCategories("");
         setLanguage("");
         setDescription("");
+        setUrl("");
         props.history.push(`/my-orgs`);
       })
       .catch((error) => console.log(error));
@@ -123,6 +126,13 @@ function AddOrganizationPage(props) {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+        />
+        <label>Url:</label>
+        <textarea
+          type="text"
+          name="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
         />
 
         <button type="submit">Submit</button>

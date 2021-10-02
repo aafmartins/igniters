@@ -81,10 +81,8 @@ function OrganizationDetailsPage(props) {
         }
 
         // set coordinates for map
-        console.log("organization object", response.data)
         setLng(response.data.geometry.coordinates[0])
         setLat(response.data.geometry.coordinates[1])
-        console.log("coordinates", lng, lat)
       })
       .catch((error) => console.log(error));
   };

@@ -35,26 +35,32 @@ const organizationSchema = new Schema({
     type: String,
     required: false,
   }, //required
+  url: {
+    type: String,
+    required: false,
+  }, //required
   creator: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: false,
   },
   reviews: [
     {
       type: Schema.Types.ObjectId,
       ref: "Review",
       default: [],
+      required: false,
     },
   ],
   geometry: {
     type: {
       type: String,
       enum: ["Point"],
-      required: true,
+      required: false,
     },
     coordinates: {
       type: [Number],
-      required: true,
+      required: false,
     },
   },
 });

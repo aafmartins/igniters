@@ -7,7 +7,6 @@ const geocoder = mbxGeocoding({
   accessToken: mapBoxToken,
 });
 const Organization = require("../models/Organization.model");
-const User = require("../models/User.model");
 
 const { isAuthenticated } = require("../middleware/jwt.middleware"); // <== IMPORT
 

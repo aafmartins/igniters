@@ -22,6 +22,8 @@ const reviewRouter = require("./routes/review.routes");
 server.use("/api", isAuthenticated, reviewRouter);
 const userOrgRouter = require("./routes/user.organization.routes");
 server.use("/api", isAuthenticated, userOrgRouter);
+const searchRouter = require("./routes/search.routes");
+server.use("/api", isAuthenticated, searchRouter);
 const apiRouter = require("./routes/api");
 server.use("/api", apiRouter);
 

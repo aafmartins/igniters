@@ -1,7 +1,6 @@
 import "./App.css";
-
 import { Route, Switch } from "react-router-dom";
-import "./components/stars.css"
+import "./components/stars.css";
 import PrivateRoute from "./components/PrivateRoute";
 import AnonRoute from "./components/AnonRoute";
 import Navbar from "./components/Navbar";
@@ -18,6 +17,7 @@ import EditProfilePage from "./pages/EditProfilePage";
 import MyOrganizationsPage from "./pages/MyOrganizationsPage";
 import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
+
 function App() {
   return (
     <div className="App">

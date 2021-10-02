@@ -154,7 +154,7 @@ function OrganizationDetailsPage(props) {
         </>
       )}
 
-      <div className="map-container"  ref={mapContainer}  id='map'  style={{width: "400px", height: "300px"}}></div>
+      <div className="map-container" ref={mapContainer} id='map' style={{width: "400px", height: "300px"}}></div>
 
       <Link to="/orgs">
         <button>Back to Organizations</button>

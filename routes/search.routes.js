@@ -7,7 +7,7 @@ router.get("/search", (req, res) => {
   // you can access the query from req.query
   const { q } = req.query;
 
-  Organization.find({ city: q })
+  Organization.find({ $text: { $search: q } })
     .then((organizationsFound) => res.json(organizationsFound))
     .catch((err) => {
       console.log("Review not updated: ", err);

@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGODB_URI = `${process.env.MONGODB_URL}/${process.env.DB_NAME}`;
+const seedUrl = "mongodb://localhost/igniters";
 
 mongoose
   .connect(MONGODB_URI, {
@@ -15,8 +16,12 @@ mongoose
     // useCreateIndex: true
   })
   .then((x) => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
+    console.log("url", MONGODB_URI);
+    console.log(
+      `Connected to Mongo! Database name: "${x.connections[0].name}"`
+    );
   })
   .catch((err) => {
+    console.log("url", MONGODB_URI);
     console.error("Error connecting to mongo: ", err);
   });

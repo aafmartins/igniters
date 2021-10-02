@@ -12,6 +12,7 @@ function EditOrganizationPage(props) {
   const [categories, setCategories] = useState("");
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
 
   const orgId = props.match.params.id;
 
@@ -34,6 +35,7 @@ function EditOrganizationPage(props) {
         setCategories(oneOrg.categories);
         setLanguage(oneOrg.language);
         setDescription(oneOrg.description);
+        setUrl(oneOrg.url);
       })
       .catch((error) => console.log(error));
   }, [orgId]);
@@ -49,6 +51,7 @@ function EditOrganizationPage(props) {
       categories,
       language,
       description,
+      url,
     };
 
     // Get the token from the localStorage
@@ -151,6 +154,13 @@ function EditOrganizationPage(props) {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+        />
+        <label>Url:</label>
+        <textarea
+          type="text"
+          name="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
         />
 
         <button type="submit">Update Organization</button>

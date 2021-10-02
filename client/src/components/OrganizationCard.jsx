@@ -22,7 +22,9 @@ function OrganizationCard(props) {
       <p>
         {city}, {country}
       </p>
-      <p style={{ maxWidth: "400px" }}>{description.substring(1, 30)} </p>
+      <p style={{ maxWidth: "400px" }}>
+        {description.substring(0, 150) + "..."}
+      </p>
     </div>
   );
 }

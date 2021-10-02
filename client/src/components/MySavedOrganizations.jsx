@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import OrganizationCard from "./../components/OrganizationCard";
+import OrganizationCard from "./OrganizationCard";
 
 const API_URL = "http://localhost:3000/api";
 

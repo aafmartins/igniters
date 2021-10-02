@@ -15,11 +15,12 @@ function OrganizationDetailsPage(props) {
   const [org, setOrg] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const { userToken } = useContext(AuthContext);
-  // const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [isCreatedByUser, setIsCreatedByUser] = useState(false);
   const orgId = props.match.params.id;
   const userId = userToken._id;
   const storedToken = localStorage.getItem("authToken");
+
 
   // map Hooks. useRef .current orioerty is initialized to null and when its value changes it does not trigger a re-render
   const mapContainer = useRef(null);
@@ -27,6 +28,27 @@ function OrganizationDetailsPage(props) {
   const [lng, setLng] = useState(9.181851961805604);
   const [lat, setLat] = useState(48.77806893750751);
   const [zoom, setZoom] = useState(15);
+
+  const getUser = (userId) => {
+    axios
+      .get(`${API_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        console.log("data from user", response.data.savedOrganizations);
+        const savedId = response.data.savedOrganizations;
+
+        for (const org of savedId) {
+          if (org === orgId) {
+            setIsSaved(true);
+          }
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -87,11 +109,10 @@ function OrganizationDetailsPage(props) {
       .catch((error) => console.log(error));
   };
 
-  // We set this effect will run only once, after the initial render
-  // by setting the empty dependency array - []
   useEffect(() => {
     getOrg();
   }, []);
+
 
   
   useEffect(() => {
@@ -113,6 +134,10 @@ function OrganizationDetailsPage(props) {
   });
   
 
+  useEffect(() => {
+    getUser(userId);
+  }, [userId]);
+
   //function to toggle the form AddReview hidden or showing style
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -126,7 +151,6 @@ function OrganizationDetailsPage(props) {
         <>
           <h1>{org.name}</h1>
           <p>{org.description}</p>
-          <button onClick={handleSave}>Save Organization</button>
         </>
       )}
 
@@ -143,26 +167,55 @@ function OrganizationDetailsPage(props) {
             <button>Edit Organization</button>
           </Link>
         </div>
-      ) : null}
+      ) : isSaved ? (
+        <div>
+          <button onClick={handleRemove}>Remove</button>
+          <br />
+          <br />
+          <button onClick={toggleForm}>
+            {showForm ? "Hide Review Form" : "Add a Review"}
+          </button>
+          <br />
+          {showForm ? (
+            <AddReview
+              toggleForm={toggleForm}
+              refreshOrg={getOrg}
+              orgId={orgId}
+            />
+          ) : null}
 
-      {/* {isSaved ? <button onClick={handleRemove}>Remove</button> : null} */}
-      <button onClick={handleRemove}>Remove</button>
-      <br />
-      <br />
-      <button onClick={toggleForm}>
-        {showForm ? "Hide Review Form" : "Add a Review"}
-      </button>
-      <br />
-      {showForm ? (
-        <AddReview toggleForm={toggleForm} refreshOrg={getOrg} orgId={orgId} />
-      ) : null}
+          {org &&
+            org.reviews.map((review) => {
+              return (
+                <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
+              );
+            })}
+        </div>
+      ) : (
+        <div>
+          <button onClick={handleSave}>Save Organization</button>
+          <br />
+          <br />
+          <button onClick={toggleForm}>
+            {showForm ? "Hide Review Form" : "Add a Review"}
+          </button>
+          <br />
+          {showForm ? (
+            <AddReview
+              toggleForm={toggleForm}
+              refreshOrg={getOrg}
+              orgId={orgId}
+            />
+          ) : null}
 
-      {org &&
-        org.reviews.map((review) => {
-          return (
-            <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
-          );
-        })}
+          {org &&
+            org.reviews.map((review) => {
+              return (
+                <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
+              );
+            })}
+        </div>
+      )}
     </div>
   );
 }

@@ -8,16 +8,18 @@ function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [country, setCountry] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
+  const handleCountry = (e) => setCountry(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name };
+    const requestBody = { email, password, name, country };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
@@ -49,6 +51,14 @@ function SignupPage(props) {
 
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={handleName} />
+
+        <label>Country:</label>
+        <input
+          type="text"
+          name="country"
+          value={country}
+          onChange={handleCountry}
+        />
 
         <button type="submit">Sign Up</button>
       </form>

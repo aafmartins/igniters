@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import OrganizationCard from "./../components/OrganizationCard";
+import OrganizationCard from "./OrganizationCard";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -19,7 +19,8 @@ function MyCreatedOrganizations() {
         },
       })
       .then((response) => {
-          setmyCreatedOrgs(response.data)})
+        setmyCreatedOrgs(response.data);
+      })
       .catch((error) => console.log(error));
   };
 

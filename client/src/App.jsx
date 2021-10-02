@@ -62,7 +62,7 @@ function App() {
           <Route exact path="/orgs" component={OrganizationListPage} />
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
-          <AnonRoute exact path="/" component={HomePage} />
+          <PrivateRoute exact path="/" component={HomePage} />
           <AnonRoute component={ErrorPage} />
         </Switch>
       </header>

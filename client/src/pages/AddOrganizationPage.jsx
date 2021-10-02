@@ -45,7 +45,7 @@ function AddOrganizationPage(props) {
         setCategories("");
         setLanguage("");
         setDescription("");
-        // props.refreshOrgs();
+        props.history.push(`/my-orgs`);
       })
       .catch((error) => console.log(error));
   };

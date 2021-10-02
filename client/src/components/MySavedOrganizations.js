@@ -4,7 +4,7 @@ import OrganizationCard from "./../components/OrganizationCard";
 
 const API_URL = "http://localhost:3000/api";
 
-function MySavedOrganizations() {
+function MySavedOrganizations(props) {
   const [savedOrgs, setSavedOrgs] = useState([]);
 
   const getAllSavedOrgs = () => {
@@ -19,7 +19,8 @@ function MySavedOrganizations() {
         },
       })
       .then((response) => {
-        setSavedOrgs(response.data.savedOrganizations)})
+        setSavedOrgs(response.data.savedOrganizations);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -32,7 +33,9 @@ function MySavedOrganizations() {
   return (
     <div>
       {savedOrgs.map((organization) => (
-        <OrganizationCard key={organization._id} {...organization} />
+        <div>
+          <OrganizationCard key={organization._id} {...organization} />
+        </div>
       ))}
     </div>
   );

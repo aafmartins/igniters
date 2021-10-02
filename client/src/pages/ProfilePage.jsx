@@ -42,13 +42,10 @@ export default function ProfilePage() {
       ) : (
         <>
           <h1>Hello, {user.name}!</h1>
-          <Link to="/orgs/create">
-            <button>Create an organization</button>
-          </Link>
           <Link to={`/profile/edit/${userId}`}>
             <button>Edit Profile</button>
           </Link>
-        <Link to={`/my-orgs`}>
+          <Link to={`/my-orgs`}>
             <button>My Organizations</button>
           </Link>
         </>

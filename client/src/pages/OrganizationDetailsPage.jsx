@@ -1,41 +1,58 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import AddReview from "../components/AddReview";
 import ReviewCard from "../components/ReviewCard";
+import { AuthContext } from "./../contexts/auth.context";
 
 const API_URL = "http://localhost:3000/api";
 
 function OrganizationDetailsPage(props) {
   const [org, setOrg] = useState(null);
-
-  const [showForm, setShowForm] = useState(false)
-
-  const [savedOrg, setSavedOrg] = useState([])
+  const [showForm, setShowForm] = useState(false);
+  const { userToken } = useContext(AuthContext);
+  // const [isSaved, setIsSaved] = useState(false);
+  const [isCreatedByUser, setIsCreatedByUser] = useState(false);
   const orgId = props.match.params.id;
-   const storedToken = localStorage.getItem("authToken");
+  const userId = userToken._id;
+  const storedToken = localStorage.getItem("authToken");
 
   const handleSave = (e) => {
     e.preventDefault();
-    // const storedToken = localStorage.getItem("authToken");
-console.log('Authorization token', storedToken)
+
     axios
-      .put(`${API_URL}/orgs/${orgId}`, {},{
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
-      .then((response) => {
-          console.log('This is our organization being saved, we hope?:', response)
-          setSavedOrg(response);
+      .put(
+        `${API_URL}/save-org`,
+        { orgId },
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      )
+      .then(() => {
+        props.history.push("/my-orgs");
       })
       .catch((error) => console.log(error));
-  }
+  };
+
+  const handleRemove = () => {
+    // Send the token through the request "Authorization" Headers
+    axios
+      .put(
+        `${API_URL}/remove-saved-org`,
+        { orgId },
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      )
+      .then(() => {
+        props.history.push("/my-orgs");
+      })
+      .catch((err) => console.log(err));
+  };
 
   const getOrg = () => {
-    // Get the token from the localStorage
-    // const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .get(`${API_URL}/orgs/${orgId}`, {
@@ -44,8 +61,13 @@ console.log('Authorization token', storedToken)
         },
       })
       .then((response) => {
-
+        console.log("My organization:", response.data);
         setOrg(response.data);
+        const creatorId = response.data.creator;
+
+        if (creatorId === userId) {
+          setIsCreatedByUser(true);
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -56,10 +78,10 @@ console.log('Authorization token', storedToken)
     getOrg();
   }, []);
 
-    //function to toggle the form AddReview hidden or showing style
-    const toggleForm = () => {
-      setShowForm(!showForm)
-    }
+  //function to toggle the form AddReview hidden or showing style
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   return (
     <div className="ProjectDetails">
@@ -73,29 +95,37 @@ console.log('Authorization token', storedToken)
         </>
       )}
 
-    
       <Link to="/orgs">
         <button>Back to Organizations</button>
       </Link>
       {/* Below will need to be inside a protected route/condition - only creator
       can access edit! */}
-      <Link to={`/orgs/edit/${orgId}`}>
-        <button>Edit Organization</button>
-      </Link>
+      {isCreatedByUser ? (
+        <div>
+          <Link to={`/orgs/edit/${orgId}`}>
+            <button>Edit Organization</button>
+          </Link>
+        </div>
+      ) : null}
 
-      <br/>
-      <br/>      
-      <button onClick={toggleForm} >{showForm ? "Hide Review Form" : "Add a Review"}</button>
-        <br/>
-        {showForm ? <AddReview toggleForm={toggleForm} refreshOrg={getOrg} orgId={orgId} /> : null}
+      {/* {isSaved ? <button onClick={handleRemove}>Remove</button> : null} */}
+      <button onClick={handleRemove}>Remove</button>
+      <br />
+      <br />
+      <button onClick={toggleForm}>
+        {showForm ? "Hide Review Form" : "Add a Review"}
+      </button>
+      <br />
+      {showForm ? (
+        <AddReview toggleForm={toggleForm} refreshOrg={getOrg} orgId={orgId} />
+      ) : null}
 
-      { org && org.reviews.map((review) => {
-        return (
+      {org &&
+        org.reviews.map((review) => {
+          return (
             <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
-          )
-        } 
-      )}
-
+          );
+        })}
     </div>
   );
 }

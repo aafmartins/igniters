@@ -1,7 +1,4 @@
-const {
-  Schema,
-  model
-} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const organizationSchema = new Schema({
@@ -16,6 +13,7 @@ const organizationSchema = new Schema({
   city: {
     type: String,
     required: true,
+    text: true,
   }, //required
   street: {
     type: String,
@@ -41,23 +39,24 @@ const organizationSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  reviews: [{
-    type: Schema.Types.ObjectId,
-    ref: "Review",
-    default: [],
-  }, ],
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+      default: [],
+    },
+  ],
   geometry: {
     type: {
       type: String,
-      enum: ['Point'],
-      required: true
+      enum: ["Point"],
+      required: true,
     },
     coordinates: {
       type: [Number],
-      required: true
-    }
+      required: true,
+    },
   },
-
 });
 
 const Organization = model("Organization", organizationSchema);

@@ -1,7 +1,7 @@
+
 import { useState } from "react";
 import axios from "axios";
 import React from "react";
-
 const API_URL = "http://localhost:3000/api";
 
 function AddOrganizationPage(props) {
@@ -14,6 +14,8 @@ function AddOrganizationPage(props) {
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  // const [picture, setPicture] = useState("");
+  // const [pictureUrl, setPictureUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ function AddOrganizationPage(props) {
       description,
       url,
     };
+    // const picture = req.file.path
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -56,7 +59,7 @@ function AddOrganizationPage(props) {
   return (
     <div className="AddProject">
       <h3>Add Organization</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>Name:</label>
         <input
           type="text"
@@ -135,6 +138,7 @@ function AddOrganizationPage(props) {
           onChange={(e) => setUrl(e.target.value)}
         />
 
+
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -142,3 +146,4 @@ function AddOrganizationPage(props) {
 }
 
 export default AddOrganizationPage;
+

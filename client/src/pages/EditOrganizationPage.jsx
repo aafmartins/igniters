@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -84,7 +85,7 @@ function EditOrganizationPage(props) {
     <div className="EditProjectPage">
       <h3>Edit the Project</h3>
 
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} enctype="multipart/form-data">
         <label>Name:</label>
         <input
           type="text"
@@ -172,3 +173,4 @@ function EditOrganizationPage(props) {
 }
 
 export default EditOrganizationPage;
+

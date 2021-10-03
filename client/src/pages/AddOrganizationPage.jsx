@@ -48,7 +48,7 @@ function AddOrganizationPage(props) {
         setLanguage("");
         setDescription("");
         setUrl("");
-        props.history.push(`/my-orgs`);
+        props.history.push(`/orgs`);
       })
       .catch((error) => console.log(error));
   };

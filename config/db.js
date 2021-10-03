@@ -13,10 +13,9 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: true,
-    // useCreateIndex: true
+    useCreateIndex: true,
   })
   .then((x) => {
-    console.log("url", MONGODB_URI);
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
     );

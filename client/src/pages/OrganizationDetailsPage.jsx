@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AddReview from "../components/AddReview";
 import ReviewCard from "../components/ReviewCard";
 import { AuthContext } from "./../contexts/auth.context";
+import { randomImageUrl } from "../javascripts/randomImageUrl";
 
 // mmapbox imports
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
@@ -144,6 +145,7 @@ function OrganizationDetailsPage(props) {
         "Loading..."
       ) : (
         <>
+          <img src={randomImageUrl()} alt="" width="400px"/>
           <h1>{org.name}</h1>
           <p>{org.description}</p>
         </>

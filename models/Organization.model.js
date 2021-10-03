@@ -1,4 +1,7 @@
-const { Schema, model } = require("mongoose");
+const {
+  Schema,
+  model
+} = require("mongoose");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const organizationSchema = new Schema({
@@ -34,17 +37,21 @@ const organizationSchema = new Schema({
   url: {
     type: String,
   }, //not required
+  picture: {
+    type: {
+      String
+    },
+    required: true
+  }, //not required
   creator: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  reviews: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Review",
-      default: [],
-    },
-  ],
+  reviews: [{
+    type: Schema.Types.ObjectId,
+    ref: "Review",
+    default: [],
+  }, ],
   geometry: {
     type: {
       type: String,

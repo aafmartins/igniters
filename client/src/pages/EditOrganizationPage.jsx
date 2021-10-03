@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -13,6 +14,7 @@ function EditOrganizationPage(props) {
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  const [picture, setPicture] = useState("");
 
   const orgId = props.match.params.id;
 
@@ -36,6 +38,7 @@ function EditOrganizationPage(props) {
         setLanguage(oneOrg.language);
         setDescription(oneOrg.description);
         setUrl(oneOrg.url);
+        setPicture(oneOrg.picture);
       })
       .catch((error) => console.log(error));
   }, [orgId]);
@@ -52,6 +55,7 @@ function EditOrganizationPage(props) {
       language,
       description,
       url,
+      picture,
     };
 
     // Get the token from the localStorage
@@ -84,7 +88,7 @@ function EditOrganizationPage(props) {
     <div className="EditProjectPage">
       <h3>Edit the Project</h3>
 
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} enctype="multipart/form-data">
         <label>Name:</label>
         <input
           type="text"
@@ -162,6 +166,14 @@ function EditOrganizationPage(props) {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />
+        <label>Picture url:</label>
+        <input
+          type="file"
+          name="picture"
+          id="picture"
+          value={picture}
+          onChange={(e) => setPicture(e.target.value)}
+        />
 
         <button type="submit">Update Organization</button>
       </form>
@@ -172,3 +184,4 @@ function EditOrganizationPage(props) {
 }
 
 export default EditOrganizationPage;
+

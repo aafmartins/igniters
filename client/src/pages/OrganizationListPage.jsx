@@ -41,10 +41,11 @@ function OrganizationListPage() {
   }, []);
 
   useEffect(() => {
+    console.log("organizations", orgs)
 
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v10',
+      style: 'mapbox://styles/mapbox/streets-v11',
       center: [-103.5917, 40.6699],
       zoom: 3
       });
@@ -58,7 +59,7 @@ function OrganizationListPage() {
       const orgsString = {features: orgs}
       //const orgsString = {features: JSON.stringify(orgs)}
       console.log("organizations string:", orgsString)
-      map.addSource('earthquakes', {
+      map.addSource('organizations', {
       type: 'geojson',
       
       // add organizations geometry data. it has to be inside a features object
@@ -72,7 +73,7 @@ function OrganizationListPage() {
       map.addLayer({
       id: 'clusters',
       type: 'circle',
-      source: 'earthquakes',
+      source: 'organizations',
       filter: ['has', 'point_count'],
       paint: {
       // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -83,11 +84,11 @@ function OrganizationListPage() {
       'circle-color': [
       'step',
       ['get', 'point_count'],
-      '#51bbd6',
+      '#E27BF5',
       100,
-      '#f1f075',
+      '#E27BF5',
       750,
-      '#f28cb1'
+      '#E27BF5'
       ],
       'circle-radius': [
       'step',
@@ -104,7 +105,7 @@ function OrganizationListPage() {
       map.addLayer({
       id: 'cluster-count',
       type: 'symbol',
-      source: 'earthquakes',
+      source: 'organizations',
       filter: ['has', 'point_count'],
       layout: {
       'text-field': '{point_count_abbreviated}',
@@ -116,13 +117,13 @@ function OrganizationListPage() {
       map.addLayer({
       id: 'unclustered-point',
       type: 'circle',
-      source: 'earthquakes',
+      source: 'organizations',
       filter: ['!', ['has', 'point_count']],
       paint: {
-      'circle-color': '#11b4da',
-      'circle-radius': 4,
+      'circle-color': '#E27BF5',
+      'circle-radius': 15,
       'circle-stroke-width': 1,
-      'circle-stroke-color': '#fff'
+      'circle-stroke-color': '#E27BF5'
       }
       });
        
@@ -132,8 +133,9 @@ function OrganizationListPage() {
       const features = map.queryRenderedFeatures(e.point, {
       layers: ['clusters']
       });
+      console.log("features", features)
       const clusterId = features[0].properties.cluster_id;
-      map.getSource('earthquakes').getClusterExpansionZoom(
+      map.getSource('organizations').getClusterExpansionZoom(
       clusterId,
       (err, zoom) => {
       if (err) return;
@@ -151,35 +153,33 @@ function OrganizationListPage() {
       // the location of the feature, with
       // description HTML from its properties.
       map.on('click', 'unclustered-point', (e) => {
-        console.log("organization clicked")
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const mag = e.features[0].properties.mag;
-      const tsunami =
-      e.features[0].properties.tsunami === 1 ? 'yes' : 'no';
-       
-      // Ensure that if the map is zoomed out such that
-      // multiple copies of the feature are visible, the
-      // popup appears over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-       
-      new mapboxgl.Popup()
-      .setLngLat(coordinates)
-      .setHTML(
-      `magnitude: ${mag}<br>Was there a tsunami?: ${tsunami}`
-      )
-      .addTo(map);
-      });
-       
-      map.on('mouseenter', 'clusters', () => {
-        console.log("mouse in over a cluster")
-      map.getCanvas().style.cursor = 'pointer';
-      });
-      map.on('mouseleave', 'clusters', () => {
-      map.getCanvas().style.cursor = '';
-      });
-      });
+        console.log("e.features", e.features[0])
+        const text = e.features[0].properties.popUpMarkup
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        
+        // Ensure that if the map is zoomed out such that
+        // multiple copies of the feature are visible, the
+        // popup appears over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+        
+        new mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setHTML(
+            text
+          )
+        .addTo(map);
+        });
+        
+        map.on('mouseenter', 'clusters', () => {
+          console.log("mouse in over a cluster")
+        map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'clusters', () => {
+        map.getCanvas().style.cursor = '';
+        });
+        });
     //if (map.current) return; 
     // initialize map only once
 

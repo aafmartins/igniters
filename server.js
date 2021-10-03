@@ -19,11 +19,11 @@ server.use("/api/users", isAuthenticated, userRouter);
 const organizationRouter = require("./routes/organization.routes");
 server.use("/api", organizationRouter);
 const reviewRouter = require("./routes/review.routes");
-server.use("/api", isAuthenticated, reviewRouter);
+server.use("/api/reviews", isAuthenticated, reviewRouter);
 const userOrgRouter = require("./routes/user.organization.routes");
-server.use("/api", isAuthenticated, userOrgRouter);
+server.use("/api/user-org", isAuthenticated, userOrgRouter);
 const searchRouter = require("./routes/search.routes");
-server.use("/api", isAuthenticated, searchRouter);
+server.use("/api/search", searchRouter);
 const apiRouter = require("./routes/api");
 server.use("/api", apiRouter);
 

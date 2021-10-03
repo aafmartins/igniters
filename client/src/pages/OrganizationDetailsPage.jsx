@@ -6,8 +6,9 @@ import ReviewCard from "../components/ReviewCard";
 import { AuthContext } from "./../contexts/auth.context";
 
 // mmapbox imports
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-mapboxgl.accessToken ='pk.eyJ1IjoiaHJpYnUiLCJhIjoiY2t1Nmsycm5tMmg3MTJucGNoamJxODBrMCJ9.aT4XOnLfqTr3V4EowsmtSg'     //process.env.MAPBOX_TOKEN;
+import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiaHJpYnUiLCJhIjoiY2t1Nmsycm5tMmg3MTJucGNoamJxODBrMCJ9.aT4XOnLfqTr3V4EowsmtSg"; //process.env.MAPBOX_TOKEN;
 
 const API_URL = "http://localhost:3000/api";
 
@@ -20,7 +21,6 @@ function OrganizationDetailsPage(props) {
   const orgId = props.match.params.id;
   const userId = userToken._id;
   const storedToken = localStorage.getItem("authToken");
-
 
   // map Hooks. useRef .current orioerty is initialized to null and when its value changes it does not trigger a re-render
   const mapContainer = useRef(null);
@@ -49,13 +49,12 @@ function OrganizationDetailsPage(props) {
       .catch((error) => console.log(error));
   };
 
-
   const handleSave = (e) => {
     e.preventDefault();
 
     axios
       .put(
-        `${API_URL}/save-org`,
+        `${API_URL}/user-org/save-org`,
         { orgId },
         {
           headers: {
@@ -73,7 +72,7 @@ function OrganizationDetailsPage(props) {
     // Send the token through the request "Authorization" Headers
     axios
       .put(
-        `${API_URL}/remove-saved-org`,
+        `${API_URL}/user-org/remove-saved-org`,
         { orgId },
         {
           headers: { Authorization: `Bearer ${storedToken}` },
@@ -103,8 +102,8 @@ function OrganizationDetailsPage(props) {
         }
 
         // set coordinates for map
-        setLng(response.data.geometry.coordinates[0])
-        setLat(response.data.geometry.coordinates[1])
+        setLng(response.data.geometry.coordinates[0]);
+        setLat(response.data.geometry.coordinates[1]);
       })
       .catch((error) => console.log(error));
   };
@@ -113,26 +112,22 @@ function OrganizationDetailsPage(props) {
     getOrg();
   }, []);
 
-
-  
   useEffect(() => {
-    //if (map.current) return; 
+    //if (map.current) return;
     // initialize map only once
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: "mapbox://styles/mapbox/streets-v11",
       center: [lng, lat],
-      zoom: zoom
+      zoom: zoom,
     });
 
     // add marker to the organization location
     const marker1 = new mapboxgl.Marker()
       .setLngLat([lng, lat])
       .addTo(map.current);
-
   });
-  
 
   useEffect(() => {
     getUser(userId);
@@ -154,7 +149,12 @@ function OrganizationDetailsPage(props) {
         </>
       )}
 
-      <div className="map-container" ref={mapContainer} id='map' style={{width: "400px", height: "300px"}}></div>
+      <div
+        className="map-container"
+        ref={mapContainer}
+        id="map"
+        style={{ width: "400px", height: "300px" }}
+      ></div>
 
       <Link to="/orgs">
         <button>Back to Organizations</button>

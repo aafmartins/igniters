@@ -66,7 +66,7 @@ module.exports = [
   {
     name: "Foundation for Mother and Child Health - India", //required
     country: "India", //required
-    city: "Mumbai ", //required
+    city: "Mumbai", //required
     street: "Kurla West", //not required
     email: "contact@fmch-india.org", //required
     categories: ["Maternal Health", "Child Health", "Malnutrition"], //not required
@@ -104,7 +104,7 @@ module.exports = [
     categories: ["Gender Equality"], //not required
     language: "English", //not required
     description:
-      "1.The Observatory will analyse the fulfilment of international gender-equality goals and targets and increase their visibility by: Making strategic gender inequality indicators and analytical tools for policymaking available to Government; Maintaining up-to-date oversight of women’s physical, economic and political-decision-making as it pertain to gender equality. 2. The Observatory will deliver periodical reports  on inequalities between women and men. 3. The Observatory will provide annual reports offering a diagnosis of inequalities between men and women in key areas such as: Paid and unpaid work, time use and poverty; Access to decision-making and political representation; Gender violence; Health and reproductive rights.", //required
+      "The Observatory will analyse the fulfilment of international gender-equality goals and targets and increase their visibility by: Making strategic gender inequality indicators and analytical tools for policymaking available to Government; Maintaining up-to-date oversight of women’s physical, economic and political-decision-making as it pertain to gender equality. 2. The Observatory will deliver periodical reports  on inequalities between women and men. 3. The Observatory will provide annual reports offering a diagnosis of inequalities between men and women in key areas such as: Paid and unpaid work, time use and poverty; Access to decision-making and political representation; Gender violence; Health and reproductive rights.", //required
     url: "https://oig.cepal.org/en",
     geometry: {
       coordinates: [-3.609024, 40.404177],

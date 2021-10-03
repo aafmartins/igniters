@@ -17,7 +17,6 @@ const organizationSchema = new Schema({
   }, //required
   street: {
     type: String,
-    required: false,
   }, //not required
   email: {
     type: String,
@@ -25,42 +24,36 @@ const organizationSchema = new Schema({
   }, //required
   categories: {
     type: [String],
-    required: false,
   }, //not required
   language: {
     type: String,
-    required: false,
   }, //not required
   description: {
     type: String,
-    required: false,
-  }, //required
+  }, //not required
   url: {
     type: String,
-    required: false,
-  }, //required
+  }, //not required
   creator: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: false,
   },
   reviews: [
     {
       type: Schema.Types.ObjectId,
       ref: "Review",
       default: [],
-      required: false,
     },
   ],
   geometry: {
     type: {
       type: String,
       enum: ["Point"],
-      required: false,
+      required: true,
     },
     coordinates: {
       type: [Number],
-      required: false,
+      required: true,
     },
   },
 });

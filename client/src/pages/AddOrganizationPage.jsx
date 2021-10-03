@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import React from "react";
-
+import { randomImageUrl } from "../javascripts/randomImageUrl";
 const API_URL = "http://localhost:3000/api";
 
 function AddOrganizationPage(props) {
@@ -15,8 +15,8 @@ function AddOrganizationPage(props) {
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
-  const [picture, setPicture] = useState("");
-  const [pictureUrl, setPictureUrl] = useState("");
+  // const [picture, setPicture] = useState("");
+  // const [pictureUrl, setPictureUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ function AddOrganizationPage(props) {
       description,
       url,
       // picture: req.file.path,
-      picture,
+      picture: randomImageUrl()
     };
     // const picture = req.file.path
 
@@ -54,7 +54,7 @@ function AddOrganizationPage(props) {
         setLanguage("");
         setDescription("");
         setUrl("");
-        setPicture("");
+        // setPicture("");
         props.history.push(`/my-orgs`);
       })
       .catch((error) => console.log(error));
@@ -141,7 +141,7 @@ function AddOrganizationPage(props) {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />
-        <label>Picture url:</label>
+        {/* <label>Picture url:</label>
         <input
           type="file"
           name="picture"
@@ -151,7 +151,7 @@ function AddOrganizationPage(props) {
             console.log(e.target.files[0].name)
             console.log(e.target.files)
             setPicture(e.target.files[0])}}
-        />
+        /> */}
 
         <button type="submit">Submit</button>
       </form>

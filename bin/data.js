@@ -1,3 +1,5 @@
+//data
+
 module.exports = [{
     name: "APAV", //required
     country: "Portugal", //required
@@ -12,6 +14,7 @@ module.exports = [{
       coordinates: [-9.137637, 38.731029],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1520785145672-94e9abd8b121?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Associação Projecto Criar", //required
@@ -27,6 +30,7 @@ module.exports = [{
       coordinates: [-8.61253, 41.14816],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1514895545225-100745680d22?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Bulgarian Centre of Women in Technology", //required
@@ -42,6 +46,7 @@ module.exports = [{
       coordinates: [23.342911, 42.722839],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1576568699714-a3f4950805d5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80",
   },
   {
     name: "Collectif National pour les Droits des Femmes", //required
@@ -57,6 +62,7 @@ module.exports = [{
       coordinates: [2.39134, 48.85248],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1485113771930-4e8b61c60d64?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Foundation for Mother and Child Health - India", //required
@@ -72,6 +78,7 @@ module.exports = [{
       coordinates: [72.88518, 19.08425],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1591824353453-41020a60f409?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Centre for Reproductive Rights", //required
@@ -87,6 +94,7 @@ module.exports = [{
       coordinates: [-74.004535, 40.706549],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1572033469469-e01521f4ed95?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Gender Equality Observatory", //required
@@ -102,6 +110,7 @@ module.exports = [{
       coordinates: [-3.609024, 40.404177],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1591824353737-61237487acf4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Osez le Féminisme", //required
@@ -117,6 +126,7 @@ module.exports = [{
       coordinates: [2.326562, 48.836303],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1593510987166-1c072a7eec3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "The Open Society Foundation", //required
@@ -132,6 +142,7 @@ module.exports = [{
       coordinates: [13.37309, 52.50642],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1520960858461-ac671067213e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1197&q=80",
   },
   {
     name: "The Open Society Foundation", //required
@@ -147,6 +158,7 @@ module.exports = [{
       coordinates: [-75.80936, 39.76414],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1595211084684-bbe2d793c0e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "The Open Society Foundation", //required
@@ -162,6 +174,7 @@ module.exports = [{
       coordinates: [21.25347, 48.72371],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1522008342704-6b265b543c37?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "The Open Society Foundation", //required
@@ -177,6 +190,7 @@ module.exports = [{
       coordinates: [-73.90523, 40.75038],
       type: "Point",
     },
+    picture: "https://images.unsplash.com/photo-1495552665515-46e119a10545?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Roks, the National Organisation for Women’s Shelters and Young Women’s Shelters in Sweden", //required
@@ -192,5 +206,6 @@ module.exports = [{
       coordinates: [18.05933, 59.31853],
       type: "Point",
     }, //required
+    picture: "https://images.unsplash.com/photo-1512903463047-f41918b9e215?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1172&q=80",
   },
 ];

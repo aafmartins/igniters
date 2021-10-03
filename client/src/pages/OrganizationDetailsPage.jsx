@@ -144,6 +144,7 @@ function OrganizationDetailsPage(props) {
         "Loading..."
       ) : (
         <>
+          <img src={org.picture} alt="" width="400px"/>
           <h1>{org.name}</h1>
           <p>{org.description}</p>
         </>

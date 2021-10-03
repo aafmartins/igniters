@@ -25,6 +25,7 @@ const Organization = require("./../models/Organization.model");
 const importData = async () => {
   console.log(mongoose.connections[0].name);
   try {
+    await Organization.deleteMany()
     await Organization.insertMany(orgs);
     console.log("Data seeded");
     process.exit();

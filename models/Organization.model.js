@@ -44,9 +44,6 @@ const organizationSchema = new Schema({
   url: {
     type: String,
   }, //not required
-  picture: {
-    type: String,
-  }, //not required
   creator: {
     type: Schema.Types.ObjectId,
     ref: "User",

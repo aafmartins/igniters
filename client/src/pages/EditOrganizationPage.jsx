@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { randomImageUrl } from "../javascripts/randomImageUrl";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -15,7 +14,6 @@ function EditOrganizationPage(props) {
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
-  // const [picture, setPicture] = useState("");
 
   const orgId = props.match.params.id;
 
@@ -39,7 +37,6 @@ function EditOrganizationPage(props) {
         setLanguage(oneOrg.language);
         setDescription(oneOrg.description);
         setUrl(oneOrg.url);
-        // setPicture(oneOrg.picture);
       })
       .catch((error) => console.log(error));
   }, [orgId]);
@@ -56,7 +53,6 @@ function EditOrganizationPage(props) {
       language,
       description,
       url,
-      picture: randomImageUrl()
     };
 
     // Get the token from the localStorage
@@ -167,14 +163,6 @@ function EditOrganizationPage(props) {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />
-        {/* <label>Picture url:</label>
-        <input
-          type="file"
-          name="picture"
-          id="picture"
-          value={picture}
-          onChange={(e) => setPicture(e.target.value)}
-        /> */}
 
         <button type="submit">Update Organization</button>
       </form>

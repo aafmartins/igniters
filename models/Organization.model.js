@@ -4,6 +4,7 @@ const {
 } = require("mongoose");
 
 // passing the virtual schema properties to json object to display the popUp org in map
+
 const opts = {
   toJSON: {
     virtuals: true
@@ -53,24 +54,27 @@ const organizationSchema = new Schema({
     ref: "Review",
     default: [],
   }, ],
-  geometry: {
-    type: {
-      type: String,
-      enum: ["Point"],
-      required: true,
-    },
-    coordinates: {
-      type: [Number],
-      required: true,
+    geometry: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
     },
   },
-}, opts);
+  opts
+);
+
+organizationSchema.index({ name: "text", country: "text", city: "text" });
 
 // virtual property that is displayed when an org is clicked in the cluster map
 organizationSchema.virtual('properties.popUpMarkup').get(function () {
   return `<a href="/orgs/${this._id}">${this.name}</a>`
 });
-
 
 const Organization = model("Organization", organizationSchema);
 

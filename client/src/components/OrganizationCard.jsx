@@ -12,6 +12,8 @@ function OrganizationCard(props) {
     categories,
     language,
     description,
+    url,
+    picture,
   } = props;
 
   return (

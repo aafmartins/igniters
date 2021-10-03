@@ -45,9 +45,6 @@ export default function ProfilePage() {
           <Link to={`/profile/edit/${userId}`}>
             <button>Edit Profile</button>
           </Link>
-          <Link to={`/my-orgs`}>
-            <button>My Organizations</button>
-          </Link>
         </>
       )}
     </div>

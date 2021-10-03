@@ -13,7 +13,7 @@ function MySavedOrganizations(props) {
 
     // Send the token through the request "Authorization" Headers
     axios
-      .get(`${API_URL}/my-saved-orgs`, {
+      .get(`${API_URL}/user-org/my-saved-orgs`, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },

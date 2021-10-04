@@ -7,7 +7,7 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 mapboxgl.accessToken = process.env.MAPBOX_TOKEN   
 
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function OrganizationListPage() {
   const [orgs, setOrgs] = useState([]);

@@ -33,9 +33,12 @@ function OrganizationCard(props) {
       </p>
       {reviews.length === 0 ? 
         "no reviews yet" : (
-        <p class="starability-result" data-rating={avgRating}>
-        Rated: {avgRating} stars
-      </p>)}
+        <div>
+          <p class="starability-result" data-rating={avgRating}>Rated: {avgRating} stars</p>
+          <p>{reviews.length}</p>
+        </div>
+        )
+      }
     </div>
   );
 }

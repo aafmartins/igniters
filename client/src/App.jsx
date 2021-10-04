@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import config from './config'
+import config from './javascripts/config'
 import "./components/stars.css";
 import PrivateRoute from "./components/PrivateRoute";
 import AnonRoute from "./components/AnonRoute";

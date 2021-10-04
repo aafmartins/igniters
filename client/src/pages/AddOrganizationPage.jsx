@@ -46,7 +46,7 @@ function AddOrganizationPage(props) {
         setCity("");
         setStreet("");
         setEmail("");
-        setCategories("");
+        setCategories([]);
         setMainIdiom("");
         setDescription("");
         setUrl("");
@@ -116,10 +116,18 @@ function AddOrganizationPage(props) {
           <select
             name="categories"
             id="categories"
-            multiple
+            multiple={true}
+            // value={something}
             onChange={(e) => {
-              console.log(e.target.value);
-              setCategories(e.target.value);
+              // console.log(e.target.value);
+              const values = [...e.target.options]
+                .filter((o) => o.selected)
+                .map((o) => {
+                  return o.value;
+                });
+
+              setCategories(values);
+              // setCategories((categories) => [...categories, values]);
             }}
           >
             <option disable="true" value="">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-// import React from "react";
+
 const API_URL = process.env.REACT_APP_API_URL;
 
 function AddOrganizationPage(props) {
@@ -9,12 +9,10 @@ function AddOrganizationPage(props) {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [email, setEmail] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const [mainIdiom, setMainIdiom] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
-  // const [picture, setPicture] = useState("");
-  // const [pictureUrl, setPictureUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +27,6 @@ function AddOrganizationPage(props) {
       description,
       url,
     };
-    // const picture = req.file.path
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -104,30 +101,19 @@ function AddOrganizationPage(props) {
         />
         <hr />
 
-        {/* <label>Categories:</label>
-        <textarea
-          type="text"
-          name="categories"
-          value={categories}
-          onChange={(e) => setCategories(e.target.value)}
-        /> */}
         <div>
           <label htmlFor="categories">Search by Category:</label>
           <select
             name="categories"
             id="categories"
             multiple={true}
-            // value={something}
             onChange={(e) => {
-              // console.log(e.target.value);
               const values = [...e.target.options]
                 .filter((o) => o.selected)
                 .map((o) => {
                   return o.value;
                 });
-
               setCategories(values);
-              // setCategories((categories) => [...categories, values]);
             }}
           >
             <option disable="true" value="">

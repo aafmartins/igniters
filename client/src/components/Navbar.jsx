@@ -18,6 +18,9 @@ function Navbar() {
           <Link to="/orgs">
             <button>Organizations</button>
           </Link>
+          <Link to={`/my-orgs`}>
+            <button>My Organizations</button>
+          </Link>
           <Link to="/orgs/create">
             <button>Create an organization</button>
           </Link>
@@ -29,7 +32,7 @@ function Navbar() {
       ) : (
         <>
           <Link to="/orgs">
-            <button>Organizations</button>
+            <button>All Organizations</button>
           </Link>
           <Link to="/signup">
             <button>Signup</button>

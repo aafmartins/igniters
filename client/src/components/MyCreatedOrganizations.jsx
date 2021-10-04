@@ -13,7 +13,7 @@ function MyCreatedOrganizations() {
 
     // Send the token through the request "Authorization" Headers
     axios
-      .get(`${API_URL}/my-created-orgs`, {
+      .get(`${API_URL}/user-org/my-created-orgs`, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },

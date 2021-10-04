@@ -8,75 +8,88 @@ const geocoder = mbxGeocoding({
 });
 const Organization = require("../models/Organization.model");
 
-const { isAuthenticated } = require("../middleware/jwt.middleware"); // <== IMPORT
+const {
+  isAuthenticated
+} = require("../middleware/jwt.middleware"); // <== IMPORT
+
+const fileUploader = require("../config/cloudinary");
 
 // PUT  /orgs/edit/:orgId" -  Updates a specific organization by id
-router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
-  const { orgId } = req.params;
+router.put(
+  "/orgs/edit/:orgId",
+  fileUploader.single("picture"),
+  isAuthenticated,
+  (req, res, next) => {
+    const {
+      orgId
+    } = req.params;
+    // const picture = req.file.path;
+    const {
+      name,
+      country,
+      city,
+      street,
+      email,
+      categories,
+      language,
+      description,
+      url,
+      picture
+    } = req.body;
 
-  const {
-    name,
-    country,
-    city,
-    street,
-    email,
-    categories,
-    language,
-    description,
-    url,
-  } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(orgId)) {
+      res.status(400).json({
+        message: "Specified id is not valid",
+      });
+      return;
+    }
 
-  if (!mongoose.Types.ObjectId.isValid(orgId)) {
-    res.status(400).json({
-      message: "Specified id is not valid",
-    });
-    return;
+    geocoder
+      .forwardGeocode({
+        query: street + " " + city + " " + country,
+        limit: 1,
+      })
+      .send()
+      .then((response) => {
+        const geometry = response.body.features[0].geometry;
+        console.log(response.body)
+        Organization.findByIdAndUpdate(
+            orgId, {
+              name,
+              country,
+              city,
+              street,
+              email,
+              categories,
+              language,
+              description,
+              url,
+              picture,
+              creator: req.payload._id,
+              // reviews,
+              geometry,
+            }, {
+              new: true,
+            }
+          )
+          .then((updatedOrg) => res.json(updatedOrg))
+          .catch((error) => {
+            console.log("Organization not updated", error);
+            res.json(error);
+          });
+      })
+      .catch((err) => {
+        console.log("Geometry not created!", err);
+        res.json(err);
+      });
   }
-
-  geocoder
-    .forwardGeocode({
-      query: street + " " + city + " " + country,
-      limit: 1,
-    })
-    .send()
-    .then((response) => {
-      const geometry = response.body.features[0].geometry;
-
-      Organization.findByIdAndUpdate(
-        orgId,
-        {
-          name,
-          country,
-          city,
-          street,
-          email,
-          categories,
-          language,
-          description,
-          url,
-          creator: req.payload._id,
-          // reviews,
-          geometry,
-        },
-        {
-          new: true,
-        }
-      )
-        .then((updatedOrg) => res.json(updatedOrg))
-        .catch((error) => {
-          console.log("Organization not updated", error);
-          res.json(error);
-        });
-    })
-    .catch((err) => {
-      console.log("Geometry not created!", err);
-      res.json(err);
-    });
-});
+);
 
 // DELETE  /orgs/delete/:orgId  -  Deletes a specific organization by id
 router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
-  const { orgId } = req.params;
+  const {
+    orgId
+  } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
@@ -95,8 +108,10 @@ router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
 });
 
 //  GET /api/orgs/:orgId -  Retrieves a specific organization by id
-router.get("/orgs/:orgId", isAuthenticated, (req, res, next) => {
-  const { orgId } = req.params;
+router.get("/orgs/:orgId", (req, res, next) => {
+  const {
+    orgId
+  } = req.params;
   // console.log(req.params);
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
@@ -131,53 +146,61 @@ router.get("/orgs", (req, res, next) => {
 });
 
 //  POST /api/orgs  -  Creates a new organization
-router.post("/orgs", isAuthenticated, (req, res, next) => {
-  const {
-    name,
-    country,
-    city,
-    street,
-    email,
-    categories,
-    language,
-    description,
-    url,
-  } = req.body;
+router.post(
+  "/orgs",
+  fileUploader.single("picture"),
+  isAuthenticated,
+  (req, res, next) => {
+    // const picture = req.file.path;
+    const {
+      name,
+      country,
+      city,
+      street,
+      email,
+      categories,
+      language,
+      description,
+      url,
+      picture
+    } = req.body;
 
-  geocoder
-    .forwardGeocode({
-      query: street + " " + city + " " + country,
-      limit: 1,
-    })
-    .send()
-    .then((response) => {
-      const geometry = response.body.features[0].geometry;
-
-      Organization.create({
-        name,
-        country,
-        city,
-        street,
-        email,
-        categories,
-        language,
-        description,
-        url,
-        creator: req.payload._id,
-        geometry,
+    geocoder
+      .forwardGeocode({
+        query: street + " " + city + " " + country,
+        limit: 1,
       })
-        .then((response) => {
-          res.status(200).json(response);
-        })
-        .catch((err) => {
-          console.log("Organization not created!", err);
-          res.json(err);
-        });
-    })
-    .catch((err) => {
-      console.log("Geometry not created!", err);
-      res.json(err);
-    });
-});
+      .send()
+      .then((response) => {
+        const geometry = response.body.features[0].geometry;
+        console.log(response.body)
+        Organization.create({
+            name,
+            country,
+            city,
+            street,
+            email,
+            categories,
+            language,
+            description,
+            url,
+            picture,
+            creator: req.payload._id,
+            geometry,
+          })
+          .then((response) => {
+            res.status(200).json(response);
+          })
+          .catch((err) => {
+            console.log("Organization not created!", err);
+            res.json(err);
+          });
+      })
+      .catch((err) => {
+        console.log("Geometry not created!", err);
+        res.json(err);
+      });
+  }
+);
 
 module.exports = router;

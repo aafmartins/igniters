@@ -42,12 +42,16 @@ export default function SearchBar() {
 
   const handleClick = () => {
     axios
-      .get(`${API_URL}/search/?q=${searchInput}`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
+      .get(
+        `${API_URL}/search?q=${searchInput}`
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${storedToken}`,
+        //   },
+        // }
+      )
       .then((response) => {
+        console.log("handleClick is through", response.data);
         setOrgs(response.data);
       })
       .catch((err) => {

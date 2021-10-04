@@ -9,14 +9,13 @@ const MONGODB_URI = `${process.env.MONGODB_URL}/${process.env.DB_NAME}`;
 const seedUrl = "mongodb://localhost/igniters";
 
 mongoose
-  .connect(MONGODB_URI, {
+  .connect(seedUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: true,
-    // useCreateIndex: true
+    useCreateIndex: true,
   })
   .then((x) => {
-    console.log("url", MONGODB_URI);
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
     );

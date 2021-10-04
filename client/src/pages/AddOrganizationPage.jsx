@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import axios from "axios";
-import React from "react";
+// import React from "react";
 const API_URL = "http://localhost:3000/api";
 
 function AddOrganizationPage(props) {
@@ -10,7 +9,7 @@ function AddOrganizationPage(props) {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [email, setEmail] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
@@ -105,13 +104,40 @@ function AddOrganizationPage(props) {
         />
         <hr />
 
-        <label>Categories:</label>
+        {/* <label>Categories:</label>
         <textarea
           type="text"
           name="categories"
           value={categories}
           onChange={(e) => setCategories(e.target.value)}
-        />
+        /> */}
+        <div>
+          <label htmlFor="categories">Search by Category:</label>
+          <select
+            name="categories"
+            id="categories"
+            multiple
+            onChange={(e) => {
+              console.log(e.target.value);
+              setCategories(e.target.value);
+            }}
+          >
+            <option disable="true" value="">
+              Select a category from the list
+            </option>
+            <option value="Activism">Activism</option>
+            <option value="Gender Discrimination">Gender Discrimination</option>
+            <option value="Human Rights">Human Rights</option>
+            <option value="Inequality">Inequality</option>
+            <option value="Malnutrition">Malnutrition</option>
+            <option value="Maternal Health">Maternal Health</option>
+            <option value="Reproductive Rights">Reproductive Rights</option>
+            <option value="Social Solidarity">Social Solidarity</option>
+            <option value="Victim Support">Victim Support</option>
+            <option value="Victim Protection">Victim Protection</option>
+            <option value="Women in Tech">Women in Tech</option>
+          </select>
+        </div>
         <hr />
 
         <label>Language:</label>
@@ -138,7 +164,6 @@ function AddOrganizationPage(props) {
           onChange={(e) => setUrl(e.target.value)}
         />
 
-
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -146,4 +171,3 @@ function AddOrganizationPage(props) {
 }
 
 export default AddOrganizationPage;
-

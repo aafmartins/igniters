@@ -10,9 +10,9 @@ function OrganizationCard(props) {
     street,
     email,
     categories,
-    language,
+    mainIdiom,
     description,
-    url
+    url,
   } = props;
 
   return (

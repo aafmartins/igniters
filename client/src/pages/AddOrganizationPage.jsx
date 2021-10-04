@@ -9,8 +9,8 @@ function AddOrganizationPage(props) {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [email, setEmail] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [language, setLanguage] = useState("");
+  const [categories, setCategories] = useState("");
+  const [mainIdiom, setMainIdiom] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   // const [picture, setPicture] = useState("");
@@ -25,7 +25,7 @@ function AddOrganizationPage(props) {
       street,
       email,
       categories,
-      language,
+      mainIdiom,
       description,
       url,
     };
@@ -47,7 +47,7 @@ function AddOrganizationPage(props) {
         setStreet("");
         setEmail("");
         setCategories("");
-        setLanguage("");
+        setMainIdiom("");
         setDescription("");
         setUrl("");
         props.history.push(`/orgs`);
@@ -143,9 +143,9 @@ function AddOrganizationPage(props) {
         <label>Language:</label>
         <textarea
           type="text"
-          name="language"
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
+          name="mainIdiom"
+          value={mainIdiom}
+          onChange={(e) => setMainIdiom(e.target.value)}
         />
         <hr />
 

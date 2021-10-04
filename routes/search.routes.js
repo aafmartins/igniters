@@ -19,7 +19,10 @@ router.get("/", (req, res) => {
     query = null;
   }
 
+  const sort = { score: { $meta: "textScore" } };
+
   Organization.find(query)
+    .sort(sort)
     .then((organizationsFound) => res.status(200).json(organizationsFound))
     .catch((err) => {
       console.log("Review not updated: ", err);

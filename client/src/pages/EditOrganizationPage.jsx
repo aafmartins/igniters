@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -11,7 +10,7 @@ function EditOrganizationPage(props) {
   const [street, setStreet] = useState("");
   const [email, setEmail] = useState("");
   const [categories, setCategories] = useState("");
-  const [language, setLanguage] = useState("");
+  const [mainIdiom, setMainIdiom] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
 
@@ -34,7 +33,7 @@ function EditOrganizationPage(props) {
         setStreet(oneOrg.street);
         setEmail(oneOrg.email);
         setCategories(oneOrg.categories);
-        setLanguage(oneOrg.language);
+        setMainIdiom(oneOrg.mainIdiom);
         setDescription(oneOrg.description);
         setUrl(oneOrg.url);
       })
@@ -50,7 +49,7 @@ function EditOrganizationPage(props) {
       street,
       email,
       categories,
-      language,
+      mainIdiom,
       description,
       url,
     };
@@ -143,9 +142,9 @@ function EditOrganizationPage(props) {
         <label>Language:</label>
         <textarea
           type="text"
-          name="language"
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
+          name="mainIdiom"
+          value={mainIdiom}
+          onChange={(e) => setMainIdiom(e.target.value)}
         />
         <hr />
 
@@ -173,4 +172,3 @@ function EditOrganizationPage(props) {
 }
 
 export default EditOrganizationPage;
-

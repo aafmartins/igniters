@@ -9,7 +9,7 @@ const MONGODB_URI = `${process.env.MONGODB_URL}/${process.env.DB_NAME}`;
 const seedUrl = "mongodb://localhost/igniters";
 
 mongoose
-  .connect(seedUrl, {
+  .connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: true,

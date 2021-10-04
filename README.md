@@ -150,7 +150,7 @@ Search Service
     type: [String],
     required: false,
   }, //not required
-  language: {
+  mainIdiom: {
     type: String,
     required: false,
   }, //not required

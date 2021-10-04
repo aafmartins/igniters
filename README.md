@@ -1,4 +1,4 @@
-# This is the template for poject 3
+# Igniters
 
 ## Description
 

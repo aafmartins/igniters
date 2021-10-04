@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import EditReviewCard from "./../components/EditReviewCard";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = process.env.REACT_APP_API_URL;
 
 // We are deconstructing the props object directly in the parentheses of the function
 function ReviewCard(props) {

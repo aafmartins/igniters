@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 // passing the virtual schema properties to json object to display the popUp org in map
-
 const opts = {
   toJSON: {
     virtuals: true,

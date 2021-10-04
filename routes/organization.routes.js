@@ -134,7 +134,7 @@ router.get("/orgs/:orgId", (req, res, next) => {
 //  GET /api/orgs -  Retrieves all of the organizations
 router.get("/orgs", (req, res, next) => {
   Organization.find()
-    // .populate("reviews")
+    .populate("reviews")
     .then((allOrgs) => res.json(allOrgs))
     .catch((err) => res.json(err));
 });

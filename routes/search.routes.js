@@ -5,9 +5,19 @@ const Organization = require("../models/Organization.model");
 
 router.get("/", (req, res) => {
   // you can access the query from req.query
-  const { q } = req.query;
+  const { q, category } = req.query;
 
-  const query = { $text: { $search: q } };
+  let query;
+
+  if (q !== "" && category !== "") {
+    query = { $text: { $search: q }, categories: category };
+  } else if (q === "" && category !== "") {
+    query = { categories: category };
+  } else if (category === "" && q !== "") {
+    query = { $text: { $search: q } };
+  } else if (q === "" && category === "") {
+    query = null;
+  }
 
   const sort = { score: { $meta: "textScore" } };
 

@@ -8,9 +8,7 @@ const geocoder = mbxGeocoding({
 });
 const Organization = require("../models/Organization.model");
 
-const {
-  isAuthenticated
-} = require("../middleware/jwt.middleware"); // <== IMPORT
+const { isAuthenticated } = require("../middleware/jwt.middleware"); // <== IMPORT
 
 const fileUploader = require("../config/cloudinary");
 
@@ -20,9 +18,7 @@ router.put(
   fileUploader.single("picture"),
   isAuthenticated,
   (req, res, next) => {
-    const {
-      orgId
-    } = req.params;
+    const { orgId } = req.params;
     // const picture = req.file.path;
     const {
       name,
@@ -31,10 +27,10 @@ router.put(
       street,
       email,
       categories,
-      language,
+      mainIdiom,
       description,
       url,
-      picture
+      picture,
     } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(orgId)) {
@@ -52,26 +48,28 @@ router.put(
       .send()
       .then((response) => {
         const geometry = response.body.features[0].geometry;
-        console.log(response.body)
+        console.log(response.body);
         Organization.findByIdAndUpdate(
-            orgId, {
-              name,
-              country,
-              city,
-              street,
-              email,
-              categories,
-              language,
-              description,
-              url,
-              picture,
-              creator: req.payload._id,
-              // reviews,
-              geometry,
-            }, {
-              new: true,
-            }
-          )
+          orgId,
+          {
+            name,
+            country,
+            city,
+            street,
+            email,
+            categories,
+            mainIdiom,
+            description,
+            url,
+            picture,
+            creator: req.payload._id,
+            // reviews,
+            geometry,
+          },
+          {
+            new: true,
+          }
+        )
           .then((updatedOrg) => res.json(updatedOrg))
           .catch((error) => {
             console.log("Organization not updated", error);
@@ -87,9 +85,7 @@ router.put(
 
 // DELETE  /orgs/delete/:orgId  -  Deletes a specific organization by id
 router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
-  const {
-    orgId
-  } = req.params;
+  const { orgId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
@@ -109,9 +105,7 @@ router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
 
 //  GET /api/orgs/:orgId -  Retrieves a specific organization by id
 router.get("/orgs/:orgId", (req, res, next) => {
-  const {
-    orgId
-  } = req.params;
+  const { orgId } = req.params;
   // console.log(req.params);
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
@@ -159,10 +153,10 @@ router.post(
       street,
       email,
       categories,
-      language,
+      mainIdiom,
       description,
       url,
-      picture
+      picture,
     } = req.body;
 
     geocoder
@@ -173,21 +167,21 @@ router.post(
       .send()
       .then((response) => {
         const geometry = response.body.features[0].geometry;
-        console.log(response.body)
+        console.log(response.body);
         Organization.create({
-            name,
-            country,
-            city,
-            street,
-            email,
-            categories,
-            language,
-            description,
-            url,
-            picture,
-            creator: req.payload._id,
-            geometry,
-          })
+          name,
+          country,
+          city,
+          street,
+          email,
+          categories,
+          mainIdiom,
+          description,
+          url,
+          picture,
+          creator: req.payload._id,
+          geometry,
+        })
           .then((response) => {
             res.status(200).json(response);
           })

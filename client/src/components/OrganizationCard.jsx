@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import react from "react";
+import {orgAverageRating} from "../javascripts/orgAverageRating"
 
 function OrganizationCard(props) {
   const {
@@ -13,7 +14,11 @@ function OrganizationCard(props) {
     mainIdiom,
     description,
     url,
+    reviews
   } = props;
+
+  // calculate average rating from the reviews array
+  const avgRating = orgAverageRating(reviews);
 
   return (
     <div>
@@ -26,6 +31,11 @@ function OrganizationCard(props) {
       <p style={{ maxWidth: "400px" }}>
         {description.substring(0, 150) + "..."}
       </p>
+      {reviews.length === 0 ? 
+        "no reviews yet" : (
+        <p class="starability-result" data-rating={avgRating}>
+        Rated: {avgRating} stars
+      </p>)}
     </div>
   );
 }

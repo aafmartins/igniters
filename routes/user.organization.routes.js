@@ -61,6 +61,13 @@ router.get("/my-saved-orgs", (req, res) => {
   if (userId) {
     User.findById(userId)
       .populate("savedOrganizations")
+      .populate({
+        path: "savedOrganizations",
+        populate: {
+          path: "reviews",
+          select: "rating",
+        },
+      })
       .then((savedOrgs) => {
         res.json(savedOrgs);
       })
@@ -73,6 +80,7 @@ router.get("/my-created-orgs", (req, res) => {
   Organization.find({
     creator: req.payload._id,
   })
+    .populate("reviews")
     .then((createdOrgs) => {
       res.json(createdOrgs);
     })

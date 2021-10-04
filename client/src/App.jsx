@@ -1,5 +1,8 @@
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import config from './config'
 import "./components/stars.css";
 import PrivateRoute from "./components/PrivateRoute";
 import AnonRoute from "./components/AnonRoute";
@@ -19,6 +22,43 @@ import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
 
 function App() {
+  const [showLoading, setShowLoading] = useState(true);
+
+  const handleGoogleSuccess = (data) => {
+    
+    // this.setState({
+    //   showLoading: true
+    // })
+    const {givenName, familyName, email, imageUrl, googleId} = data.profileObj
+    let newUser = {
+      firstName: givenName,
+      lastName: familyName,
+      email, 
+      image: imageUrl, 
+      googleId
+    }
+    axios.post(`${config.API_URL}/api/google/info`, newUser , {withCredentials: true})
+      .then((response) => {
+        this.setState({
+          loggedInUser: response.data.data,
+          error: null,
+          showLoading: false
+        }, () => {
+          this.props.history.push('/profile')
+        });   
+      })
+  } 
+
+  const handleGoogleFailure = (error) => {
+    //TODO: Handle these errors yourself the way you want. Currently the state is not in use
+    console.log(error) 
+    this.setState({
+      error,
+    }); 
+  }
+
+
+
   return (
     <div className="App">
       <header className="App-header">

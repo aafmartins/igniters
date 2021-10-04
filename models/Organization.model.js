@@ -21,7 +21,6 @@ const organizationSchema = new Schema(
     city: {
       type: String,
       required: true,
-      text: true,
     }, //required
     street: {
       type: String,

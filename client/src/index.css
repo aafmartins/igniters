@@ -1,4 +1,21 @@
+body {
+  /* background-color: #f5eaf9; */
+  color: #22183b;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lora", serif;
+}
 .map-container {
-    height: 400px;
-  }
-  
+  height: 400px;
+}

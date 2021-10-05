@@ -17,6 +17,7 @@ import EditProfilePage from "./pages/EditProfilePage";
 import MyOrganizationsPage from "./pages/MyOrganizationsPage";
 import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
 
+          <Route exact path="/search" component={SearchPage} />
           <Route exact path="/orgs" component={OrganizationListPage} />
           <Route exact path="/" component={HomePage} />
           <Route component={ErrorPage} />

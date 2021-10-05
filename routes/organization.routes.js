@@ -10,78 +10,69 @@ const Organization = require("../models/Organization.model");
 
 const { isAuthenticated } = require("../middleware/jwt.middleware"); // <== IMPORT
 
-const fileUploader = require("../config/cloudinary");
-
 // PUT  /orgs/edit/:orgId" -  Updates a specific organization by id
-router.put(
-  "/orgs/edit/:orgId",
-  fileUploader.single("picture"),
-  isAuthenticated,
-  (req, res, next) => {
-    const { orgId } = req.params;
-    // const picture = req.file.path;
-    const {
-      name,
-      country,
-      city,
-      street,
-      email,
-      categories,
-      mainIdiom,
-      description,
-      url,
-      picture,
-    } = req.body;
+router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
+  const { orgId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(orgId)) {
-      res.status(400).json({
-        message: "Specified id is not valid",
-      });
-      return;
-    }
+  const {
+    name,
+    country,
+    city,
+    street,
+    email,
+    categories,
+    mainIdiom,
+    description,
+    url,
+  } = req.body;
 
-    geocoder
-      .forwardGeocode({
-        query: street + " " + city + " " + country,
-        limit: 1,
-      })
-      .send()
-      .then((response) => {
-        const geometry = response.body.features[0].geometry;
-        console.log(response.body);
-        Organization.findByIdAndUpdate(
-          orgId,
-          {
-            name,
-            country,
-            city,
-            street,
-            email,
-            categories,
-            mainIdiom,
-            description,
-            url,
-            picture,
-            creator: req.payload._id,
-            // reviews,
-            geometry,
-          },
-          {
-            new: true,
-          }
-        )
-          .then((updatedOrg) => res.json(updatedOrg))
-          .catch((error) => {
-            console.log("Organization not updated", error);
-            res.json(error);
-          });
-      })
-      .catch((err) => {
-        console.log("Geometry not created!", err);
-        res.json(err);
-      });
+  if (!mongoose.Types.ObjectId.isValid(orgId)) {
+    res.status(400).json({
+      message: "Specified id is not valid",
+    });
+    return;
   }
-);
+
+  geocoder
+    .forwardGeocode({
+      query: street + " " + city + " " + country,
+      limit: 1,
+    })
+    .send()
+    .then((response) => {
+      const geometry = response.body.features[0].geometry;
+      console.log(response.body);
+      Organization.findByIdAndUpdate(
+        orgId,
+        {
+          name,
+          country,
+          city,
+          street,
+          email,
+          categories,
+          mainIdiom,
+          description,
+          url,
+          creator: req.payload._id,
+          // reviews,
+          geometry,
+        },
+        {
+          new: true,
+        }
+      )
+        .then((updatedOrg) => res.json(updatedOrg))
+        .catch((error) => {
+          console.log("Organization not updated", error);
+          res.json(error);
+        });
+    })
+    .catch((err) => {
+      console.log("Geometry not created!", err);
+      res.json(err);
+    });
+});
 
 // DELETE  /orgs/delete/:orgId  -  Deletes a specific organization by id
 router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
@@ -156,7 +147,6 @@ router.post(
       mainIdiom,
       description,
       url,
-      picture,
     } = req.body;
 
     geocoder
@@ -178,7 +168,6 @@ router.post(
           mainIdiom,
           description,
           url,
-          picture,
           creator: req.payload._id,
           geometry,
         })

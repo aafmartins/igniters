@@ -1,0 +1,33 @@
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  height: 11vh;
+  background-color: #eec7eb;
+  padding: 10px 30px;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.footerContainer h6 {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.footerContainer p {
+  font-size: 8px;
+  margin: 0;
+}
+
+.footerContainer a {
+  color: #22183b;
+}
+
+.footerLink {
+  color: #22183b;
+  margin-bottom: 5px;
+}
+
+.footerLinksContainer {
+  display: flex;
+  flex-direction: column;
+}

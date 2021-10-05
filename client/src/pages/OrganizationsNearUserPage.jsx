@@ -1,27 +1,55 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "./../contexts/auth.context";
 import axios from "axios";
-import OrganizationCard from "./OrganizationCard";
 
-// import { AuthContext } from "./../contexts/auth.context";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
-export default function OrganizationsNearUserPage() {
+export default function OrganizationsNearUserPage(props) {
   const { userToken } = useContext(AuthContext);
   const userId = userToken._id;
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
+  const [orgs, setOrgs] = useState([]);
+  const [orgsForMap, setOrgsForMap] = useState([]);
+  let neededOrgs = [];
+  // Get the token from the localStorage
+  const storedToken = localStorage.getItem("authToken");
 
-  // const [userCountry, setUserCountry] = useState("");
-  // const {
-  //   userToken: { _id: userId },
-  // } = useContext(AuthContext);
+  const getUserAndOrgs = (userId) => {
+    axios
+      .get(`${API_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        setUser(response.data);
+        console.log("user data", response.data);
+        axios
+          .get(`${API_URL}/orgs`, {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+          })
+          .then((response) => {
+            // setOrgs(response.data);
+            console.log(response.data);
+            // const orgs = response.data;
 
+            response.data.map((org) => {
+              if (org.country === user.country) {
+                console.log(org.country, user.country);
+                neededOrgs.push(org);
+              }
+              // return neededOrgs;
+            });
+
+            console.log("orgs after mapping", neededOrgs);
+            
+          })
+          .catch((error) => console.log(error));
+      });
+  };
   // const getUser = (userId) => {
-  //   // Get the token from the localStorage
-  //   const storedToken = localStorage.getItem("authToken");
-
   //   // Send the token through the request "Authorization" Headers
   //   axios
   //     .get(`${API_URL}/users/${userId}`, {
@@ -30,43 +58,59 @@ export default function OrganizationsNearUserPage() {
   //       },
   //     })
   //     .then((response) => {
-  //       console.log("data from user", response.data.country);
-  //       setUserCountry(response.data.country);
+  //       setUser(response.data);
   //     })
   //     .catch((error) => console.log(error));
   // };
 
-  const getAllOrgs = () => {
-    // if (userLocation === "unknown") {
-    axios
-      .get(`${API_URL}/orgs`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
-      .then((response) => {
-        setOrgs(response.data);
-      })
-      .catch((error) => console.log(error));
-    // } else {
-    // axios
-    //   .get(`${API_URL}/search/?q=${userLocation}`, {
-    //     headers: {
-    //       Authorization: `Bearer ${storedToken}`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     setOrgs(response.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // }
-  };
+  // const getAllOrgs = () => {
+  //   axios
+  //     .get(`${API_URL}/orgs`, {
+  //       headers: {
+  //         Authorization: `Bearer ${storedToken}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setOrgs(response.data);
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
+
+  // function mapOrgsArray() {
+  //   orgs.map((org) => {
+  //     console.log(org.country, user.country);
+  //     if (org.country === user.country) {
+  //       neededOrgs.push(org);
+  //     }
+  //   });
+
+  //   setOrgsForMap(neededOrgs);
+  //   console.log(neededOrgs);
+  // }
+
+  // useEffect(() => {
+  //   mapOrgsArray();
+  // }, []);
+
+  // useEffect(() => {
+  //   getAllOrgs();
+  //   console.log(neededOrgs);
+  // }, []);
+
+  // useEffect(() => {
+  //   getUser(userId);
+  // }, [userId]);
 
   useEffect(() => {
-    getAllOrgs();
-  }, []);
+    getUserAndOrgs(userId);
+  }, [props]);
 
-  return <div></div>;
+  return (
+    <div>
+      <h1>Organizations near you</h1>
+      {orgsForMap.map((org) => {
+        <p>{org.country}</p>;
+      })}
+    </div>
+  );
 }

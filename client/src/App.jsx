@@ -29,47 +29,35 @@ import { AuthContext } from "./contexts/auth.context";
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 function App(props) {
-  const [showLoading, setShowLoading] = useState(true);
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const { logInUser } = useContext(AuthContext);
  
   const handleGoogleSuccess = (data) => {
-    console.log("google verifies the google user ", data)
-    setShowLoading(true);
     const {givenName, familyName, email, imageUrl, googleId} = data.profileObj
-    // const requestBody = {
-    //   firstName: givenName,
-    //   lastName: familyName,
-    //   email, 
-    //   image: imageUrl, 
-    //   googleId
-    // }
+    
     const requestBody = {
       email,
       name: givenName,
       country: "Germany",
       password: "GoogleUser1234"
     }
+
     axios
       .post(`${API_URL}/auth/google`, requestBody )
         .then((response) =>{ 
-          console.log("succesful login, going to homepage:, ", response)
           const token = response.data.authToken;
           logInUser(token);
-          props.history.push("/")}
-          )
+          props.history.push("/")
+        })
         .catch((error) => {
-          console.log("error")
-         // const errorDescription = error.response.data.message;
-         //setErrorMessage(errorDescription);
+          const errorDescription = error;
+          setErrorMessage(errorDescription);
         });
   } 
 
   const handleGoogleFailure = (err) => {
-    //TODO: Handle these errors yourself the way you want. Currently the state is not in use
-    console.log("this is an error", err) 
+    console.log("Error with google singup", err) 
     setErrorMessage(err)
   }
 

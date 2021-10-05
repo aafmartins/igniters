@@ -5,7 +5,7 @@ import OrganizationCard from "./OrganizationCard";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export default function SearchBar() {
+export default function HomeSearchBar() {
   const [searchInput, setSearchInput] = useState("");
   const [categoryInput, setCategoryInput] = useState("");
   const [orgs, setOrgs] = useState([]);

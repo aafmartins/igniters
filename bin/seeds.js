@@ -1,8 +1,12 @@
+// require("dotenv").config({
+//   path: "../.env"
+// });
+
 // require database configuration
 require("./../config/db");
 
 // bin/seeds.js
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 const orgs = require("./data");
 
@@ -23,7 +27,8 @@ const Organization = require("./../models/Organization.model");
 //   );
 
 const importData = async () => {
-  console.log(mongoose.connections[0].name);
+  // console.log("connection name", mongoose.connections[0].name);
+  // console.log(process.env)
   try {
     await Organization.deleteMany()
     await Organization.insertMany(orgs);

@@ -26,9 +26,9 @@ function OrganizationDetailsPage(props) {
   // map Hooks. useRef .current orioerty is initialized to null and when its value changes it does not trigger a re-render
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(9.181851961805604);
-  const [lat, setLat] = useState(48.77806893750751);
-  const [zoom, setZoom] = useState(15);
+  const [lng, setLng] = useState(-35);
+  const [lat, setLat] = useState(30);
+  const [zoom, setZoom] = useState(0);
 
   const getUser = (userId) => {
     axios
@@ -105,6 +105,7 @@ function OrganizationDetailsPage(props) {
         // set coordinates for map
         setLng(response.data.geometry.coordinates[0]);
         setLat(response.data.geometry.coordinates[1]);
+        setZoom(10);
       })
       .catch((error) => console.log(error));
   };
@@ -114,9 +115,6 @@ function OrganizationDetailsPage(props) {
   }, []);
 
   useEffect(() => {
-    //if (map.current) return;
-    // initialize map only once
-
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -124,10 +122,14 @@ function OrganizationDetailsPage(props) {
       zoom: zoom,
     });
 
-    // add marker to the organization location
-    const marker1 = new mapboxgl.Marker()
+    // add marker to the organization location. If theres is no organization, do not add a marker
+
+    if(org) {
+      const marker1 = new mapboxgl.Marker()
       .setLngLat([lng, lat])
       .addTo(map.current);
+    }
+    
   });
 
   useEffect(() => {

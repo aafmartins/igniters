@@ -1,13 +1,22 @@
 const router = require("express").Router();
-const UserModel = require('../models/User.model')
+const User = require('../models/User.model')
 
 // The client makes a API request to this url sending the data in the body
 router.post("/google/info", (req, res, next) => {
-  const {firstName, lastName, email, image, googleId} = req.body
+  const {firstName, lastName, email, image, googleId, password, name, country} = req.body
   // the name itself will include the last name
   try {
     // Create the user in the DB
-    UserModel.create({firstName, lastName, googleId, image, email})
+    User.create({
+      firstName, 
+      lastName, 
+      googleId, 
+      image, 
+      email,
+      name,
+      password,
+      country,
+    })
       .then((response) => {
         // Save the loggedInInfo in the session
         // We'll stick to using sessions just to not over complicate the students with tokens and cookies

@@ -20,6 +20,8 @@ import EditProfilePage from "./pages/EditProfilePage";
 import MyOrganizationsPage from "./pages/MyOrganizationsPage";
 import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
+import SocialNav from "./components/SocialNav"
+//import { AuthContext } from "./../contexts/auth.context";
 
 function App() {
   const [showLoading, setShowLoading] = useState(true);
@@ -39,12 +41,12 @@ function App() {
     }
     axios.post(`${config.API_URL}/api/google/info`, newUser , {withCredentials: true})
       .then((response) => {
-        this.setState({
+        setShowLoading({
           loggedInUser: response.data.data,
           error: null,
           showLoading: false
         }, () => {
-          this.props.history.push('/profile')
+          props.history.push('/profile')
         });   
       })
   } 
@@ -52,7 +54,7 @@ function App() {
   const handleGoogleFailure = (error) => {
     //TODO: Handle these errors yourself the way you want. Currently the state is not in use
     console.log(error) 
-    this.setState({
+    setShowLoading({
       error,
     }); 
   }
@@ -107,6 +109,14 @@ function App() {
           <Route component={ErrorPage} />
         </Switch>
       </header>
+      
+        <SocialNav 
+          onLogout={handleLogout} 
+          loggedInUser={loggedInUser}
+         // onFacebookResponse={handleFacebookReponse}
+          onGoogleSuccess={handleGoogleSuccess}
+          onGoogleFailure={handleGoogleFailure}
+        />
     </div>
   );
 }

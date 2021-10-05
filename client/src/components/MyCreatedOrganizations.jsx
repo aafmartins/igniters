@@ -5,7 +5,7 @@ import {
 import axios from "axios";
 import OrganizationCard from "./OrganizationCard";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 function MyCreatedOrganizations() {
   const [myCreatedOrgs, setmyCreatedOrgs] = useState([]);
@@ -27,14 +27,13 @@ function MyCreatedOrganizations() {
       .catch((error) => console.log(error));
   };
 
-  // We set this effect will run only once, after the initial render
+  // We set this effect will run only once, after the initial renderz
   // by setting the empty dependency array - []
   useEffect(() => {
     getmyCreatedOrgs();
   }, []);
 
-  return ( <
-    div > {
+  return ( <div> {
       myCreatedOrgs.map((organization) => ( <
         OrganizationCard key = {
           organization._id
@@ -43,8 +42,7 @@ function MyCreatedOrganizations() {
         }
         />
       ))
-    } <
-    /div>
+    } </div>
   );
 }
 

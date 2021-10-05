@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import {
+  useState,
+  useEffect
+} from "react";
 import axios from "axios";
 import OrganizationCard from "./OrganizationCard";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function MyCreatedOrganizations() {
   const [myCreatedOrgs, setmyCreatedOrgs] = useState([]);
@@ -30,12 +33,18 @@ function MyCreatedOrganizations() {
     getmyCreatedOrgs();
   }, []);
 
-  return (
-    <div>
-      {myCreatedOrgs.map((organization) => (
-        <OrganizationCard key={organization._id} {...organization} />
-      ))}
-    </div>
+  return ( <
+    div > {
+      myCreatedOrgs.map((organization) => ( <
+        OrganizationCard key = {
+          organization._id
+        } {
+          ...organization
+        }
+        />
+      ))
+    } <
+    /div>
   );
 }
 

@@ -41,7 +41,7 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
     .send()
     .then((response) => {
       const geometry = response.body.features[0].geometry;
-      console.log(response.body);
+    
       Organization.findByIdAndUpdate(
         orgId,
         {
@@ -55,7 +55,6 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
           description,
           url,
           creator: req.payload._id,
-          // reviews,
           geometry,
         },
         {
@@ -97,7 +96,7 @@ router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
 //  GET /api/orgs/:orgId -  Retrieves a specific organization by id
 router.get("/orgs/:orgId", (req, res, next) => {
   const { orgId } = req.params;
-  // console.log(req.params);
+  
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
       message: "Specified id is not valid",
@@ -133,10 +132,9 @@ router.get("/orgs", (req, res, next) => {
 //  POST /api/orgs  -  Creates a new organization
 router.post(
   "/orgs",
-  fileUploader.single("picture"),
   isAuthenticated,
   (req, res, next) => {
-    // const picture = req.file.path;
+    
     const {
       name,
       country,
@@ -157,7 +155,7 @@ router.post(
       .send()
       .then((response) => {
         const geometry = response.body.features[0].geometry;
-        console.log(response.body);
+        
         Organization.create({
           name,
           country,

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage(props) {
   const [searchInput, setSearchInput] = useState("");
@@ -18,6 +19,9 @@ function HomePage(props) {
   return (
     <div>
       <h1>Home Page</h1>
+      <Link to="/orgs-near-you">
+        <button>Organizations near you</button>
+      </Link>
       <div>
         <form onSubmit={handleClick}>
           <div>

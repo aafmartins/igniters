@@ -18,6 +18,7 @@ import MyOrganizationsPage from "./pages/MyOrganizationsPage";
 import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
 import SearchPage from "./pages/SearchPage";
+import OrganizationsNearUserPage from "./pages/OrganizationsNearUserPage";
 
 function App() {
   return (
@@ -58,6 +59,11 @@ function App() {
             exact
             path="/created-orgs"
             component={MyCreatedOrganizations}
+          />
+          <PrivateRoute
+            exact
+            path="/orgs-near-you"
+            component={OrganizationsNearUserPage}
           />
 
           <AnonRoute exact path="/signup" component={SignupPage} />

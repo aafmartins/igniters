@@ -20,6 +20,7 @@ import MyOrganizationsPage from "./pages/MyOrganizationsPage";
 import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
 import SearchPage from "./pages/SearchPage";
+import OrganizationsNearUserPage from "./pages/OrganizationsNearUserPage";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -117,6 +118,11 @@ function App(props) {
             exact
             path="/created-orgs"
             component={MyCreatedOrganizations}
+          />
+          <PrivateRoute
+            exact
+            path="/orgs-near-you"
+            component={OrganizationsNearUserPage}
           />
 
           <AnonRoute exact path="/signup" component={SignupPage} />

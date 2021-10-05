@@ -8,7 +8,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   name: {
     type: String,
@@ -33,9 +33,9 @@ const userSchema = new Schema({
   firstName: String, 
   lastName: String, 
   image: String,
-  linkedInId: String, 
+  //linkedInId: String, 
   googleId: String, 
-  facebookId: String,
+  //facebookId: String,
 });
 
 const User = model("User", userSchema);

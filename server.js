@@ -30,8 +30,8 @@ server.use("/api", apiRouter);
 //const facebookRoutes = require('./routes/facebook.routes')
 //server.use('/api', facebookRoutes);
 
-const googleRoutes = require('./routes/google.routes')
-server.use('/api', googleRoutes);
+// const googleRoutes = require('./routes/google.routes')
+// server.use('/api', googleRoutes);
 
 // catch 404 and forward to error handler
 server.use(function (req, res, next) {

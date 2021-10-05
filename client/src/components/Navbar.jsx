@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react"; // <== IMPORT
 import { AuthContext } from "./../contexts/auth.context"; // <== IMPORT
+import GoogleButton from './GoogleButton'
 
-function Navbar() {
+function Navbar(props) {
   // Subscribe to the AuthContext to gain access to
   // the values from AuthContext.Provider `value` prop
   const { isLoggedIn, userToken, logOutUser } = useContext(AuthContext);
+
+  const { 
+    onGoogleSuccess,
+    onGoogleFailure
+  } = props  
 
   return (
     <nav>
@@ -40,6 +46,9 @@ function Navbar() {
           <Link to="/login">
             <button>Login</button>
           </Link>
+          
+           <GoogleButton  onSuccess={onGoogleSuccess} onFailure={onGoogleFailure} />
+          
         </>
       )}
     </nav>

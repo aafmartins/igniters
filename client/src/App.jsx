@@ -2,7 +2,6 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import config from './javascripts/config'
 import "./components/stars.css";
 import PrivateRoute from "./components/PrivateRoute";
 import AnonRoute from "./components/AnonRoute";
@@ -20,43 +19,59 @@ import EditProfilePage from "./pages/EditProfilePage";
 import MyOrganizationsPage from "./pages/MyOrganizationsPage";
 import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
-import SocialNav from "./components/SocialNav"
-//import { AuthContext } from "./../contexts/auth.context";
+import SearchPage from "./pages/SearchPage";
 
-function App() {
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
+
+function App(props) {
   const [showLoading, setShowLoading] = useState(true);
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleGoogleSuccess = (data) => {
-    
-    // this.setState({
-    //   showLoading: true
-    // })
+    console.log("success with login, this is the data object we get: ", data)
+    setShowLoading(true);
     const {givenName, familyName, email, imageUrl, googleId} = data.profileObj
-    let newUser = {
-      firstName: givenName,
-      lastName: familyName,
-      email, 
-      image: imageUrl, 
-      googleId
+    // const requestBody = {
+    //   firstName: givenName,
+    //   lastName: familyName,
+    //   email, 
+    //   image: imageUrl, 
+    //   googleId
+    // }
+    const requestBody = {
+      email,
+      name: givenName,
+      country: "Germany",
+      password: "GoogleUser1234"
     }
-    axios.post(`${config.API_URL}/api/google/info`, newUser , {withCredentials: true})
-      .then((response) => {
-        setShowLoading({
-          loggedInUser: response.data.data,
-          error: null,
-          showLoading: false
-        }, () => {
-          props.history.push('/profile')
-        });   
-      })
+    axios
+      .post(`${API_URL}/auth/signup`, requestBody , {withCredentials: true})
+        .then((response) => {
+          console.log("successful google signup ", response)
+          setLoggedInUser(response.data.data)
+          setError(null)
+          setShowLoading(false)
+          props.history.push("/orgs")
+        //   setShowLoading({
+        //     loggedInUser: response.data.data,
+        //     error: null,
+        //     showLoading: false
+        //   }, () => {
+        //     data.history.push('/')
+        //   });   
+        })
+        .catch((error) => {
+          console.log("error during axios request", error)
+          // const errorDescription = error.response.data.message;
+          setError(error);
+        });
   } 
 
-  const handleGoogleFailure = (error) => {
+  const handleGoogleFailure = (err) => {
     //TODO: Handle these errors yourself the way you want. Currently the state is not in use
-    console.log(error) 
-    setShowLoading({
-      error,
-    }); 
+    console.log("this is an error", err) 
+    setError(err)
   }
 
 
@@ -64,7 +79,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar />
+        <Navbar
+          onGoogleSuccess={handleGoogleSuccess}
+          onGoogleFailure={handleGoogleFailure}
+         />
         <Switch>
           <PrivateRoute
             exact
@@ -104,19 +122,12 @@ function App() {
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
 
+          <Route exact path="/search" component={SearchPage} />
           <Route exact path="/orgs" component={OrganizationListPage} />
           <Route exact path="/" component={HomePage} />
           <Route component={ErrorPage} />
         </Switch>
       </header>
-      
-        <SocialNav 
-          onLogout={handleLogout} 
-          loggedInUser={loggedInUser}
-         // onFacebookResponse={handleFacebookReponse}
-          onGoogleSuccess={handleGoogleSuccess}
-          onGoogleFailure={handleGoogleFailure}
-        />
     </div>
   );
 }

@@ -152,29 +152,104 @@ router.post("/login", (req, res, next) => {
     );
 });
 
-// GOOGLE signup!!!!
-router.post("/google/info", (req, res, next) => {
-  const {firstName, lastName, email, image, googleId} = req.body
-  // the name itself will include the last name
-  try {
-    // Create the user in the DB
-    User.create({
-      firstName, 
-      lastName, 
-      googleId, 
-      image, 
-      email,
+// GOOGLE signup and login!!!!
+
+router.post("/google", (req, res, next) => {
+  const { email, password, name, country } = req.body;
+  console.log("email, pass, name, country", email, password, name, country);
+
+   // Check if email or password are provided as empty string
+   if (email === "" || password === "") {
+    res.status(400).json({
+      message: "Please provide email and password.",
+    });
+    return;
+  }
+
+  // Check the users collection if a user with the same email exists
+  User.findOne({
+    email,
+  })
+    .then((foundUser) => {
+      if (!foundUser) {
+        // If the user is not found, createa new user
+        console.log("google user not found, creating new user")
+        // If email is unique, proceed to hash the password
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+
+        // Create the new user in the database
+        // We return a pending promise, which allows us to chain another `then`
+        User.create({
+          email,
+          password: hashedPassword,
+          name,
+          country,
+        })
+        .then((createdUser) => {
+          console.log("user successfully created")
+          // Deconstruct the newly created user object to omit the password
+          // We should never expose passwords publicly
+          const { email, name, _id } = createdUser;
+    
+          // Create a new object that doesn't expose the password
+          const user = {
+            email,
+            name,
+            _id,
+          };
+    
+          // Send a json response containing the user object
+          // res.status(201).json({
+          //   user: user,
+          // });
+        })
+        .catch((err) => {
+          console.log("user not created",err);
+          res.status(500).json({
+            message: "Internal Server Error",
+          });
+        });
+      }
+
+      console.log("trying to login")
+      // Compare the provided password with the one saved in the database
+      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
+
+      if (passwordCorrect) {
+        // Deconstruct the user object to omit the password
+        const { _id, email, name } = foundUser;
+
+        // Create an object that will be set as the token payload
+        const payload = {
+          _id,
+          email,
+          name,
+        };
+
+        // Create and sign the token
+        const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+          algorithm: "HS256",
+          expiresIn: "6h",
+        });
+
+        // Send the token as the response
+        res.status(200).json({
+          authToken: authToken,
+        });
+      } else {
+        res.status(401).json({
+          message: "Unable to authenticate the user",
+        });
+      }
     })
-      .then((response) => {
-        // Save the loggedInInfo in the session
-        // We'll stick to using sessions just to not over complicate the students with tokens and cookies
-        req.session.loggedInUser = response
-        res.status(200).json({data: response})
+    .catch((err) => {
+      console.log("user not found, external then")
+      res.status(500).json({
+        message: "Internal Server Error",
       })
-  }
-  catch(error) {
-    res.status(500).json({error: `${error}`})
-  }
+    }
+    );
 });
 
 // GET  /auth/verify  -  Used to verify JWT stored on the client

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import "./components/stars.css";
 import PrivateRoute from "./components/PrivateRoute";
@@ -22,15 +22,21 @@ import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
 import SearchPage from "./pages/SearchPage";
 import OrganizationsNearUserPage from "./pages/OrganizationsNearUserPage";
 
+import { AuthContext } from "./contexts/auth.context";
+
+
+
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 function App(props) {
   const [showLoading, setShowLoading] = useState(true);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
+  const { logInUser } = useContext(AuthContext);
+ 
   const handleGoogleSuccess = (data) => {
-    console.log("success with login, this is the data object we get: ", data)
+    console.log("google verifies the google user ", data)
     setShowLoading(true);
     const {givenName, familyName, email, imageUrl, googleId} = data.profileObj
     // const requestBody = {
@@ -47,32 +53,24 @@ function App(props) {
       password: "GoogleUser1234"
     }
     axios
-      .post(`${API_URL}/auth/signup`, requestBody , {withCredentials: true})
-        .then((response) => {
-          console.log("successful google signup ", response)
-          setLoggedInUser(response.data.data)
-          setError(null)
-          setShowLoading(false)
-          props.history.push("/orgs")
-        //   setShowLoading({
-        //     loggedInUser: response.data.data,
-        //     error: null,
-        //     showLoading: false
-        //   }, () => {
-        //     data.history.push('/')
-        //   });   
-        })
+      .post(`${API_URL}/auth/google`, requestBody )
+        .then((response) =>{ 
+          console.log("succesful login, going to homepage:, ", response)
+          const token = response.data.authToken;
+          logInUser(token);
+          props.history.push("/")}
+          )
         .catch((error) => {
-          console.log("error during axios request", error)
-          // const errorDescription = error.response.data.message;
-          setError(error);
+          console.log("error")
+         // const errorDescription = error.response.data.message;
+         //setErrorMessage(errorDescription);
         });
   } 
 
   const handleGoogleFailure = (err) => {
     //TODO: Handle these errors yourself the way you want. Currently the state is not in use
     console.log("this is an error", err) 
-    setError(err)
+    setErrorMessage(err)
   }
 
 

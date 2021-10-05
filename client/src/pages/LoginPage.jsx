@@ -22,6 +22,7 @@ function LoginPage(props) {
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
+        console.log("succesful login, going to homepage:, ", response)
         const token = response.data.authToken;
         logInUser(token);
         props.history.push("/");

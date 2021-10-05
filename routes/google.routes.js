@@ -20,7 +20,7 @@ router.post("/google/info", (req, res, next) => {
       .then((response) => {
         // Save the loggedInInfo in the session
         // We'll stick to using sessions just to not over complicate the students with tokens and cookies
-        req.session.loggedInUser = response
+        req.session.loggedInUser = response   //    ????????????????????????
         res.status(200).json({data: response})
       })
   }

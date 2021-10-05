@@ -5,15 +5,18 @@
   "workspaces": [
     "client"
   ],
-    "engines": {
+  "engines": {
     "node": "16.x",
-     "npm": "7.x"
+    "npm": "7.x"
   },
   "scripts": {
-    "start": "npm run build -w client&&node ./bin/www",
+    "start": "node ./bin/www",
     "dev:all": "concurrently \"PORT=3000 nodemon ./bin/www\" \"PORT=5000 npm run start -w client\"",
     "dev:front": "PORT=5000 npm run start -w client",
-    "dev:back": "PORT=3000 nodemon ./bin/www"
+    "dev:back": "PORT=3000 nodemon ./bin/www",
+    "seed:atlas": "MONGODB_URL=mongodb+srv://globrtrotters:HCZ1b3WaxnWjkd1X@cluster0.1yh39.mongodb.net   node ./bin/www/seeds.js",
+    "seed:dev": "node ./bin/www/seeds.js",
+    "build": "npm run build -w client"
   },
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.13.2",

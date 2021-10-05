@@ -130,13 +130,37 @@ function EditOrganizationPage(props) {
         />
         <hr />
 
-        <label>Categories:</label>
-        <textarea
-          type="text"
-          name="categories"
-          value={categories}
-          onChange={(e) => setCategories(e.target.value)}
-        />
+        <div>
+          <label htmlFor="categories">Search by Category:</label>
+          <select
+            name="categories"
+            id="categories"
+            multiple={true}
+            onChange={(e) => {
+              const values = [...e.target.options]
+                .filter((o) => o.selected)
+                .map((o) => {
+                  return o.value;
+                });
+              setCategories(values);
+            }}
+          >
+            <option disable="true" value="">
+              Select a category from the list
+            </option>
+            <option value="Activism">Activism</option>
+            <option value="Gender Discrimination">Gender Discrimination</option>
+            <option value="Human Rights">Human Rights</option>
+            <option value="Inequality">Inequality</option>
+            <option value="Malnutrition">Malnutrition</option>
+            <option value="Maternal Health">Maternal Health</option>
+            <option value="Reproductive Rights">Reproductive Rights</option>
+            <option value="Social Solidarity">Social Solidarity</option>
+            <option value="Victim Support">Victim Support</option>
+            <option value="Victim Protection">Victim Protection</option>
+            <option value="Women in Tech">Women in Tech</option>
+          </select>
+        </div>
         <hr />
 
         <label>Language:</label>

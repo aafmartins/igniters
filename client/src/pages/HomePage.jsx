@@ -11,7 +11,6 @@ function HomePage(props) {
   const handleClick = (e) => {
     props.history.push({
       pathname: "/search",
-      search: `?q=${searchInput}`,
       state: searchInput,
     });
   };

@@ -28,7 +28,7 @@
 
 .active {
   background-color: rgb(124, 94, 241, 0.7);
-  border-radius: 3px;
+  /* border-radius: 3px; */
 }
 
 .ulLi {
@@ -36,6 +36,7 @@
   padding: 0px 5px 0px 15px;
   border-radius: 3px;
   border: 1px solid white;
+  color: white;
 }
 
 .ulLi:active {
@@ -48,10 +49,9 @@
   margin: 5px 0px 0px 0px;
 }
 
-nav .navbar-nav li a {
-  color: white;
-}
-
-#lastLink {
+/* .lastLink {
   color: gray;
+} */
+.navbar-light .navbar-nav .nav-link {
+  color: white;
 }

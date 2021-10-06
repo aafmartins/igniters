@@ -33,13 +33,8 @@ function MyCreatedOrganizations() {
     getmyCreatedOrgs();
   }, []);
 
-  return ( <div> {
-      myCreatedOrgs.map((organization) => ( <
-        OrganizationCard key = {
-          organization._id
-        } {
-          ...organization
-        }
+  return ( <div className="container-fluid"> {
+      myCreatedOrgs.map((organization) => ( <OrganizationCard key = {organization._id} {...organization}
         />
       ))
     } </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "./../contexts/auth.context";
 import axios from "axios";
+import OrganizationsNearUserMap from "../components/OrganizationsNearUserMap";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -70,9 +71,9 @@ export default function OrganizationsNearUserPage(props) {
   return (
     <div>
       <h1>Organizations near you</h1>
-      {orgsForMap.map((org) => {
-        return <p>{org.country}</p>;
-      })}
+      <OrganizationsNearUserMap
+        orgs={orgsForMap}
+      />
     </div>
   );
 }

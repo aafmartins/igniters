@@ -31,13 +31,13 @@ function MySavedOrganizations(props) {
   }, []);
 
   return (
-    <div>
+  <div className="container-fluid" >
       {savedOrgs.map((organization) => (
-        <div>
+        <div className="container-fluid" >
           <OrganizationCard key={organization._id} {...organization} />
         </div>
       ))}
-    </div>
+</div>
   );
 }
 

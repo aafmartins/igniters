@@ -1,54 +1,58 @@
 .navbar {
-    padding: 0px;
+  padding: 0px;
 }
 
 .logo {
-    height: 50px;
+  height: 50px;
 
-    margin: 4px 6px 4px 10px;
+  margin: 4px 6px 4px 10px;
 }
 
 .fa-1x {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .hambIcon {
-    color: #7C5EF1;
-    padding: 0px;
+  color: #7c5ef1;
+  padding: 0px;
 
-    font-size: xx-large;
+  font-size: xx-large;
 }
 
 .navbar-toggler {
-    border: none;
-    padding: 0px;
-    width: 40px;
-    margin: 0px 10px 0px 0px;
-
+  border: none;
+  padding: 0px;
+  width: 40px;
+  margin: 0px 10px 0px 0px;
 }
 
-.active {
-    background-color: rgb(124, 94, 241, 0.7);
-    border-radius: 3px;
+.firstLink {
+  background-color: rgb(124, 94, 241, 0.7);
+  border-radius: 3px;
+  padding: 0px 5px 0px 15px;
+  border: 1px solid white;
 }
 
-ul li {
-    background-color: rgb(124, 94, 241, 0.5);
-    padding: 0px 5px 0px 15px;
-    border-radius: 3px;
-    border: 1px solid white;
+.ulLi {
+  background-color: rgb(124, 94, 241, 0.5);
+  padding: 0px 5px 0px 15px;
+  border-radius: 3px;
+  border: 1px solid white;
 }
 
-ul li:active {
-    background-color: rgb(124, 94, 241);
-    border-radius: 3px;
-    border: 1px solid gray;
+.ulLi:active {
+  background-color: rgb(124, 94, 241);
+  border-radius: 3px;
+  border: 1px solid gray;
 }
 
-ul {
-    margin: 5px 0px 0px 0px;
+.ul {
+  margin: 5px 0px 0px 0px;
 }
 
-nav .navbar-nav li a {
-    color: white !important;
+/* .anchors {
+  color: white;
+} */
+a:not([href]) {
+  color: white;
 }

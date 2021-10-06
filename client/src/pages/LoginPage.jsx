@@ -59,10 +59,12 @@ function LoginPage(props) {
               onChange={handlePassword}
             />
           </div>
+
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52 " type="submit">
               Login
             </button>
+            <GoogleButton buttonText="Login" />
           </div>
           <div className="formInputContainer prompt">
             <p>Don't have an account yet?</p>
@@ -71,9 +73,6 @@ function LoginPage(props) {
             </Link>
           </div>
         </form>
-        <GoogleButton
-          buttonText='Login'
-        />
       </div>
     </div>
   );

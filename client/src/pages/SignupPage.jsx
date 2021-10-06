@@ -81,6 +81,7 @@ function SignupPage(props) {
             <button className="submitButton button-52 " type="submit">
               Sign Up
             </button>
+            <GoogleButton buttonText="Sign Up" />
           </div>
 
           <div className="formInputContainer prompt">
@@ -90,9 +91,6 @@ function SignupPage(props) {
             </Link>
           </div>
         </form>
-        <GoogleButton 
-          buttonText='Sign Up'
-        />
       </div>
     </div>
   );

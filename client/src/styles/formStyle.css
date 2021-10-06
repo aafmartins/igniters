@@ -43,8 +43,13 @@
 }
 
 .formSubmitButtonContainer {
-  text-align: center;
-  margin: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.submitButton {
+  padding: 10px 15px;
 }
 
 .prompt {

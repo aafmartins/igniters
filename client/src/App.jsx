@@ -1,6 +1,10 @@
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
 import "./components/stars.css";
+
+import { Route, Switch } from "react-router-dom";
+import { useState, useContext } from "react";
+import axios from "axios";
+
 import PrivateRoute from "./components/PrivateRoute";
 import AnonRoute from "./components/AnonRoute";
 import Navbar from "./components/Navbar";
@@ -22,13 +26,49 @@ import OrganizationsNearUserPage from "./pages/OrganizationsNearUserPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/Footer";
 
-function App() {
+import { AuthContext } from "./contexts/auth.context";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
+
+function App(props) {
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
+  const { logInUser } = useContext(AuthContext);
+
+  const handleGoogleSuccess = (data) => {
+    const { givenName, email } = data.profileObj;
+
+    const requestBody = {
+      email,
+      name: givenName,
+      password: "GoogleUser1234",
+    };
+
+    axios
+      .post(`${API_URL}/auth/google`, requestBody)
+      .then((response) => {
+        const token = response.data.authToken;
+        logInUser(token);
+        props.history.push("/");
+      })
+      .catch((error) => {
+        const errorDescription = error;
+        setErrorMessage(errorDescription);
+      });
+  };
+
+  const handleGoogleFailure = (err) => {
+    console.log("Error with google singup", err);
+    setErrorMessage(err);
+  };
 
   return (
     <div className="App">
-        <Navbar
-         />
-        <div className="mainContainer">    
+      <Navbar
+        onGoogleSuccess={handleGoogleSuccess}
+        onGoogleFailure={handleGoogleFailure}
+      />
+      <div className="mainContainer">
         <Switch>
           <PrivateRoute
             exact

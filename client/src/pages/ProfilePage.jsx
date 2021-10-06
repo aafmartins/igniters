@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "./../contexts/auth.context";
+import '../styles/ProfilePage.css'
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -38,14 +39,17 @@ export default function ProfilePage() {
   return (
     <div>
       {!user.name ? (
-        "Loading profile..."
+        <div className="profilePageContainer">
+         <img src="/images/loading.png" className="profileImage" alt="" />
+        </div>
       ) : (
-        <>
+        <div className="profilePageContainer">
           <h1>Hello, {user.name}!</h1>
+          <img src="/images/profile.png" className="profileImage" alt="" />
           <Link to={`/profile/edit/${userId}`}>
-            <button>Edit Profile</button>
+            <button className="button-52 profileEditButton">Edit Profile</button>
           </Link>
-        </>
+        </div>
       )}
     </div>
   );

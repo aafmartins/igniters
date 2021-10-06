@@ -1,0 +1,15 @@
+.profileImage {
+    height: 350px;
+    margin: 20px 20px 10px 20px;
+}
+
+.profilePageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 20px 20px 20px;
+}
+
+.profileEditButton {
+    margin-bottom: 100px;
+}

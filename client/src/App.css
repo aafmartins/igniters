@@ -23,6 +23,7 @@ body {
   background-color: #f9f8fa;
   margin: 0;
   height: 100%;
+  width: 100%;
   padding: 0;
   padding-top: 70px;
 }
@@ -32,12 +33,16 @@ body {
   flex-direction: column;
   height: 100%;
 }
+
 .mainContainer {
   flex: 1 0 auto;
 }
 
-Link {
-  color: #22183b;
+.loadingImg {
+  width: 350px;
+  padding: 0 50px;
+  display: block;
+  margin: 0 auto;
 }
 
 /* CSS */

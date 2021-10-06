@@ -170,7 +170,7 @@ useEffect(() => {
   },[orgs]);
 
   return (
-    <div id="map" style={{ width: "100%", height: "500px" }}></div>
+    <div id="map" style={{ width: "100%", height: "0", padding: "0 0 56% 0" }}></div>
   )
 
 }

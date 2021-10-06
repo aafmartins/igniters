@@ -9,7 +9,7 @@ export default function OrganizationsNearUserMap(props) {
 
         const map = new mapboxgl.Map({
           container: "map",
-          style: "mapbox://styles/mapbox/streets-v11", // change style
+          style: "mapbox://styles/hribu/ckufjv3c47vjn17mpj3kujvhi", // change style
           center: [-35, 30],
           zoom: 1,
         });
@@ -88,6 +88,6 @@ export default function OrganizationsNearUserMap(props) {
     
 
     return (
-        <div id="map" style={{ width: "100%", height: "500px" }}></div>
+        <div id="map" style={{ width: "100%", height: "0", padding: "0 0 56% 0" }}></div>
     )
 }

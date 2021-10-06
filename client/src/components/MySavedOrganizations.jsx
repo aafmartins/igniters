@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import OrganizationCard from "./OrganizationCard";
+import '../styles/MyCreatedOrg.css'
+import { Link } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -31,13 +33,43 @@ function MySavedOrganizations(props) {
   }, []);
 
   return (
-  <div className="container-fluid" >
+    <div>
+    {savedOrgs.length===0 ?
+
+    <div className="imageContainer">
+    <img src="/images/created-org.png" className="myCreatedOrgImage" alt="" />
+      <Link to="/orgs">
+        <button className="button-52">Save organizations</button>
+      </Link>
+    </div>
+    :
+    <div>
+        <div className="imageContainer">
+      <img src="/images/hero.png" className="myCreatedOrgImage" alt="" />
+    
       {savedOrgs.map((organization) => (
-        <div className="container-fluid" >
-          <OrganizationCard key={organization._id} {...organization} />
+        <div className="container-fluid"> 
+          <OrganizationCard key = {organization._id} {...organization}/>
         </div>
-      ))}
-</div>
+        ))
+        }
+    </div>
+    </div>
+    }
+    
+    </div>
+
+
+
+
+
+//   <div className="" >
+//       {savedOrgs.map((organization) => (
+//         <div className="container-fluid" >
+//           <OrganizationCard key={organization._id} {...organization} />
+//         </div>
+//       ))}
+// </div>
   );
 }
 

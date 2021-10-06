@@ -2,6 +2,7 @@ import React from "react";
 import MySavedOrganizations from "../components/MySavedOrganizations";
 import MyCreatedOrganizations from "../components/MyCreatedOrganizations";
 import { useState } from "react";
+import '../styles/MyOrganizationsButtons.css'
 
 export default function MyOrganizationsPage() {
   const [savedClicked, setSavedClicked] = useState(true);
@@ -16,15 +17,19 @@ export default function MyOrganizationsPage() {
   return (
     <div>
       {savedClicked ? (
-        <div>
-          <button disabled>My Saved Organizations</button>
-          <button onClick={handleClick}>My Created Organizations</button>
+        <div >
+          <div className="changeBetweenMyOrgsContainer">
+            <button className="button-52 changeBetweenMyOrgsButtons" disabled>My Saved Organizations</button>
+          <button className="button-52 changeBetweenMyOrgsButtons" onClick={handleClick}>My Created Organizations</button>
+          </div>
           <MySavedOrganizations />
         </div>
       ) : (
-        <div>
-          <button onClick={handleClick}>My Saved Organizations</button>
-          <button disabled>My Created Organizations</button>
+        <div >
+     <div className="changeBetweenMyOrgsContainer">
+            <button className="button-52 changeBetweenMyOrgsButtons" onClick={handleClick}>My Saved Organizations</button>
+          <button className="button-52 changeBetweenMyOrgsButtons" disabled>My Created Organizations</button>
+     </div>
           <MyCreatedOrganizations />
         </div>
       )}

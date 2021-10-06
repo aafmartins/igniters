@@ -26,6 +26,10 @@
   margin: 0px 10px 0px 0px;
 }
 
+.navbar-toggler:checked {
+  border: none;
+}
+
 .firstLink {
   background-color: rgb(124, 94, 241, 0.7);
   border-radius: 3px;

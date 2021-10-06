@@ -28,28 +28,28 @@ export default function NavBarPrivate() {
 
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto ul">
-          <li className="nav-item active ulLi">
+          <li className="nav-item active firstLink">
             <Link className="nav-link " to="/orgs">
               <a className="anchors">Organizations</a>
             </Link>
           </li>
-          <li className="nav-item">
+          <li li className = "nav-item ulLi" >
             <Link className="nav-link" to={`/my-orgs`}>
               <a className="anchors">My Organizations</a>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item ulLi">
             <Link className="nav-link" to="/orgs/create">
               <a className="anchors">Create an organization</a>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item ulLi">
             <Link className="nav-link" to="/profile">
               <a className="anchors">Profile</a>
             </Link>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" id="lastLink" onClick={logOutUser}>
+          <li className="nav-item lastLink ulLi">
+            <a className="nav-link" onClick={logOutUser}>
               Logout, {userToken.name}
             </a>
           </li>

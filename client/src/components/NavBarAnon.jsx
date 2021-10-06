@@ -29,12 +29,12 @@ export default function NavBarAnon() {
               <a className="anchors">All Organizations</a>
             </Link>
           </li>
-          <li class="nav-item ">
+          <li class = "nav-item ulLi" >
             <Link className="nav-link" to="/signup">
               <a className="anchors">Signup</a>
             </Link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ulLi">
             <Link className="nav-link" to="/login">
               <a className="anchors">Login</a>
             </Link>

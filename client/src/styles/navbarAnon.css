@@ -26,9 +26,11 @@
   margin: 0px 10px 0px 0px;
 }
 
-.active {
+.firstLink {
   background-color: rgb(124, 94, 241, 0.7);
   border-radius: 3px;
+  padding: 0px 5px 0px 15px;
+  border: 1px solid white;
 }
 
 .ulLi {
@@ -48,6 +50,9 @@
   margin: 5px 0px 0px 0px;
 }
 
-nav .navbar-nav li a {
-  color: white !important;
+/* .anchors {
+  color: white;
+} */
+a:not([href]) {
+  color: white;
 }

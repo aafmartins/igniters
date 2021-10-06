@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "./../contexts/auth.context";
 import axios from "axios";
+import OrganizationsNearUserMap from "../components/OrganizationsNearUserMap";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -23,6 +24,7 @@ export default function OrganizationsNearUserPage(props) {
         },
       })
       .then((response) => {
+        console.log(response)
         setUser(response.data);
       })
       .catch((error) => console.log(error));
@@ -46,6 +48,7 @@ export default function OrganizationsNearUserPage(props) {
     orgs.map((org) => {
       console.log(org.country, user.country);
       if (org.country === user.country) {
+        console.log(org.country, user.country)
         neededOrgs.push(org);
       }
     });
@@ -63,14 +66,14 @@ export default function OrganizationsNearUserPage(props) {
 
   useEffect(() => {
     mapOrgsArray();
-  }, [orgs]);
+  }, [user,orgs]);
 
   return (
     <div>
       <h1>Organizations near you</h1>
-      {orgsForMap.map((org) => {
-        return <p>{org.country}</p>;
-      })}
+      <OrganizationsNearUserMap
+        orgs={orgsForMap}
+      />
     </div>
   );
 }

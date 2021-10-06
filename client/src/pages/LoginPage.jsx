@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./../contexts/auth.context";
+import GoogleButton from "../components/GoogleButton";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -34,26 +35,46 @@ function LoginPage(props) {
 
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
-
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="text" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <button type="submit">Login</button>
-      </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <div className="formContainer">
+        <form onSubmit={handleLoginSubmit}>
+          <div className="formHeading">
+            <h1>Login</h1>
+          </div>
+          <div className="formInputContainer">
+            <label>Email:</label>
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleEmail}
+            />
+          </div>
+          <div className="formInputContainer">
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePassword}
+            />
+          </div>
+          <div className="formSubmitButtonContainer">
+            <button className="submitButton button-52 " type="submit">
+              Login
+            </button>
+          </div>
+          <div className="formInputContainer prompt">
+            <p>Don't have an account yet?</p>
+            <Link className="promptLink" to={"/signup"}>
+              Sign Up
+            </Link>
+          </div>
+        </form>
+        <GoogleButton
+          buttonText='Login'
+        />
+      </div>
     </div>
   );
 }

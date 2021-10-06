@@ -156,11 +156,19 @@ function OrganizationDetailsPage(props) {
           </div>
 
           <div className="mainDetailsContainer">
-            <div>
+            <div className="nameAndDescriptionContainer">
               <h1>{org.name}</h1>
               <p>{org.description}</p>
             </div>
             <div className="orgContactsAndDetails">
+              <div className="orgDetailsSubContainer">
+                <h6>Contact Details</h6>
+                <a href={org.url}>APAV</a>
+                <p>{org.email}</p>
+                <p>
+                  {org.street} <br /> {org.city}, {org.country}
+                </p>
+              </div>
               <div className="orgDetailsUl orgDetailsSubContainer">
                 <ul>
                   <h6>Categories</h6>
@@ -172,15 +180,6 @@ function OrganizationDetailsPage(props) {
                   <h6>Main language</h6>
                   <p>{org.mainIdiom}</p>
                 </div>
-              </div>
-
-              <div className="orgDetailsSubContainer">
-                <h6>Contact Details</h6>
-                <a href={org.url}>APAV</a>
-                <p>{org.email}</p>
-                <p>
-                  {org.street} <br /> {org.city}, {org.country}
-                </p>
               </div>
             </div>
           </div>

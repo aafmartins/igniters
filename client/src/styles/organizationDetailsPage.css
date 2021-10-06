@@ -9,7 +9,16 @@
 }
 
 .mainDetailsContainer {
-  margin: 20px;
+  margin: 20px 20px;
+  max-width: 700px;
+}
+
+.nameAndDescriptionContainer {
+  margin-bottom: 30px;
+}
+
+.nameAndDescriptionContainer h1 {
+  margin-bottom: 20px;
 }
 
 .orgDetailsUl ul {
@@ -29,6 +38,17 @@
   font-size: 12px;
 }
 
+.orgContactsAndDetails a {
+  color: #e27bf5;
+  text-decoration: none;
+}
+
+.orgContactsAndDetails a:hover {
+  font-weight: 800;
+  text-decoration: none;
+  color: #e27bf5;
+}
+
 /* .orgDetailsSubContainer{
     margin: 
 } */
@@ -40,7 +60,8 @@
 .mapAndButtonsContainer {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
+  margin: 20px 20px;
+  max-width: 700px;
 }
 
 .buttonsContainer {

@@ -164,8 +164,10 @@ function OrganizationDetailsPage(props) {
               <div className="orgDetailsSubContainer">
                 <h6>Contact Details</h6>
                 <a href={org.url}>APAV</a>
+                {/* <br /> */}
+                {/* <a href={org.email}>{org.email}</a> */}
                 <p>{org.email}</p>
-                <p>
+                <p className="address">
                   {org.street} <br /> {org.city}, {org.country}
                 </p>
               </div>
@@ -211,7 +213,7 @@ function OrganizationDetailsPage(props) {
               <br />
               <br />
               <button className="button-52" onClick={toggleForm}>
-                {showForm ? "Hide Review Form" : "Review"}
+                {showForm ? "Hide Form" : "Review"}
               </button>
               <br />
               {showForm ? (
@@ -246,7 +248,7 @@ function OrganizationDetailsPage(props) {
                 className="button-52 orgDetailsButtons"
                 onClick={toggleForm}
               >
-                {showForm ? "Hide Review Form" : "Review"}
+                {showForm ? "Hide Form" : "Review"}
               </button>
               <br />
               {showForm ? (

@@ -2,6 +2,7 @@ import { AuthContext } from "./../contexts/auth.context";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import EditReviewCard from "./../components/EditReviewCard";
+import "../styles/reviews.css";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -55,28 +56,35 @@ function ReviewCard(props) {
 
   return (
     <div className="ReviewCard card">
+      <h5>Reviews</h5>
       <p class="starability-result" data-rating={rating}>
         Rated: {rating} stars
       </p>
 
-      <h4>Comment:</h4>
+      {/* <h6>Comment:</h6> */}
       <p>{comment}</p>
       <p>by: {reviewer.name}</p>
       {userToken._id === reviewer._id ? (
         <div>
-          <button onClick={toggleForm}>
-            {showForm ? "Cancel Edit" : "Edit"}
+          <button className="button-52 reviewButtons" onClick={toggleForm}>
+            {showForm ? "Cancel" : "Edit"}
           </button>
           <br />
           {showForm ? (
-            <EditReviewCard
-              refreshOrg={props.refreshOrg}
-              toggleForm={toggleForm}
-              reviewId={reviewId}
-            />
+            <div>
+              <EditReviewCard
+                refreshOrg={props.refreshOrg}
+                toggleForm={toggleForm}
+                reviewId={reviewId}
+              />
+              <button
+                className="button-52 reviewButtons"
+                onClick={deleteReview}
+              >
+                Delete
+              </button>
+            </div>
           ) : null}
-
-          <button onClick={deleteReview}>Delete</button>
         </div>
       ) : (
         ""

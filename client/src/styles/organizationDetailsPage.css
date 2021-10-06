@@ -49,14 +49,13 @@
   color: #e27bf5;
 }
 
-/* .orgDetailsSubContainer{
-    margin: 
-} */
-
 .orgContactsAndDetails h6 {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 
+.address {
+  margin-top: 10px;
+}
 .mapAndButtonsContainer {
   display: flex;
   justify-content: space-between;

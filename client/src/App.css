@@ -38,6 +38,13 @@ body {
   height: 100%;
 }
 
+.images {
+  width: 350px;
+  padding: 0 50px;
+  display: block;
+  margin: 0 auto;
+}
+
 .mainContainer {
   flex: 1 0 auto;
 }

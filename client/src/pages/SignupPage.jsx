@@ -37,7 +37,7 @@ function SignupPage(props) {
 
   return (
     <div className="SignupPage">
-      <img src="/images/signup.png" alt="Sign up hero" className="aboutUsImg" />
+      <img src="/images/signup.png" alt="Sign up hero" className="images" />
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="formContainer">

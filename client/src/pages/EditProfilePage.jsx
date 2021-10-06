@@ -68,7 +68,7 @@ function EditProfilePage(props) {
 
   return (
     <div className="EditProfilePage">
-      <img src="/images/edit.png" alt="Edit Form" className="aboutUsImg" />
+      <img src="/images/edit.png" alt="Edit Form" className="images" />
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 

@@ -82,7 +82,7 @@ function EditOrganizationPage(props) {
 
   return (
     <div className="EditOrganizationPage">
-      <img src="/images/edit.png" alt="Edit Form" className="aboutUsImg" />
+      <img src="/images/edit.png" alt="Edit Form" className="images" />
       <div className="formContainer orgForm">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="formHeading">

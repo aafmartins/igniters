@@ -4,7 +4,6 @@
 
 .logo {
   height: 50px;
-
   margin: 4px 6px 4px 10px;
 }
 
@@ -15,8 +14,11 @@
 .hambIcon {
   color: #7c5ef1;
   padding: 0px;
-
   font-size: xx-large;
+}
+
+.hambIcon:checked {
+  border: none;
 }
 
 .navbar-toggler {

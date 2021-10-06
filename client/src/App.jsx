@@ -21,6 +21,8 @@ import MySavedOrganizations from "./components/MySavedOrganizations";
 import MyCreatedOrganizations from "./components/MyCreatedOrganizations";
 import SearchPage from "./pages/SearchPage";
 import OrganizationsNearUserPage from "./pages/OrganizationsNearUserPage";
+import AboutUsPage from "./pages/AboutUsPage";
+import Footer from "./components/Footer";
 
 import { AuthContext } from "./contexts/auth.context";
 
@@ -114,11 +116,13 @@ function App(props) {
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
 
+          <Route exact path="/about" component={AboutUsPage} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/orgs" component={OrganizationListPage} />
           <Route exact path="/" component={HomePage} />
           <Route component={ErrorPage} />
         </Switch>
+        <Footer />
       </header>
     </div>
   );

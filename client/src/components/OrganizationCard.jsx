@@ -40,7 +40,7 @@ function OrganizationCard(props) {
         </div> : (
         <div className="reviewDisplay">
           <p class="starability-result" data-rating={avgRating}>Rated: {avgRating} stars</p>
-          <p className="reviewsNum">{reviews.length}</p>
+          <p className="reviewsNum">({reviews.length})</p>
         </div>
         )
       }

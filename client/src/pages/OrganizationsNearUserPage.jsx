@@ -23,6 +23,7 @@ export default function OrganizationsNearUserPage(props) {
         },
       })
       .then((response) => {
+        console.log(response)
         setUser(response.data);
       })
       .catch((error) => console.log(error));
@@ -46,6 +47,7 @@ export default function OrganizationsNearUserPage(props) {
     orgs.map((org) => {
       console.log(org.country, user.country);
       if (org.country === user.country) {
+        console.log(org.country, user.country)
         neededOrgs.push(org);
       }
     });
@@ -63,7 +65,7 @@ export default function OrganizationsNearUserPage(props) {
 
   useEffect(() => {
     mapOrgsArray();
-  }, [orgs]);
+  }, [user,orgs]);
 
   return (
     <div>

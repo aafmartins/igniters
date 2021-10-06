@@ -83,7 +83,6 @@ router.post("/signup", (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({
         message: "Internal Server Error",
       });
@@ -152,11 +151,112 @@ router.post("/login", (req, res, next) => {
     );
 });
 
+// GOOGLE signup and login!!!!
+
+router.post("/google", (req, res, next) => {
+  const { email, password, name, country } = req.body;
+
+  // Check the users collection if a user with the same email exists
+  User.findOne({
+    email,
+    })
+    .then((foundUser) => {
+      if (!foundUser) {
+        // If the user is not found, createa new user
+
+        // If email is unique, proceed to hash the password
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+
+        // Create the new user in the database
+        // We return a pending promise, which allows us to chain another `then`
+        return User.create({
+          email,
+          password: hashedPassword,
+          name,
+          country,
+        })
+        .then((createdUser) => {
+          
+          // Compare the provided password with the one saved in the database
+          const passwordCorrect = bcrypt.compareSync(password, createdUser.password);
+    
+          if (passwordCorrect) {
+            // Deconstruct the user object to omit the password
+            const { _id, email, name } = createdUser;
+    
+            // Create an object that will be set as the token payload
+            const payload = {
+              _id,
+              email,
+              name,
+            };
+    
+            // Create and sign the token
+            const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+              algorithm: "HS256",
+              expiresIn: "6h",
+            });
+    
+            // Send the token as the response
+            res.status(200).json({
+              authToken: authToken,
+            });
+          } else {
+            res.status(401).json({
+              message: "Unable to authenticate the user",
+            });
+          }
+        })
+        .catch((err) => {
+          res.status(500).json({
+            message: "Internal Server Error",
+          });
+        });
+      }
+
+      // Compare the provided password with the one saved in the database
+      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
+
+      if (passwordCorrect) {
+        // Deconstruct the user object to omit the password
+        const { _id, email, name } = foundUser;
+
+        // Create an object that will be set as the token payload
+        const payload = {
+          _id,
+          email,
+          name,
+        };
+
+        // Create and sign the token
+        const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+          algorithm: "HS256",
+          expiresIn: "6h",
+        });
+
+        // Send the token as the response
+        res.status(200).json({
+          authToken: authToken,
+        });
+      } else {
+        res.status(401).json({
+          message: "Unable to authenticate the user",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "Internal Server Error",
+      })
+    }
+    );
+});
+
 // GET  /auth/verify  -  Used to verify JWT stored on the client
 router.get("/verify", isAuthenticated, (req, res, next) => {
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and made available on `req.payload`
-  // console.log(`req.payload`, req.payload);
 
   // Send back the object with user data
   // previously set as the token payload

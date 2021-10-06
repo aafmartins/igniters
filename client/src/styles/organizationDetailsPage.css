@@ -1,0 +1,73 @@
+.orgDetailsPage {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.orgHeaderImg {
+  width: 100%;
+}
+
+.mainDetailsContainer {
+  margin: 20px 20px;
+  max-width: 700px;
+}
+
+.nameAndDescriptionContainer {
+  margin-bottom: 30px;
+}
+
+.nameAndDescriptionContainer h1 {
+  margin-bottom: 20px;
+}
+
+.orgDetailsUl ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.map-container {
+  width: 50vw;
+  height: 50vw;
+}
+
+.orgContactsAndDetails {
+  display: flex;
+  justify-content: space-around;
+  font-size: 12px;
+}
+
+.orgContactsAndDetails a {
+  color: #e27bf5;
+  text-decoration: none;
+}
+
+.orgContactsAndDetails a:hover {
+  font-weight: 800;
+  text-decoration: none;
+  color: #e27bf5;
+}
+
+.orgContactsAndDetails h6 {
+  margin-bottom: 5px;
+}
+
+.address {
+  margin-top: 10px;
+}
+.mapAndButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px;
+  max-width: 700px;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.orgDetailsButtons {
+  width: 100px;
+}

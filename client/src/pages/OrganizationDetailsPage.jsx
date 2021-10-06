@@ -1,3 +1,4 @@
+import "../styles/organizationDetailsPage.css";
 import { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -141,105 +142,136 @@ function OrganizationDetailsPage(props) {
   };
 
   return (
-    <div className="ProjectDetails">
+    <div className="orgDetailsContainer">
       {!org ? (
-        "Loading..."
+        <img
+          src="../../public/images/loading.png"
+          alt="Loading"
+          className="loadingImg"
+        />
       ) : (
         <>
-          <img src={randomImageUrl()} alt="" width="400px" />
-          <h1>{org.name}</h1>
-
-          <p>{org.description}</p>
-
-          <ul>
-            <h6>Categories</h6>
-            {org.categories.map((category) => {
-              return <li>{category}</li>;
-            })}
-          </ul>
-
           <div>
-            <h6>Main language:</h6>
-            <p>{org.mainIdiom}</p>
+            <img src={randomImageUrl()} alt="" className="orgHeaderImg" />
           </div>
 
-          <div>
-            <h6>Contact Details</h6>
-            <a href={org.url}>APAV</a>
-            <p>{org.email}</p>
-            <p>
-              {org.street} <br /> {org.city}, {org.country}
-            </p>
+          <div className="mainDetailsContainer">
+            <div className="nameAndDescriptionContainer">
+              <h1>{org.name}</h1>
+              <p>{org.description}</p>
+            </div>
+            <div className="orgContactsAndDetails">
+              <div className="orgDetailsSubContainer">
+                <h6>Contact Details</h6>
+                <a href={org.url}>APAV</a>
+                {/* <br /> */}
+                {/* <a href={org.email}>{org.email}</a> */}
+                <p>{org.email}</p>
+                <p className="address">
+                  {org.street} <br /> {org.city}, {org.country}
+                </p>
+              </div>
+              <div className="orgDetailsUl orgDetailsSubContainer">
+                <ul>
+                  <h6>Categories</h6>
+                  {org.categories.map((category) => {
+                    return <li>{category}</li>;
+                  })}
+                </ul>
+                <div>
+                  <h6>Main language</h6>
+                  <p>{org.mainIdiom}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </>
       )}
 
-      <div
-        className="map-container"
-        ref={mapContainer}
-        id="map"
-        style={{ width: "400px", height: "300px" }}
-      ></div>
-
-      <Link to="/orgs">
-        <button>Back to Organizations</button>
-      </Link>
-
-      {isCreatedByUser ? (
-        <div>
-          <Link to={`/orgs/edit/${orgId}`}>
-            <button>Edit Organization</button>
-          </Link>
+      <div className="mapAndButtonsContainer">
+        <div
+          className="map-container"
+          ref={mapContainer}
+          id="map"
+          // style={{ width: "400px", height: "300px" }}
+        ></div>
+        {/* <Link to="/orgs">
+          <button>Back to Organizations</button>
+        </Link> */}
+        <div className="buttonsContainer">
+          {isCreatedByUser ? (
+            <div>
+              <Link to={`/orgs/edit/${orgId}`}>
+                <button className="button-52 orgDetailsButtons">Edit</button>
+              </Link>
+            </div>
+          ) : isSaved ? (
+            <div>
+              <button className="button-52" onClick={handleRemove}>
+                Remove
+              </button>
+              <br />
+              <br />
+              <button className="button-52" onClick={toggleForm}>
+                {showForm ? "Hide Form" : "Review"}
+              </button>
+              <br />
+              {showForm ? (
+                <AddReview
+                  toggleForm={toggleForm}
+                  refreshOrg={getOrg}
+                  orgId={orgId}
+                />
+              ) : null}
+              {org &&
+                org.reviews.map((review) => {
+                  return (
+                    <ReviewCard
+                      refreshOrg={getOrg}
+                      key={review._id}
+                      {...review}
+                    />
+                  );
+                })}
+            </div>
+          ) : (
+            <div>
+              <button
+                className="button-52 orgDetailsButtons"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+              <br />
+              <br />
+              <button
+                className="button-52 orgDetailsButtons"
+                onClick={toggleForm}
+              >
+                {showForm ? "Hide Form" : "Review"}
+              </button>
+              <br />
+              {showForm ? (
+                <AddReview
+                  toggleForm={toggleForm}
+                  refreshOrg={getOrg}
+                  orgId={orgId}
+                />
+              ) : null}
+              {org &&
+                org.reviews.map((review) => {
+                  return (
+                    <ReviewCard
+                      refreshOrg={getOrg}
+                      key={review._id}
+                      {...review}
+                    />
+                  );
+                })}
+            </div>
+          )}
         </div>
-      ) : isSaved ? (
-        <div>
-          <button onClick={handleRemove}>Remove</button>
-          <br />
-          <br />
-          <button onClick={toggleForm}>
-            {showForm ? "Hide Review Form" : "Add a Review"}
-          </button>
-          <br />
-          {showForm ? (
-            <AddReview
-              toggleForm={toggleForm}
-              refreshOrg={getOrg}
-              orgId={orgId}
-            />
-          ) : null}
-
-          {org &&
-            org.reviews.map((review) => {
-              return (
-                <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
-              );
-            })}
-        </div>
-      ) : (
-        <div>
-          <button onClick={handleSave}>Save Organization</button>
-          <br />
-          <br />
-          <button onClick={toggleForm}>
-            {showForm ? "Hide Review Form" : "Add a Review"}
-          </button>
-          <br />
-          {showForm ? (
-            <AddReview
-              toggleForm={toggleForm}
-              refreshOrg={getOrg}
-              orgId={orgId}
-            />
-          ) : null}
-
-          {org &&
-            org.reviews.map((review) => {
-              return (
-                <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
-              );
-            })}
-        </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+.aboutUsImg {
+  width: 350px;
+  padding: 0 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.aboutUsPage p {
+  padding: 55px;
+  text-align: left;
+}

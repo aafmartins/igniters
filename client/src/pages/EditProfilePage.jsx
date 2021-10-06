@@ -7,13 +7,12 @@ function EditProfilePage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  //   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [country, setCountry] = useState("");
+  const [errorMessage, setErrorMessage] = useState(undefined);
   const userId = props.match.params.id;
+  const storedToken = localStorage.getItem("authToken");
 
   useEffect(() => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .get(`${API_URL}/users/${userId}`, {
@@ -24,6 +23,7 @@ function EditProfilePage(props) {
         setName(oneUser.name);
         setPassword(oneUser.password);
         setEmail(oneUser.email);
+        setCountry(oneUser.country);
       })
       .catch((error) => console.log(error));
   }, [userId]);
@@ -31,6 +31,7 @@ function EditProfilePage(props) {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
+  const handleCountry = (e) => setCountry(e.target.value);
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
@@ -38,11 +39,9 @@ function EditProfilePage(props) {
       name,
       password,
       email,
+      country,
     };
 
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-    const userId = props.match.params.id;
     // Send the token through the request "Authorization" Headers
     axios
       .put(`${API_URL}/users/${userId}/edit`, requestBody, {
@@ -54,9 +53,6 @@ function EditProfilePage(props) {
   };
 
   const deleteUser = () => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .delete(`${API_URL}/users/${userId}/delete`, {
@@ -66,28 +62,56 @@ function EditProfilePage(props) {
       .catch((err) => console.log(err));
   };
 
-  //   const handleEditSubmit = (e) => {
-  //     e.preventDefault();
-  //     // Create an object representing the request body
-  //     const requestBody = { email, password, name };
-
-  //     // Make an axios request to the API
-  //     // If POST request is successful redirect to login page
-  //     // If the request resolves with an error, set the error message in the state
-  //     axios
-  //       .post(`${API_URL}/users/${userId}/edit`, requestBody)
-  //       .then((response) => props.history.push("/login"))
-  //       .catch((error) => {
-  //         const errorDescription = error.response.data.message;
-  //         setErrorMessage(errorDescription);
-  //       });
-  //   };
-
   return (
-    <div className="ProfilePage">
-      <h1>Edit Profile</h1>
+    <div className="EditProfilePage">
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <div className="formContainer">
+        <form onSubmit={handleEditSubmit}>
+          <div className="formHeading">
+            <h1>Edit Profile</h1>
+          </div>
+          <div className="formInputContainer">
+            <label>Name:</label>
+            <input type="text" name="name" value={name} onChange={handleName} />
+          </div>
+          <div className="formInputContainer">
+            <label>Country of residence:</label>
+            <input
+              type="text"
+              name="country"
+              value={country}
+              onChange={handleCountry}
+            />
+          </div>
+          <div className="formInputContainer">
+            <label>Email:</label>
+            <input
+              placeholder="your_email@igniters.com"
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleEmail}
+            />
+          </div>
+          <div className="formInputContainer">
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="******"
+              onChange={handlePassword}
+            />
+          </div>
 
-      <form onSubmit={handleEditSubmit}>
+          <div className="formSubmitButtonContainer">
+            <button className="submitButton button-52 " type="submit">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* <form onSubmit={handleEditSubmit}>
         <label>Email:</label>
         <input type="text" name="email" value={email} onChange={handleEmail} />
 
@@ -103,11 +127,9 @@ function EditProfilePage(props) {
         <input type="text" name="name" value={name} onChange={handleName} />
 
         <button type="submit">Save</button>
-      </form>
+      </form> */}
 
       <button onClick={deleteUser}>Delete User</button>
-
-      {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
     </div>
   );
 }

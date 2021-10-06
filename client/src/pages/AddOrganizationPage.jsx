@@ -54,7 +54,7 @@ function AddOrganizationPage(props) {
 
   return (
     <div className="AddOrganization">
-      <div className="formContainer">
+      <div className="formContainer orgForm">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="formHeading">
             <h1>Create an Organization</h1>

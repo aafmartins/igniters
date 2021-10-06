@@ -71,7 +71,7 @@ export default function OrganizationsNearUserPage(props) {
   return (
     <div>
       <h1>Organizations near you</h1>
-      <OrganizationsNearUserMap 
+      <OrganizationsNearUserMap
         orgs={orgsForMap}
       />
     </div>

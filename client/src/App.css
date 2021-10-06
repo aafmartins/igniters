@@ -1,0 +1,117 @@
+/* colors:
+light lilac: #F5EAF9
+light pink: #EEC7EB
+strong lilac: #E27BF5 
+blue lilac: #7C5EF1
+blue:#1F78F0
+dark blue: #22183B
+yellow: #FFCE46
+*/
+
+/* fonts:
+font-family: 'Lato', sans-serif; 
+font-family: 'Lora', serif;
+font-family: 'Roboto', sans-serif;
+*/
+
+body {
+  color: #22183b;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #f9f8fa;
+  margin: 0;
+  height: 100%;
+  padding: 0;
+  padding-top: 70px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.mainContainer {
+  flex: 1 0 auto;
+}
+
+Link {
+  color: #22183b;
+}
+
+/* CSS */
+.button-52 {
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 10px 17px 10px;
+  border: 1px solid #22183b;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  /* user-select: none; */
+  /* -webkit-user-select: none; */
+  touch-action: manipulation;
+}
+
+.button-52:after {
+  content: "";
+  background-color: #f5eaf9;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-52:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
+}
+
+/* CSS */
+.button-53 {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-53:after {
+  content: "";
+  background-color: #f5eaf9;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  bottom: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-53:hover:after {
+  bottom: 0px;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-53 {
+    padding: 13px 50px 13px;
+  }
+}

@@ -25,7 +25,7 @@ module.exports = (server) => {
   // The value of localhost:5000 is hard coded. The port (:5000) must match what is set for the create-react-app start script.
   server.use(
     cors({
-      origin: [process.env.CORS_ORIGIN],
+      origin: process.env.CORS_ORIGIN || "http://localhost:5000"
     })
   );
 

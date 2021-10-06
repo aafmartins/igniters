@@ -1,0 +1,52 @@
+.homeHeader {
+  display: flex;
+  padding: 20px 10px;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 30vh;
+}
+
+.homePageSlogan {
+  margin: 10px;
+}
+
+.heroImage {
+  width: 200px;
+  margin: 10px;
+}
+
+.homeButtonsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 50vh;
+}
+
+.searchBarContainer {
+  position: relative;
+}
+
+.orgsNearYouLinkContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.searchImg {
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  width: 22px;
+}
+.searchBarInput {
+  padding: 10px 10px 10px 35px;
+  width: 270px;
+  border: 1px solid rgba(34, 24, 59, 0.25);
+  border-radius: 2px;
+}
+
+::placeholder {
+  font-size: 12px;
+  color: rgba(34, 24, 59, 0.15);
+}

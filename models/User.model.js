@@ -29,13 +29,7 @@ const userSchema = new Schema({
   username: {
     type: String,
     // unique: true -> Ideally, should be unique, but its up to you
-  },
-  firstName: String, 
-  lastName: String, 
-  image: String,
-  //linkedInId: String, 
-  googleId: String, 
-  //facebookId: String,
+  }
 });
 
 const User = model("User", userSchema);

@@ -14,7 +14,7 @@ function Navbar(props) {
     onGoogleFailure
   } = props  
 
-  return (<nav>{isLoggedIn ? <NavBarPrivate /> : (<NavBarAnon />  <GoogleButton  onSuccess={onGoogleSuccess} onFailure={onGoogleFailure} />) }
+  return (<nav>{isLoggedIn ? <NavBarPrivate /> : <div> <NavBarAnon />  <GoogleButton  onSuccess={onGoogleSuccess} onFailure={onGoogleFailure} /></div> }
     </nav>);
 }
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../styles/formStyle.css";
+import GoogleButton from "./../components/GoogleButton";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -89,6 +90,9 @@ function SignupPage(props) {
             </Link>
           </div>
         </form>
+        <GoogleButton 
+          buttonText='Sign Up'
+        />
       </div>
     </div>
   );

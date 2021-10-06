@@ -22,7 +22,9 @@
   margin-bottom: 30px;
 }
 
-.formInputContainer input {
+.formInputContainer input,
+.formInputContainer select,
+.formInputContainer textarea {
   display: flex;
   flex-direction: column;
   width: 286px;

@@ -67,11 +67,11 @@ function App(props) {
 
   return (
     <div className="App">
-      <header className="App-header">
         <Navbar
           onGoogleSuccess={handleGoogleSuccess}
           onGoogleFailure={handleGoogleFailure}
          />
+        <div className="mainContainer">    
         <Switch>
           <PrivateRoute
             exact
@@ -88,14 +88,12 @@ function App(props) {
             path="/orgs/:id"
             component={OrganizationDetailsPage}
           />
-
           <PrivateRoute
             exact
             path="/profile/edit/:id"
             component={EditProfilePage}
           />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
-
           <PrivateRoute exact path="/my-orgs" component={MyOrganizationsPage} />
           <PrivateRoute
             exact
@@ -112,18 +110,16 @@ function App(props) {
             path="/orgs-near-you"
             component={OrganizationsNearUserPage}
           />
-
           <AnonRoute exact path="/signup" component={SignupPage} />
           <AnonRoute exact path="/login" component={LoginPage} />
-
           <Route exact path="/about" component={AboutUsPage} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/orgs" component={OrganizationListPage} />
           <Route exact path="/" component={HomePage} />
           <Route component={ErrorPage} />
         </Switch>
-        <Footer />
-      </header>
+      </div>
+      <Footer />
     </div>
   );
 }

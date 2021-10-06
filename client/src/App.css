@@ -15,23 +15,42 @@ font-family: 'Roboto', sans-serif;
 */
 
 body {
+  color: #22183b;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
   background-color: #f9f8fa;
+  margin: 0;
+  height: 100%;
+  padding: 0;
   padding-top: 70px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.mainContainer {
+  flex: 1 0 auto;
+}
+
+Link {
+  color: #22183b;
 }
 
 /* CSS */
 .button-52 {
-  font-size: 16px;
   font-weight: 200;
   letter-spacing: 1px;
-  padding: 13px 20px 13px;
-  outline: 0;
-  border: 1px solid black;
+  padding: 10px 17px 10px;
+  border: 1px solid #22183b;
   cursor: pointer;
   position: relative;
   background-color: rgba(0, 0, 0, 0);
-  user-select: none;
-  -webkit-user-select: none;
+  /* user-select: none; */
+  /* -webkit-user-select: none; */
   touch-action: manipulation;
 }
 

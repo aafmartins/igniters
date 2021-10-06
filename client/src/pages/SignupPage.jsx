@@ -36,32 +36,48 @@ function SignupPage(props) {
 
   return (
     <div className="SignupPage">
-      <h1>Sign Up</h1>
+      <form className="formContainer" onSubmit={handleSignupSubmit}>
+        <h1 className="formHeading">Sign Up</h1>
+        <div className="formInputContainer">
+          <label>Email:</label>
+          <input
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleEmail}
+          />
+        </div>
 
-      <form className="form-container" onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="text" name="email" value={email} onChange={handleEmail} />
+        <div className="formInputContainer">
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </div>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+        <div className="formInputContainer">
+          <label>Name:</label>
+          <input type="text" name="name" value={name} onChange={handleName} />
+        </div>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <div className="formInputContainer">
+          <label>Country:</label>
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={handleCountry}
+          />
+        </div>
 
-        <label>Country:</label>
-        <input
-          type="text"
-          name="country"
-          value={country}
-          onChange={handleCountry}
-        />
-
-        <button type="submit">Sign Up</button>
+        <div className="formSubmitButtonContainer">
+          <button className="submitButton button-52 " type="submit">
+            Sign Up
+          </button>
+        </div>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

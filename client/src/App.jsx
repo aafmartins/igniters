@@ -36,12 +36,11 @@ function App(props) {
   const { logInUser } = useContext(AuthContext);
  
   const handleGoogleSuccess = (data) => {
-    const {givenName, familyName, email, imageUrl, googleId} = data.profileObj
+    const {givenName, email} = data.profileObj
     
     const requestBody = {
       email,
       name: givenName,
-      country: "Germany",
       password: "GoogleUser1234"
     }
 

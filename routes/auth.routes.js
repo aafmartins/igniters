@@ -154,7 +154,7 @@ router.post("/login", (req, res, next) => {
 // GOOGLE signup and login!!!!
 
 router.post("/google", (req, res, next) => {
-  const { email, password, name, country } = req.body;
+  const { email, password, name } = req.body;
 
   // Check the users collection if a user with the same email exists
   User.findOne({
@@ -174,7 +174,6 @@ router.post("/google", (req, res, next) => {
           email,
           password: hashedPassword,
           name,
-          country,
         })
         .then((createdUser) => {
           

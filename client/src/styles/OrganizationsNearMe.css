@@ -1,0 +1,18 @@
+.paragraph {
+    padding-top: 10px;
+    font-size: 20px;
+    font-weight: 300;
+    width: 400px;
+}
+
+.divContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+
+.heroImg {
+    height: 300px;
+}

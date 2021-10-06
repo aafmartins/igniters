@@ -49,6 +49,10 @@ function EditProfilePage(props) {
       })
       .then(() => {
         props.history.push(`/profile`);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
       });
   };
 
@@ -64,7 +68,10 @@ function EditProfilePage(props) {
 
   return (
     <div className="EditProfilePage">
+      <img src="/images/edit.png" alt="Edit Form" className="aboutUsImg" />
+
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <div className="formContainer">
         <form onSubmit={handleEditSubmit}>
           <div className="formHeading">
@@ -108,28 +115,14 @@ function EditProfilePage(props) {
               Save
             </button>
           </div>
+
+          <div className="formSubmitButtonContainer">
+            <button className="submitButton button-52 " onClick={deleteUser}>
+              Delete Account
+            </button>
+          </div>
         </form>
       </div>
-
-      {/* <form onSubmit={handleEditSubmit}>
-        <label>Email:</label>
-        <input type="text" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="******"
-          onChange={handlePassword}
-        />
-
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
-
-        <button type="submit">Save</button>
-      </form> */}
-
-      <button onClick={deleteUser}>Delete User</button>
     </div>
   );
 }

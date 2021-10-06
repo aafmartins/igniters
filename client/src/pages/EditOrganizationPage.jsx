@@ -82,6 +82,7 @@ function EditOrganizationPage(props) {
 
   return (
     <div className="EditOrganizationPage">
+      <img src="/images/edit.png" alt="Edit Form" className="aboutUsImg" />
       <div className="formContainer orgForm">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="formHeading">
@@ -207,7 +208,7 @@ function EditOrganizationPage(props) {
 
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52" type="submit">
-              Submit
+              Save
             </button>
           </div>
           <div className="formSubmitButtonContainer">

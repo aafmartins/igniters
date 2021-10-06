@@ -35,6 +35,7 @@ function LoginPage(props) {
 
   return (
     <div className="LoginPage">
+      <img src="/images/login.png" alt="Log in hero" className="aboutUsImg" />
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="formContainer">
         <form onSubmit={handleLoginSubmit}>

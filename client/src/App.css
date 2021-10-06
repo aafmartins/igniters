@@ -6,6 +6,10 @@ blue lilac: #7C5EF1
 blue:#1F78F0
 dark blue: #22183B
 yellow: #FFCE46
+
+Star rating color
+    filter: hue-rotate(
+206deg);
 */
 
 /* fonts:

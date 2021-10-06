@@ -54,6 +54,11 @@ function AddOrganizationPage(props) {
 
   return (
     <div className="AddOrganization">
+      <img
+        src="/images/created-org.png"
+        alt="Rocket Lady"
+        className="aboutUsImg"
+      />
       <div className="formContainer orgForm">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="formHeading">

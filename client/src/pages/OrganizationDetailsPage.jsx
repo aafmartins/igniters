@@ -6,6 +6,7 @@ import AddReview from "../components/AddReview";
 import ReviewCard from "../components/ReviewCard";
 import { AuthContext } from "./../contexts/auth.context";
 import { randomImageUrl } from "../javascripts/randomImageUrl";
+import OrganizationDetailsMap from "../components/OrganizationDetailsMap";
 
 // mmapbox imports
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
@@ -115,22 +116,22 @@ function OrganizationDetailsPage(props) {
     getOrg();
   }, []);
 
-  useEffect(() => {
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [lng, lat],
-      zoom: zoom,
-    });
+  // useEffect(() => {
+  //   map.current = new mapboxgl.Map({
+  //     container: mapContainer.current,
+  //     style: "mapbox://styles/mapbox/streets-v11",
+  //     center: [lng, lat],
+  //     zoom: zoom,
+  //   });
 
-    // add marker to the organization location. If theres is no organization, do not add a marker
+  //   // add marker to the organization location. If theres is no organization, do not add a marker
 
-    if (org) {
-      const marker1 = new mapboxgl.Marker()
-        .setLngLat([lng, lat])
-        .addTo(map.current);
-    }
-  });
+  //   if (org) {
+  //     const marker1 = new mapboxgl.Marker()
+  //       .setLngLat([lng, lat])
+  //       .addTo(map.current);
+  //   }
+  // });
 
   useEffect(() => {
     getUser(userId);
@@ -189,15 +190,16 @@ function OrganizationDetailsPage(props) {
       )}
 
       <div className="mapAndButtonsContainer">
-        <div
+        {/* <div
           className="map-container"
           ref={mapContainer}
           id="map"
           // style={{ width: "400px", height: "300px" }}
-        ></div>
+        ></div> */}
         {/* <Link to="/orgs">
           <button>Back to Organizations</button>
         </Link> */}
+        <OrganizationDetailsMap org={org} />
         <div className="buttonsContainer">
           {isCreatedByUser ? (
             <div>

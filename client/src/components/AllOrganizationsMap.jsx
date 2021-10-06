@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = "pk.eyJ1IjoiaHJpYnUiLCJhIjoiY2t1Nmsycm5tMmg3MTJucGNoamJxODBrMCJ9.aT4XOnLfqTr3V4EowsmtSg";
 
 export default function AllOrganizationsMap (props) {
   const {orgs} = props;
@@ -25,6 +25,18 @@ useEffect(() => {
 
       // orgs data has to be passed as a features property inside an object
       const orgsString = { features: orgs };
+
+      //Add an image to use as a custom marker
+      map.loadImage( './images/lifebuoy.png',
+      // 'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+      (error, image) => {
+          if (error) {
+            console.log("did not load image")
+            throw error
+          };
+          map.addImage('custom-marker', image);
+          // Add a GeoJSON source with 2 points
+        });
 
       map.addSource("organizations", {
         type: "geojson",
@@ -79,17 +91,15 @@ useEffect(() => {
       });
 
       map.addLayer({
-        id: "unclustered-point",
-        type: "circle",
-        source: "organizations",
+        'id': 'unclustered-point',
+        'type': 'symbol',
+        'source': 'organizations',
         filter: ["!", ["has", "point_count"]],
-        paint: {
-          "circle-color": "#E27BF5",
-          "circle-radius": 15,
-          "circle-stroke-width": 1,
-          "circle-stroke-color": "#E27BF5",
-        },
-      });
+        'layout': {
+            'icon-image': 'custom-marker',
+            'icon-size': 0.04
+        }
+    });
 
       // inspect a cluster on click
       map.on("click", "clusters", (e) => {

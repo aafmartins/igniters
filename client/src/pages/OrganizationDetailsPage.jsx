@@ -124,12 +124,11 @@ function OrganizationDetailsPage(props) {
 
     // add marker to the organization location. If theres is no organization, do not add a marker
 
-    if(org) {
+    if (org) {
       const marker1 = new mapboxgl.Marker()
-      .setLngLat([lng, lat])
-      .addTo(map.current);
+        .setLngLat([lng, lat])
+        .addTo(map.current);
     }
-    
   });
 
   useEffect(() => {
@@ -147,9 +146,31 @@ function OrganizationDetailsPage(props) {
         "Loading..."
       ) : (
         <>
-          <img src={randomImageUrl()} alt="" width="400px"/>
+          <img src={randomImageUrl()} alt="" width="400px" />
           <h1>{org.name}</h1>
+
           <p>{org.description}</p>
+
+          <ul>
+            <h6>Categories</h6>
+            {org.categories.map((category) => {
+              return <li>{category}</li>;
+            })}
+          </ul>
+
+          <div>
+            <h6>Main language:</h6>
+            <p>{org.mainIdiom}</p>
+          </div>
+
+          <div>
+            <h6>Contact Details</h6>
+            <a href={org.url}>APAV</a>
+            <p>{org.email}</p>
+            <p>
+              {org.street} <br /> {org.city}, {org.country}
+            </p>
+          </div>
         </>
       )}
 
@@ -163,8 +184,7 @@ function OrganizationDetailsPage(props) {
       <Link to="/orgs">
         <button>Back to Organizations</button>
       </Link>
-      {/* Below will need to be inside a protected route/condition - only creator
-      can access edit! */}
+
       {isCreatedByUser ? (
         <div>
           <Link to={`/orgs/edit/${orgId}`}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OrganizationCard from "../components/OrganizationCard";
+import OrganizationsNearUserMap from "../components/OrganizationsNearUserMap";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -96,11 +97,16 @@ export default function SearchPage(props) {
         <button type="submit">Search</button>
       </form>
       {orgs.length ? (
-        orgs.map((organization) => (
-          <div className="container-fluid">
-            <OrganizationCard key={organization._id} {...organization} />
-          </div>
-        ))
+        <>
+          <OrganizationsNearUserMap 
+            orgs={orgs}
+          />
+          {orgs.map((organization) => (
+            <div className="container-fluid">
+              <OrganizationCard key={organization._id} {...organization} />
+            </div>
+          ))}
+        </>
       ) : (
         <div>
           <p>No organizations found.</p>

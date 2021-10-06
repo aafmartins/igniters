@@ -13,6 +13,7 @@ function AddOrganizationPage(props) {
   const [mainIdiom, setMainIdiom] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,14 +50,21 @@ function AddOrganizationPage(props) {
         setUrl("");
         props.history.push(`/orgs`);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
   };
 
   return (
     <div className="AddOrganization">
       <img src="/images/created-org.png" alt="Rocket Lady" className="images" />
       <div className="formContainer orgForm">
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form
+          autoComplete="off"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="formHeading">
             <h1>Create an Organization</h1>
           </div>
@@ -183,6 +191,7 @@ function AddOrganizationPage(props) {
               Submit
             </button>
           </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
       </div>
     </div>

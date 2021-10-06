@@ -41,7 +41,7 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
     .send()
     .then((response) => {
       const geometry = response.body.features[0].geometry;
-    
+
       Organization.findByIdAndUpdate(
         orgId,
         {
@@ -96,7 +96,7 @@ router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
 //  GET /api/orgs/:orgId -  Retrieves a specific organization by id
 router.get("/orgs/:orgId", (req, res, next) => {
   const { orgId } = req.params;
-  
+
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
       message: "Specified id is not valid",
@@ -130,58 +130,60 @@ router.get("/orgs", (req, res, next) => {
 });
 
 //  POST /api/orgs  -  Creates a new organization
-router.post(
-  "/orgs",
-  isAuthenticated,
-  (req, res, next) => {
-    
-    const {
-      name,
-      country,
-      city,
-      street,
-      email,
-      categories,
-      mainIdiom,
-      description,
-      url,
-    } = req.body;
+router.post("/orgs", isAuthenticated, (req, res, next) => {
+  const {
+    name,
+    country,
+    city,
+    street,
+    email,
+    categories,
+    mainIdiom,
+    description,
+    url,
+  } = req.body;
 
-    geocoder
-      .forwardGeocode({
-        query: street + " " + city + " " + country,
-        limit: 1,
-      })
-      .send()
-      .then((response) => {
-        const geometry = response.body.features[0].geometry;
-        
-        Organization.create({
-          name,
-          country,
-          city,
-          street,
-          email,
-          categories,
-          mainIdiom,
-          description,
-          url,
-          creator: req.payload._id,
-          geometry,
-        })
-          .then((response) => {
-            res.status(200).json(response);
-          })
-          .catch((err) => {
-            console.log("Organization not created!", err);
-            res.json(err);
-          });
-      })
-      .catch((err) => {
-        console.log("Geometry not created!", err);
-        res.json(err);
-      });
+  if (name === "" || city === "" || country === "" || email === "") {
+    res.status(400).json({
+      message: "Please provide organization's name, city,  country and email",
+    });
+    return;
   }
-);
+
+  geocoder
+    .forwardGeocode({
+      query: street + " " + city + " " + country,
+      limit: 1,
+    })
+    .send()
+    .then((response) => {
+      const geometry = response.body.features[0].geometry;
+
+      Organization.create({
+        name,
+        country,
+        city,
+        street,
+        email,
+        categories,
+        mainIdiom,
+        description,
+        url,
+        creator: req.payload._id,
+        geometry,
+      })
+        .then((response) => {
+          res.status(200).json(response);
+        })
+        .catch((err) => {
+          console.log("Organization not created!", err);
+          res.json(err);
+        });
+    })
+    .catch((err) => {
+      console.log("Geometry not created!", err);
+      res.json(err);
+    });
+});
 
 module.exports = router;

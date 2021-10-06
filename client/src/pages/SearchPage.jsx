@@ -97,7 +97,9 @@ export default function SearchPage(props) {
       </form>
       {orgs.length ? (
         orgs.map((organization) => (
-          <OrganizationCard key={organization._id} {...organization} />
+          <div className="container-fluid">
+            <OrganizationCard key={organization._id} {...organization} />
+          </div>
         ))
       ) : (
         <div>

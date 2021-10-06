@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import react from "react";
 import {orgAverageRating} from "../javascripts/orgAverageRating"
-
+import '../styles/organizationCard.css'
 function OrganizationCard(props) {
   const {
     _id,
@@ -21,21 +21,26 @@ function OrganizationCard(props) {
   const avgRating = orgAverageRating(reviews);
 
   return (
-    <div>
-      <Link to={`/orgs/${_id}`}>
+    <div className = "container-sm cardcontainers" >
+      <Link className="headerlink" to={`/orgs/${_id}`}>
         <h3>{name}</h3>
       </Link>
-      <p>
-        {city}, {country}
+      <hr />
+      <p className="location">
+        {city}, {country} <p className="locationHeader">(Location)</p>
       </p>
+
       <p style={{ maxWidth: "400px" }}>
         {description.substring(0, 150) + "..."}
       </p>
       {reviews.length === 0 ? 
-        "no reviews yet" : (
-        <div>
+          <div className="reviewDisplay">
+          <p class="starability-result" data-rating="0"></p>
+          <p lassName="reviewsNum">(0)</p>
+        </div> : (
+        <div className="reviewDisplay">
           <p class="starability-result" data-rating={avgRating}>Rated: {avgRating} stars</p>
-          <p>{reviews.length}</p>
+          <p className="reviewsNum">{reviews.length}</p>
         </div>
         )
       }

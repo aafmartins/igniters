@@ -33,9 +33,11 @@ function OrganizationListPage() {
       <AllOrganizationsMap 
          orgs={orgs}
       />
-      {orgs.map((organization) => (
+  <div className="container-fluid">
+        {orgs.map((organization) => (
         <OrganizationCard key={organization._id} {...organization} />
       ))}
+  </div>
     </div>
   );
 }

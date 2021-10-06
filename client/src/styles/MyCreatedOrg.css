@@ -1,0 +1,16 @@
+.myCreatedOrgImage {
+    height: 300px;
+}
+
+@media only screen and (min-width: 600px) {
+    .myCreatedOrgImage {
+        height: 400px;
+    }
+}
+
+.imageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -9,11 +9,11 @@ export default function Footer() {
         <Link className="footerLink" to="/about">
           About Us
         </Link>
-        <Link className="footerLink" to="/orgs">
+        {/* <Link className="footerLink" to="/orgs">
           Organizations
-        </Link>
+        </Link> */}
       </div>
-      <div>
+      {/* <div>
         <h6>Illustrations by:</h6>
         <p>
           <a href="https://icons8.com/illustrations/author/5c07e68d82bcbc0092519bb6">
@@ -21,14 +21,17 @@ export default function Footer() {
           </a>{" "}
           from <a href="https://icons8.com/illustrations">Ouch!</a>
         </p>
-      </div>
+      </div> */}
       <div className="creditsContainer">
-        <h6>Proudly made by:</h6>
-        <p>Flavian Albert</p>
-        <p>Monika Geiger</p>
-        <p>Ana Martins</p>
-        <p>Osvaldo Picazo</p>
-        <p></p>
+        {/* <div class="namesMainContainer"> */}
+        <a className="headerForNames"> <b>Proudly made by:</b></a>
+        <a href="" className="anchorsInMadeBy">Flavian Albert</a>
+        <a href="https://www.linkedin.com/in/monika-geiger/" className="anchorsInMadeBy">  Monika Geiger </a>
+        <a href="https://www.linkedin.com/in/ana-af-martins/" className="anchorsInMadeBy"> Ana Martins  </a>
+        <a href="https://www.linkedin.com/in/osvaldo-picazo/" className="anchorsInMadeBy">Osvaldo Picazo</a>
+
+
+        
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ function MySavedOrganizations(props) {
     {savedOrgs.length===0 ?
 
     <div className="imageContainer">
-    <img src="/images/created-org.png" className="myCreatedOrgImage" alt="" />
+    <img src="/images/hero.png" className="myCreatedOrgImage" alt="" />
       <Link to="/orgs">
         <button className="button-52">Save organizations</button>
       </Link>

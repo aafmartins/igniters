@@ -14,7 +14,7 @@ export default function NavBarPrivate() {
   const { userToken, logOutUser } = useContext(AuthContext);
   return (
 
-      <nav className = "navbar navbar-light bg-light" >
+      <nav className = "navbar fixed-top navbar-light bg-light" >
         <Link to="/">
           <img className="logo" src="/images/megaphone.png" alt="" />
         </Link>
@@ -26,6 +26,7 @@ export default function NavBarPrivate() {
 
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav mr-auto">
+            
               <li className="nav-item active">
         <Link className="nav-link "  to="/orgs">
           <a className="anchors">Organizations</a>

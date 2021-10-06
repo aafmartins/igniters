@@ -6,7 +6,7 @@ import { faBars  } from '@fortawesome/free-solid-svg-icons'
 export default function NavBarAnon() {
   return (
    
-      <nav className="navbar navbar-light bg-light">
+      <nav className="navbar fixed-top navbar-light bg-light">
         <Link to="/">
           <img className="logo" src="/images/megaphone.png" alt="" />
         </Link>

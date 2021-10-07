@@ -8,7 +8,6 @@
   /* align-items: center; */
 }
 
-
 .footerLinksContainer {
   display: flex;
   align-items: center;
@@ -21,21 +20,27 @@
   color: #22183b;
 }
 
-.headerForNames {}
+.headerForNames {
+}
 
 .namesMainContainer a {
   margin: 6px;
 }
 
-
 .creditsContainer {
   padding: 3px;
   display: flex;
   align-items: center;
-
 }
 
 .anchorsInMadeBy {
   padding: 10px;
   text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .creditsContainer a {
+    color: transparent;
+    width: 10px;
+  }
 }

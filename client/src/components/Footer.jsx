@@ -24,14 +24,32 @@ export default function Footer() {
       </div> */}
       <div className="creditsContainer">
         {/* <div class="namesMainContainer"> */}
-        <a className="headerForNames"> <b>Proudly made by:</b></a>
-        <a href="" className="anchorsInMadeBy">Flavian Albert</a>
-        <a href="https://www.linkedin.com/in/monika-geiger/" className="anchorsInMadeBy">  Monika Geiger </a>
-        <a href="https://www.linkedin.com/in/ana-af-martins/" className="anchorsInMadeBy"> Ana Martins  </a>
-        <a href="https://www.linkedin.com/in/osvaldo-picazo/" className="anchorsInMadeBy">Osvaldo Picazo</a>
-
-
-        
+        <a className="headerForNames">
+          <b>Proudly made by:</b>
+        </a>
+        <a href="" className="anchorsInMadeBy">
+          Flavian Albert
+        </a>
+        <a
+          href="https://www.linkedin.com/in/monika-geiger/"
+          className="anchorsInMadeBy"
+        >
+          {" "}
+          Monika Geiger{" "}
+        </a>
+        <a
+          href="https://www.linkedin.com/in/ana-af-martins/"
+          className="anchorsInMadeBy"
+        >
+          {" "}
+          Ana Martins{" "}
+        </a>
+        <a
+          href="https://www.linkedin.com/in/osvaldo-picazo/"
+          className="anchorsInMadeBy"
+        >
+          Osvaldo Picazo
+        </a>
       </div>
     </div>
   );

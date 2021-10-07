@@ -23,7 +23,7 @@ function OrganizationCard(props) {
       {reviews.length === 0 ? (
         <div className="reviewDisplay">
           <p class="starability-result" data-rating="0"></p>
-          <p lassName="reviewsNum">(0)</p>
+          <p className="reviewsNum">(0)</p>
         </div>
       ) : (
         <div className="reviewDisplay">

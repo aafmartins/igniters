@@ -6,7 +6,7 @@ export default function AboutUs() {
       <img
         src="/images/about-us-header.png"
         alt="Rocket Lady"
-        className="aboutUsImg"
+        className="images"
       />
       <p>
         A repository of women's rights organizations, Igniters is a power tool

@@ -10,12 +10,19 @@ const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
-  const { email, password, name, country } = req.body;
+  const { email, password, name, country, confirmPassword } = req.body;
 
   // Check if email or password or name are provided as empty string
   if (email === "" || password === "" || name === "") {
     res.status(400).json({
       message: "Please provide email, password and name",
+    });
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    res.status(400).json({
+      message: "Passwords don't match",
     });
     return;
   }
@@ -159,7 +166,7 @@ router.post("/google", (req, res, next) => {
   // Check the users collection if a user with the same email exists
   User.findOne({
     email,
-    })
+  })
     .then((foundUser) => {
       if (!foundUser) {
         // If the user is not found, createa new user
@@ -175,43 +182,45 @@ router.post("/google", (req, res, next) => {
           password: hashedPassword,
           name,
         })
-        .then((createdUser) => {
-          
-          // Compare the provided password with the one saved in the database
-          const passwordCorrect = bcrypt.compareSync(password, createdUser.password);
-    
-          if (passwordCorrect) {
-            // Deconstruct the user object to omit the password
-            const { _id, email, name } = createdUser;
-    
-            // Create an object that will be set as the token payload
-            const payload = {
-              _id,
-              email,
-              name,
-            };
-    
-            // Create and sign the token
-            const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
-              algorithm: "HS256",
-              expiresIn: "6h",
+          .then((createdUser) => {
+            // Compare the provided password with the one saved in the database
+            const passwordCorrect = bcrypt.compareSync(
+              password,
+              createdUser.password
+            );
+
+            if (passwordCorrect) {
+              // Deconstruct the user object to omit the password
+              const { _id, email, name } = createdUser;
+
+              // Create an object that will be set as the token payload
+              const payload = {
+                _id,
+                email,
+                name,
+              };
+
+              // Create and sign the token
+              const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+                algorithm: "HS256",
+                expiresIn: "6h",
+              });
+
+              // Send the token as the response
+              res.status(200).json({
+                authToken: authToken,
+              });
+            } else {
+              res.status(401).json({
+                message: "Unable to authenticate the user",
+              });
+            }
+          })
+          .catch((err) => {
+            res.status(500).json({
+              message: "Internal Server Error",
             });
-    
-            // Send the token as the response
-            res.status(200).json({
-              authToken: authToken,
-            });
-          } else {
-            res.status(401).json({
-              message: "Unable to authenticate the user",
-            });
-          }
-        })
-        .catch((err) => {
-          res.status(500).json({
-            message: "Internal Server Error",
           });
-        });
       }
 
       // Compare the provided password with the one saved in the database
@@ -247,9 +256,8 @@ router.post("/google", (req, res, next) => {
     .catch((err) => {
       res.status(500).json({
         message: "Internal Server Error",
-      })
-    }
-    );
+      });
+    });
 });
 
 // GET  /auth/verify  -  Used to verify JWT stored on the client

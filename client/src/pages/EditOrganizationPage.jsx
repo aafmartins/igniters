@@ -13,13 +13,12 @@ function EditOrganizationPage(props) {
   const [mainIdiom, setMainIdiom] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const storedToken = localStorage.getItem("authToken");
 
   const orgId = props.match.params.id;
 
   useEffect(() => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .get(`${API_URL}/orgs/${orgId}`, {
@@ -40,7 +39,7 @@ function EditOrganizationPage(props) {
       .catch((error) => console.log(error));
   }, [orgId]);
 
-  const handleFormSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
       name,
@@ -54,9 +53,6 @@ function EditOrganizationPage(props) {
       url,
     };
 
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .put(`${API_URL}/orgs/edit/${orgId}`, requestBody, {
@@ -64,133 +60,165 @@ function EditOrganizationPage(props) {
       })
       .then((response) => {
         props.history.push(`/orgs/${orgId}`);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
       });
   };
 
   const deleteOrganization = () => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .delete(`${API_URL}/orgs/delete/${orgId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then(() => props.history.push("/orgs"))
+      .then(() => props.history.push("/"))
       .catch((err) => console.log(err));
   };
 
   return (
-    <div className="EditProjectPage">
-      <h3>Edit the Project</h3>
+    <div className="EditOrganizationPage">
+      <img src="/images/edit.png" alt="Edit Form" className="images" />
+      <div className="formContainer orgForm">
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <div className="formHeading">
+            <h1>Edit Organization</h1>
+          </div>
+          <div className="formInputContainer">
+            <label>Name:</label>
+            <input
+              placeholder="*required"
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-      <form onSubmit={handleFormSubmit} enctype="multipart/form-data">
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <hr />
+          <div className="formInputContainer">
+            <label>Email:</label>
+            <input
+              placeholder="*required"
+              type="text"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-        <label>Country:</label>
-        <textarea
-          type="text"
-          name="country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-        />
-        <hr />
+          <div className="formInputContainer">
+            <label>Website:</label>
+            <input
+              type="text"
+              name="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </div>
 
-        <label>City:</label>
-        <textarea
-          type="text"
-          name="city"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <hr />
+          <div className="formInputContainer">
+            <label>Street:</label>
+            <input
+              type="text"
+              name="street"
+              value={street}
+              onChange={(e) => setStreet(e.target.value)}
+            />
+          </div>
 
-        <label>Street:</label>
-        <textarea
-          type="text"
-          name="street"
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
-        />
-        <hr />
+          <div className="formInputContainer">
+            <label>City:</label>
+            <input
+              placeholder="*required"
+              type="text"
+              name="city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
 
-        <label>Email:</label>
-        <textarea
-          type="text"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <hr />
+          <div className="formInputContainer">
+            <label>Country:</label>
+            <input
+              placeholder="*required"
+              type="text"
+              name="country"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            />
+          </div>
 
-        <div>
-          <label htmlFor="categories">Search by Category:</label>
-          <select
-            name="categories"
-            id="categories"
-            multiple={true}
-            onChange={(e) => {
-              const values = [...e.target.options]
-                .filter((o) => o.selected)
-                .map((o) => {
-                  return o.value;
-                });
-              setCategories(values);
-            }}
-          >
-            <option disable="true" value="">
-              Select a category from the list
-            </option>
-            <option value="Activism">Activism</option>
-            <option value="Gender Discrimination">Gender Discrimination</option>
-            <option value="Human Rights">Human Rights</option>
-            <option value="Inequality">Inequality</option>
-            <option value="Malnutrition">Malnutrition</option>
-            <option value="Maternal Health">Maternal Health</option>
-            <option value="Reproductive Rights">Reproductive Rights</option>
-            <option value="Social Solidarity">Social Solidarity</option>
-            <option value="Victim Support">Victim Support</option>
-            <option value="Victim Protection">Victim Protection</option>
-            <option value="Women in Tech">Women in Tech</option>
-          </select>
-        </div>
-        <hr />
+          <div className="formInputContainer">
+            <label>Language:</label>
+            <input
+              type="text"
+              name="mainIdiom"
+              value={mainIdiom}
+              onChange={(e) => setMainIdiom(e.target.value)}
+            />
+          </div>
 
-        <label>Language:</label>
-        <textarea
-          type="text"
-          name="mainIdiom"
-          value={mainIdiom}
-          onChange={(e) => setMainIdiom(e.target.value)}
-        />
-        <hr />
+          <div className="formInputContainer">
+            <label htmlFor="categories">Categories:</label>
+            <select
+              name="categories"
+              id="categories"
+              multiple={true}
+              onChange={(e) => {
+                const values = [...e.target.options]
+                  .filter((o) => o.selected)
+                  .map((o) => {
+                    return o.value;
+                  });
+                setCategories(values);
+              }}
+            >
+              {/* <option disable="true" value="">
+                Select a category from the list
+              </option> */}
+              <option value="Activism">Activism</option>
+              <option value="Gender Discrimination">
+                Gender Discrimination
+              </option>
+              <option value="Human Rights">Human Rights</option>
+              <option value="Inequality">Inequality</option>
+              <option value="Malnutrition">Malnutrition</option>
+              <option value="Maternal Health">Maternal Health</option>
+              <option value="Reproductive Rights">Reproductive Rights</option>
+              <option value="Social Solidarity">Social Solidarity</option>
+              <option value="Victim Support">Victim Support</option>
+              <option value="Victim Protection">Victim Protection</option>
+              <option value="Women in Tech">Women in Tech</option>
+            </select>
+          </div>
 
-        <label>Description:</label>
-        <textarea
-          type="text"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <label>Url:</label>
-        <textarea
-          type="text"
-          name="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
+          <div className="formInputContainer">
+            <label>Description:</label>
+            <textarea
+              type="text"
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
 
-        <button type="submit">Update Organization</button>
-      </form>
-
-      <button onClick={deleteOrganization}>Delete Organization</button>
+          <div className="formSubmitButtonContainer">
+            <button className="submitButton button-52" type="submit">
+              Save
+            </button>
+          </div>
+          <div className="formSubmitButtonContainer">
+            <button
+              className="submitButton button-52"
+              onClick={deleteOrganization}
+            >
+              Delete Organization
+            </button>
+          </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+        </form>
+      </div>
     </div>
   );
 }

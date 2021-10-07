@@ -9,6 +9,10 @@
   width: 350px;
 }
 
+.orgForm {
+  border: none;
+}
+
 .formContainer form {
   padding: 30px;
   border-radius: 4px;
@@ -39,7 +43,13 @@
 }
 
 .formSubmitButtonContainer {
-  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.submitButton {
+  padding: 10px 15px;
 }
 
 .prompt {

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBarPrivate() {
-  const { userToken, logOutUser } = useContext(AuthContext);
+  const { logOutUser } = useContext(AuthContext);
   return (
     <nav className="navbar fixed-top navbar-light bg-light">
       <Link to="/">
@@ -33,7 +33,7 @@ export default function NavBarPrivate() {
               <a className="anchors">Organizations</a>
             </Link>
           </li>
-          <li li className = "nav-item ulLi" >
+          <li li className="nav-item ulLi">
             <Link className="nav-link" to={`/my-orgs`}>
               <a className="anchors">My Organizations</a>
             </Link>
@@ -50,7 +50,7 @@ export default function NavBarPrivate() {
           </li>
           <li className="nav-item lastLink ulLi">
             <a className="nav-link" onClick={logOutUser}>
-              Logout, {userToken.name}
+              Logout
             </a>
           </li>
         </ul>

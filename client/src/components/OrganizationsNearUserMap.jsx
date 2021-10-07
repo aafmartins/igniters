@@ -58,7 +58,7 @@ export default function OrganizationsNearUserMap(props) {
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
               coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
-            
+              
             map.easeTo({
               center: e.features[0].geometry.coordinates.slice(),
               zoom: 10,
@@ -70,15 +70,22 @@ export default function OrganizationsNearUserMap(props) {
               .addTo(map);
     
           });
-    
+          
           // Once the organizations (map features) are loaded, zoom to fit all orgs
-
+          // if there is only one org, zoom just to a value of 10, otherwise zoom to fit all orgs
           if(orgs.length !== 0) {
-            const bounds = new mapboxgl.LngLatBounds();
-            orgs.forEach((org) => {
-              bounds.extend(org.geometry.coordinates);
-            });
-            map.fitBounds(bounds, {padding : 80});
+            if (orgs.length ===1) {
+              map.easeTo({
+                center: orgs[0].geometry.coordinates,
+                zoom: 10,
+              });
+            } else {
+                const bounds = new mapboxgl.LngLatBounds();
+                orgs.forEach((org) => {
+                  bounds.extend(org.geometry.coordinates);
+                });
+                map.fitBounds(bounds, {padding : 80});
+            }
           }
     
     

@@ -1,11 +1,9 @@
-body {
-  /* background-color: #f5eaf9; */
-  color: #22183b;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 0;
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 h1,

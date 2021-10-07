@@ -8,9 +8,7 @@ const saltRounds = process.env.SALT || 10;
 
 //DELETE USER
 router.get("/:id/delete", (req, res) => {
-  const {
-    userId
-  } = req.params;
+  const { userId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     res.status(400).json({
@@ -30,9 +28,7 @@ router.get("/:id/delete", (req, res) => {
 
 //EDIT USER
 router.put("/:id/edit", (req, res) => {
-  const {
-    id
-  } = req.params;
+  const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     res.status(400).json({
@@ -41,11 +37,7 @@ router.put("/:id/edit", (req, res) => {
     return;
   }
 
-  const {
-    name,
-    password,
-    email,
-  } = req.body;
+  const { name, password, email, country } = req.body;
 
   if (
     !name ||
@@ -57,7 +49,7 @@ router.put("/:id/edit", (req, res) => {
     !email.includes("@")
   ) {
     res.status(400).json({
-      message: "Specified id is not valid",
+      message: "Please provide email, password and name",
     });
     return;
   }
@@ -66,12 +58,13 @@ router.put("/:id/edit", (req, res) => {
   const hashPassword = bcrypt.hashSync(password, salt);
 
   User.findByIdAndUpdate(id, {
-      name,
-      email,
-      password: hashPassword,
-    })
+    name,
+    email,
+    password: hashPassword,
+    country,
+  })
     .then((updatedUser) => {
-      res.json(updatedUser)
+      res.json(updatedUser);
     })
     .catch((error) => {
       console.log("User not updated", error);

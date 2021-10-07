@@ -26,6 +26,10 @@ const userSchema = new Schema({
       default: [],
     },
   ],
+  username: {
+    type: String,
+    // unique: true -> Ideally, should be unique, but its up to you
+  }
 });
 
 const User = model("User", userSchema);

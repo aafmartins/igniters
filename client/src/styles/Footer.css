@@ -1,0 +1,39 @@
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(34, 24, 59, 0.4);
+  padding: 10px 30px;
+  font-size: 10px;
+  flex-shrink: 0;
+  /* align-items: center; */
+}
+
+
+.footerLinksContainer {
+  display: flex;
+  align-items: center;
+  width: 60px;
+}
+
+.footerContainer a {
+  color: #22183b;
+}
+
+.headerForNames {}
+
+.namesMainContainer a {
+  margin: 6px;
+}
+
+
+.creditsContainer {
+  padding: 3px;
+  display: flex;
+  align-items: center;
+
+}
+
+.anchorsInMadeBy {
+  padding: 10px;
+  text-align: center;
+}

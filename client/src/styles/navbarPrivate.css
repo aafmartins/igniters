@@ -1,0 +1,59 @@
+.navbar {
+  padding: 0px;
+}
+
+.logo {
+  height: 50px;
+  margin: 4px 6px 4px 10px;
+}
+
+.fa-1x {
+  font-size: 1.5rem;
+}
+
+.hambIcon {
+  color: #7c5ef1;
+  padding: 0px;
+  font-size: xx-large;
+}
+
+.hambIcon:checked {
+  border: none;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0px;
+  width: 40px;
+  margin: 0px 10px 0px 0px;
+}
+
+.active {
+  background-color: rgb(124, 94, 241, 0.7);
+  /* border-radius: 3px; */
+}
+
+.ulLi {
+  background-color: rgb(124, 94, 241, 0.5);
+  padding: 0px 5px 0px 15px;
+  border-radius: 3px;
+  border: 1px solid white;
+  color: white;
+}
+
+.ulLi:active {
+  background-color: rgb(124, 94, 241);
+  border-radius: 3px;
+  border: 1px solid gray;
+}
+
+.ul {
+  margin: 5px 0px 0px 0px;
+}
+
+/* .lastLink {
+  color: gray;
+} */
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+}

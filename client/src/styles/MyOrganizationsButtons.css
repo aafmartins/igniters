@@ -1,0 +1,9 @@
+.changeBetweenMyOrgsContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.changeBetweenMyOrgsButtons {
+    margin: 5px;
+    font-weight: 500;
+}

@@ -8,7 +8,8 @@ function Navbar() {
   // the values from AuthContext.Provider `value` prop
   const { isLoggedIn } = useContext(AuthContext);
 
-  return <nav>{isLoggedIn ? <NavBarPrivate /> : <NavBarAnon />}</nav>;
+  return (<nav>{isLoggedIn ? <NavBarPrivate /> : <div> <NavBarAnon />  </div> }
+    </nav>);
 }
 
 export default Navbar;

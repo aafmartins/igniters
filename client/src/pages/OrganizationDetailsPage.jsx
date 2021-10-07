@@ -1,15 +1,12 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import "../styles/organizationDetailsPage.css";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import AddReview from "../components/AddReview";
 import ReviewCard from "../components/ReviewCard";
 import { AuthContext } from "./../contexts/auth.context";
 import { randomImageUrl } from "../javascripts/randomImageUrl";
-
-// mmapbox imports
-import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiaHJpYnUiLCJhIjoiY2t1Nmsycm5tMmg3MTJucGNoamJxODBrMCJ9.aT4XOnLfqTr3V4EowsmtSg"; //process.env.MAPBOX_TOKEN;
+import OrganizationDetailsMap from "../components/OrganizationDetailsMap";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -23,13 +20,6 @@ function OrganizationDetailsPage(props) {
   const userId = userToken._id;
   const storedToken = localStorage.getItem("authToken");
 
-  // map Hooks. useRef .current orioerty is initialized to null and when its value changes it does not trigger a re-render
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(9.181851961805604);
-  const [lat, setLat] = useState(48.77806893750751);
-  const [zoom, setZoom] = useState(15);
-
   const getUser = (userId) => {
     axios
       .get(`${API_URL}/users/${userId}`, {
@@ -38,7 +28,6 @@ function OrganizationDetailsPage(props) {
         },
       })
       .then((response) => {
-        console.log("data from user", response.data.savedOrganizations);
         const savedId = response.data.savedOrganizations;
 
         for (const org of savedId) {
@@ -94,17 +83,12 @@ function OrganizationDetailsPage(props) {
         },
       })
       .then((response) => {
-        console.log("My organization:", response.data);
         setOrg(response.data);
         const creatorId = response.data.creator;
 
         if (creatorId === userId) {
           setIsCreatedByUser(true);
         }
-
-        // set coordinates for map
-        setLng(response.data.geometry.coordinates[0]);
-        setLat(response.data.geometry.coordinates[1]);
       })
       .catch((error) => console.log(error));
   };
@@ -112,23 +96,6 @@ function OrganizationDetailsPage(props) {
   useEffect(() => {
     getOrg();
   }, []);
-
-  useEffect(() => {
-    //if (map.current) return;
-    // initialize map only once
-
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [lng, lat],
-      zoom: zoom,
-    });
-
-    // add marker to the organization location
-    const marker1 = new mapboxgl.Marker()
-      .setLngLat([lng, lat])
-      .addTo(map.current);
-  });
 
   useEffect(() => {
     getUser(userId);
@@ -140,84 +107,131 @@ function OrganizationDetailsPage(props) {
   };
 
   return (
-    <div className="ProjectDetails">
+    <div className="orgDetailsContainer">
       {!org ? (
-        "Loading..."
+        <img
+          src="../../public/images/loading.png"
+          alt="Loading"
+          className="loadingImg"
+        />
       ) : (
         <>
-          <img src={randomImageUrl()} alt="" width="400px"/>
-          <h1>{org.name}</h1>
-          <p>{org.description}</p>
+          <div>
+            <img src={randomImageUrl()} alt="" className="orgHeaderImg" />
+          </div>
+
+          <div className="mainDetailsContainer">
+            <div className="nameAndDescriptionContainer">
+              <h1>{org.name}</h1>
+              <p>{org.description}</p>
+            </div>
+            <div className="orgContactsAndDetails">
+              <div className="orgDetailsSubContainer">
+                <h6>Contact Details</h6>
+                <a href={org.url}>APAV</a>
+                {/* <br /> */}
+                {/* <a href={org.email}>{org.email}</a> */}
+                <p>{org.email}</p>
+                <p className="address">
+                  {org.street} <br /> {org.city}, {org.country}
+                </p>
+              </div>
+              <div className="orgDetailsUl orgDetailsSubContainer">
+                <ul>
+                  <h6>Categories</h6>
+                  {org.categories.map((category) => {
+                    return <li>{category}</li>;
+                  })}
+                </ul>
+                <div>
+                  <h6>Main language</h6>
+                  <p>{org.mainIdiom}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       )}
 
-      <div
-        className="map-container"
-        ref={mapContainer}
-        id="map"
-        style={{ width: "400px", height: "300px" }}
-      ></div>
-
-      <Link to="/orgs">
-        <button>Back to Organizations</button>
-      </Link>
-      {/* Below will need to be inside a protected route/condition - only creator
-      can access edit! */}
-      {isCreatedByUser ? (
-        <div>
-          <Link to={`/orgs/edit/${orgId}`}>
-            <button>Edit Organization</button>
-          </Link>
+      <div className="mapAndButtonsContainer">
+        <OrganizationDetailsMap org={org} />
+        {/* <Link to="/orgs">
+          <button>Back to Organizations</button>
+        </Link> */}
+        <div className="buttonsContainer">
+          {isCreatedByUser ? (
+            <div>
+              <Link to={`/orgs/edit/${orgId}`}>
+                <button className="button-52 orgDetailsButtons">Edit</button>
+              </Link>
+            </div>
+          ) : isSaved ? (
+            <div>
+              <button className="button-52" onClick={handleRemove}>
+                Remove
+              </button>
+              <br />
+              <br />
+              <button className="button-52" onClick={toggleForm}>
+                {showForm ? "Hide Form" : "Review"}
+              </button>
+              <br />
+              {showForm ? (
+                <AddReview
+                  toggleForm={toggleForm}
+                  refreshOrg={getOrg}
+                  orgId={orgId}
+                />
+              ) : null}
+              {org &&
+                org.reviews.map((review) => {
+                  return (
+                    <ReviewCard
+                      refreshOrg={getOrg}
+                      key={review._id}
+                      {...review}
+                    />
+                  );
+                })}
+            </div>
+          ) : (
+            <div>
+              <button
+                className="button-52 orgDetailsButtons"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+              <br />
+              <br />
+              <button
+                className="button-52 orgDetailsButtons"
+                onClick={toggleForm}
+              >
+                {showForm ? "Hide Form" : "Review"}
+              </button>
+              <br />
+              {showForm ? (
+                <AddReview
+                  toggleForm={toggleForm}
+                  refreshOrg={getOrg}
+                  orgId={orgId}
+                />
+              ) : null}
+              {org &&
+                org.reviews.map((review) => {
+                  return (
+                    <ReviewCard
+                      refreshOrg={getOrg}
+                      key={review._id}
+                      {...review}
+                    />
+                  );
+                })}
+            </div>
+          )}
         </div>
-      ) : isSaved ? (
-        <div>
-          <button onClick={handleRemove}>Remove</button>
-          <br />
-          <br />
-          <button onClick={toggleForm}>
-            {showForm ? "Hide Review Form" : "Add a Review"}
-          </button>
-          <br />
-          {showForm ? (
-            <AddReview
-              toggleForm={toggleForm}
-              refreshOrg={getOrg}
-              orgId={orgId}
-            />
-          ) : null}
-
-          {org &&
-            org.reviews.map((review) => {
-              return (
-                <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
-              );
-            })}
-        </div>
-      ) : (
-        <div>
-          <button onClick={handleSave}>Save Organization</button>
-          <br />
-          <br />
-          <button onClick={toggleForm}>
-            {showForm ? "Hide Review Form" : "Add a Review"}
-          </button>
-          <br />
-          {showForm ? (
-            <AddReview
-              toggleForm={toggleForm}
-              refreshOrg={getOrg}
-              orgId={orgId}
-            />
-          ) : null}
-
-          {org &&
-            org.reviews.map((review) => {
-              return (
-                <ReviewCard refreshOrg={getOrg} key={review._id} {...review} />
-              );
-            })}
-        </div>
-      )}
+      </div>
     </div>
   );
 }

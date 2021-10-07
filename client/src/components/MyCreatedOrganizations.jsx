@@ -4,7 +4,7 @@ import {
 } from "react";
 import axios from "axios";
 import OrganizationCard from "./OrganizationCard";
-
+import { Link } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 function MyCreatedOrganizations() {
@@ -33,16 +33,32 @@ function MyCreatedOrganizations() {
     getmyCreatedOrgs();
   }, []);
 
-  return ( <div> {
-      myCreatedOrgs.map((organization) => ( <
-        OrganizationCard key = {
-          organization._id
-        } {
-          ...organization
+  return (
+    <div>
+    {myCreatedOrgs.length===0 ?
+
+    <div className="imageContainer">
+    <img src="/images/created-org.png" className="myCreatedOrgImage" alt="" />
+      <Link to="/orgs/create">
+        <button className="button-52">Create an organization</button>
+      </Link>
+    </div>
+    :
+    <div>
+        <div className="imageContainer">
+      <img src="/images/created-org.png" className="myCreatedOrgImage" alt="" />
+    
+      {myCreatedOrgs.map((organization) => (
+        <div className="container-fluid"> 
+          <OrganizationCard key = {organization._id} {...organization}/>
+        </div>
+        ))
         }
-        />
-      ))
-    } </div>
+    </div>
+    </div>
+    }
+    
+    </div>
   );
 }
 

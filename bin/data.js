@@ -147,7 +147,7 @@ module.exports = [
   },
   {
     name: "The Open Society Foundation", //required
-    country: "Britain", //required
+    country: "United Kingdom", //required
     city: "London", //required
     street: "8-10 Back Hill", //not required
     email: "media@opensocietyfoundations.org", //required

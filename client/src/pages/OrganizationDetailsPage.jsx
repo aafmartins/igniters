@@ -161,7 +161,9 @@ function OrganizationDetailsPage(props) {
               <button className="button-52 orgDetailsButtons">Edit</button>
             </Link>
           </div>
-          <OrganizationDetailsMap org={org} />
+          <div className="orgsDetailsMapContainer">
+            <OrganizationDetailsMap org={org} />
+          </div>
         </>
       ) : isSaved ? (
         <>
@@ -188,7 +190,9 @@ function OrganizationDetailsPage(props) {
               />
             </div>
           ) : null}
-          <OrganizationDetailsMap org={org} />
+          <div className="orgsDetailsMapContainer">
+            <OrganizationDetailsMap org={org} />
+          </div>
 
           <div className="reviewCardContainer">
             {org &&
@@ -230,7 +234,9 @@ function OrganizationDetailsPage(props) {
             </div>
           ) : null}
 
-          <OrganizationDetailsMap org={org} />
+          <div className="orgsDetailsMapContainer">
+            <OrganizationDetailsMap org={org} />
+          </div>
 
           <div className="reviewCardContainer">
             {org &&

@@ -3,7 +3,7 @@ import React from "react";
 export default function ErrorPage() {
   return (
     <div>
-      <h1>404</h1>
+      <img src="/images/404.png" alt="404 page not found" className="images" />
     </div>
   );
 }

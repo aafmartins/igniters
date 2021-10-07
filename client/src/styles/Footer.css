@@ -1,33 +1,39 @@
 .footerContainer {
   display: flex;
   justify-content: space-between;
-  height: 11vh;
-  background-color: #eec7eb;
+  background-color: rgb(34, 24, 59, 0.4);
   padding: 10px 30px;
   font-size: 10px;
   flex-shrink: 0;
+  /* align-items: center; */
 }
 
-.footerContainer h6 {
-  font-size: 10px;
-  margin-bottom: 5px;
-}
 
-.footerContainer p {
-  font-size: 8px;
-  margin: 0;
+.footerLinksContainer {
+  display: flex;
+  align-items: center;
+  width: 60px;
 }
 
 .footerContainer a {
   color: #22183b;
 }
 
-.footerLink {
-  color: #22183b;
-  margin-bottom: 5px;
+.headerForNames {}
+
+.namesMainContainer a {
+  margin: 6px;
 }
 
-.footerLinksContainer {
+
+.creditsContainer {
+  padding: 3px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+
+}
+
+.anchorsInMadeBy {
+  padding: 10px;
+  text-align: center;
 }

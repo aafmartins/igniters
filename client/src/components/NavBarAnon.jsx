@@ -29,9 +29,9 @@ export default function NavBarAnon() {
               <a className="anchors">All Organizations</a>
             </Link>
           </li>
-          <li class = "nav-item ulLi" >
+          <li class="nav-item ulLi">
             <Link className="nav-link" to="/signup">
-              <a className="anchors">Signup</a>
+              <a className="anchors">Sign Up</a>
             </Link>
           </li>
           <li class="nav-item ulLi">

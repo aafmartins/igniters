@@ -34,20 +34,20 @@ function ReviewCard(props) {
     getReview();
   }, []);
 
-  const deleteReview = () => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
+  // const deleteReview = () => {
+  //   // Get the token from the localStorage
+  //   const storedToken = localStorage.getItem("authToken");
 
-    // Send the token through the request "Authorization" Headers
-    axios
-      .delete(`${API_URL}/reviews/delete/${reviewId}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then(() => {
-        props.refreshOrg();
-      })
-      .catch((err) => console.log(err));
-  };
+  //   // Send the token through the request "Authorization" Headers
+  //   axios
+  //     .delete(`${API_URL}/reviews/delete/${reviewId}`, {
+  //       headers: { Authorization: `Bearer ${storedToken}` },
+  //     })
+  //     .then(() => {
+  //       props.refreshOrg();
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   //function to toggle the form AddReview hidden or showing style
   const toggleForm = () => {
@@ -55,17 +55,16 @@ function ReviewCard(props) {
   };
 
   return (
-    <div className="ReviewCard card">
-      <h5>Reviews</h5>
+    <div className="ReviewCard">
       <p class="starability-result" data-rating={rating}>
-        Rated: {rating} stars
+        {/* Rated: {rating} stars */}
       </p>
-
       {/* <h6>Comment:</h6> */}
-      <p>{comment}</p>
-      <p>by: {reviewer.name}</p>
+      <p className="reviewText">
+        {comment} <br /> <i>by: {reviewer.name}</i>
+      </p>
       {userToken._id === reviewer._id ? (
-        <div>
+        <>
           <button className="button-52 reviewButtons" onClick={toggleForm}>
             {showForm ? "Cancel" : "Edit"}
           </button>
@@ -77,15 +76,15 @@ function ReviewCard(props) {
                 toggleForm={toggleForm}
                 reviewId={reviewId}
               />
-              <button
+              {/* <button
                 className="button-52 reviewButtons"
                 onClick={deleteReview}
               >
                 Delete
-              </button>
+              </button> */}
             </div>
           ) : null}
-        </div>
+        </>
       ) : (
         ""
       )}

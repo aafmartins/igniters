@@ -2,9 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "./../contexts/auth.context";
 import axios from "axios";
 import OrganizationsNearUserMap from "../components/OrganizationsNearUserMap";
-import "../styles/OrganizationsNearMe.css"
+import "../styles/OrganizationsNearMe.css";
 import { Link } from "react-router-dom";
-
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -88,8 +87,20 @@ export default function OrganizationsNearUserPage(props) {
       </Link>   
     </div>
 }
-
 </>
+
 
   );
 }
+
+// {
+//   /* <div className="divContainer">
+//   <p className="paragraph">
+//     Is there no organizations in your area? Let's create one!{" "}
+//   </p>
+//   <Link to="/orgs/create">
+//     <img src="/images/hero.png" className="heroImg" alt="" />
+//     <button className="button-52">Create an organization</button>
+//   </Link>
+// </div> */
+// }

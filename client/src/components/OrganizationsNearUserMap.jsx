@@ -51,7 +51,8 @@ export default function OrganizationsNearUserMap(props) {
           // the location of the feature, with
           // description HTML from its properties.
           map.on("click", "points", (e) => {
-            const popUpMarkup = e.features[0].properties.popUpMarkup;
+            const orgId = e.features[0].properties.id;
+            const orgName = e.features[0].properties.name;
             const coordinates = e.features[0].geometry.coordinates.slice();
     
             // Ensure that if the map is zoomed out such that
@@ -65,11 +66,17 @@ export default function OrganizationsNearUserMap(props) {
               center: e.features[0].geometry.coordinates.slice(),
               zoom: 10,
             });
-    
+
+            // create an element with the popup content
+            const PopUpLink = document.createElement('div');
+            PopUpLink.innerHTML = `<button >${orgName}</button>`;
+            PopUpLink.addEventListener('click', (e) => {
+              props.history.push(`/orgs/${orgId}`)
+            });
             new mapboxgl.Popup()
-              .setLngLat(coordinates)
-              .setHTML(popUpMarkup)
-              .addTo(map);
+            .setLngLat(coordinates)
+            .setDOMContent(PopUpLink)
+            .addTo(map);
     
           });
           

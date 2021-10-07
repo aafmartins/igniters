@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -142,10 +142,16 @@ useEffect(() => {
           zoom: 12,
         });
 
+        // create an element with the popup content
+        const PopUpLink = document.createElement('div');
+        PopUpLink.innerHTML = `<button >${orgName}</button>`;
+        PopUpLink.addEventListener('click', (e) => {
+          props.history.push(`/orgs/${orgId}`)
+        });
         new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(`<a href="${process.env.REACT_APP_POPUP_ORIGIN}/orgs/${orgId}">${orgName}</a>`)
-          .addTo(map);
+        .setLngLat(coordinates)
+        .setDOMContent(PopUpLink)
+        .addTo(map);
 
       });
 
@@ -226,7 +232,6 @@ useEffect(() => {
   return (
     <>
       <div id="map" style={{ width: "100%", height: "0", padding: "0 0 56% 0" }}></div>
-      {/* <button id="map-button">Home</button> */}
     </>
   )
 

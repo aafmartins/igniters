@@ -11,22 +11,22 @@ const Organization = require("../models/Organization.model");
 
 // PUT /api/remove-saved-org
 router.put("/remove-saved-org", (req, res, next) => {
-  const { orgId } = req.body;
+  const {
+    orgId
+  } = req.body;
   const userId = req.payload._id;
 
   console.log("I am inside the put!", orgId, userId);
 
   User.findByIdAndUpdate(
-    userId,
-    {
-      $pull: {
-        savedOrganizations: orgId,
-      },
-    },
-    {
-      new: false,
-    }
-  )
+      userId, {
+        $pull: {
+          savedOrganizations: orgId,
+        },
+      }, {
+        new: false,
+      }
+    )
     .then((updatedSavedList) => {
       res.json(updatedSavedList);
     })
@@ -35,20 +35,20 @@ router.put("/remove-saved-org", (req, res, next) => {
 
 // POST /api/save-orgs
 router.put("/save-org", (req, res, next) => {
-  const { orgId } = req.body;
+  const {
+    orgId
+  } = req.body;
   const userId = req.payload._id;
 
   User.findByIdAndUpdate(
-    userId,
-    {
-      $addToSet: {
-        savedOrganizations: orgId,
-      },
-    },
-    {
-      new: false,
-    }
-  )
+      userId, {
+        $addToSet: {
+          savedOrganizations: orgId,
+        },
+      }, {
+        new: false,
+      }
+    )
     .then((updatedSavedList) => {
       res.json(updatedSavedList);
     })
@@ -78,8 +78,8 @@ router.get("/my-saved-orgs", (req, res) => {
 //THIS GET DISPLAYS CREATED BOOKS BOOKSHELF, AND POPULATES USER
 router.get("/my-created-orgs", (req, res) => {
   Organization.find({
-    creator: req.payload._id,
-  })
+      creator: req.payload._id,
+    })
     .populate("reviews")
     .then((createdOrgs) => {
       res.json(createdOrgs);

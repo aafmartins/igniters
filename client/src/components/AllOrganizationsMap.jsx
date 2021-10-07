@@ -126,7 +126,8 @@ useEffect(() => {
       // the location of the feature, with
       // description HTML from its properties.
       map.on("click", "unclustered-point", (e) => {
-        const popUpMarkup = e.features[0].properties.popUpMarkup;
+        const orgId = e.features[0].properties.id;
+        const orgName = e.features[0].properties.name;
         const coordinates = e.features[0].geometry.coordinates.slice();
 
         // Ensure that if the map is zoomed out such that
@@ -143,7 +144,7 @@ useEffect(() => {
 
         new mapboxgl.Popup()
           .setLngLat(coordinates)
-          .setHTML(popUpMarkup)
+          .setHTML(`<a href="${process.env.REACT_APP_POPUP_ORIGIN}/orgs/${orgId}">${orgName}</a>`)
           .addTo(map);
 
       });

@@ -109,7 +109,7 @@ router.get("/orgs/:orgId", (req, res, next) => {
   const {
     orgId
   } = req.params;
-
+   console.log("this is the req", req)
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
       message: "Specified id is not valid",

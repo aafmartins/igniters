@@ -1,4 +1,10 @@
-.aboutUsPage p {
+.aboutUsDescription {
   padding: 55px;
   text-align: left;
+  font-size: large;
+  text-align: justify;
+}
+
+.usedPages {
+  margin-top: 10px;
 }

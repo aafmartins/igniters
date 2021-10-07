@@ -43,7 +43,10 @@ export default function GoogleButton(props) {
     return (
         <div>
             <GoogleLogin
-                clientId="1075856615959-jb5bsiohdhef5en7l0blehp1pj4ru57h.apps.googleusercontent.com"
+                clientId = {
+                  process.env.REACT_APP_GOOGLE_CLIENT_ID
+                }
+                clientSecret={process.env.REACT_APP_GOOGLE_CLIENT_SECRET}
                 buttonText={buttonText}
                 onSuccess={handleGoogleSuccess}
                 onFailure={handleGoogleFailure}

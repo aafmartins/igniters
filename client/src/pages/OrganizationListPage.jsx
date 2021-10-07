@@ -5,7 +5,7 @@ import AllOrganizationsMap from "../components/AllOrganizationsMap";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
-function OrganizationListPage() {
+function OrganizationListPage(props) {
   const [orgs, setOrgs] = useState([]);
 
   const getAllOrgs = () => {
@@ -32,6 +32,7 @@ function OrganizationListPage() {
     <div>
       <AllOrganizationsMap 
          orgs={orgs}
+         {...props}
       />
   <div className="container-fluid">
         {orgs.map((organization) => (

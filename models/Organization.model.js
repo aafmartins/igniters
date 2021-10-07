@@ -74,6 +74,14 @@ organizationSchema.virtual("properties.popUpMarkup").get(function () {
   return `<a href="/orgs/${this._id}">${this.name}</a>`;
 });
 
+organizationSchema.virtual("properties.id").get(function () {
+  return this._id;
+});
+
+organizationSchema.virtual("properties.name").get(function () {
+  return this.name;
+});
+
 const Organization = model("Organization", organizationSchema);
 
 module.exports = Organization;

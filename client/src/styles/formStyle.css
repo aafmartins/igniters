@@ -9,6 +9,10 @@
   width: 350px;
 }
 
+.orgForm {
+  border: none;
+}
+
 .formContainer form {
   padding: 30px;
   border-radius: 4px;
@@ -22,7 +26,9 @@
   margin-bottom: 30px;
 }
 
-.formInputContainer input {
+.formInputContainer input,
+.formInputContainer select,
+.formInputContainer textarea {
   display: flex;
   flex-direction: column;
   width: 286px;
@@ -37,7 +43,13 @@
 }
 
 .formSubmitButtonContainer {
-  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.submitButton {
+  padding: 10px 15px;
 }
 
 .prompt {

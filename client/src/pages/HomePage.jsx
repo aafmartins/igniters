@@ -23,11 +23,12 @@ function HomePage(props) {
   return (
     <div>
       <div className="homeHeader">
-        <h1 className="homePageSlogan">Home Page Slogan</h1>
+        {/* <h1 className="homePageSlogan">Home Page Slogan</h1> */}
         <img className="heroImage" src="/images/hero.png" alt="Rocket Lady" />
       </div>
 
       <div className="homeButtonsContainer">
+        <h2 className="homePageSlogan">Welcome to Igniters</h2>
         <div>
           <form onSubmit={handleClick}>
             <div className="searchBarContainer">
@@ -44,13 +45,15 @@ function HomePage(props) {
               />
               <img src="/images/telescope.png" className="searchImg" alt="" />
             </div>
-            {/* <button type="submit">Search</button> */}
+            <button className="searchButton button-52 " type="submit">
+              Search
+            </button>
           </form>
 
           {isLoggedIn ? (
             <div className="orgsNearYouLinkContainer">
               <Link to="/orgs-near-you">
-                <button className="button-52">Organizations near you</button>
+                <button className=" button-52">Organizations near you</button>
               </Link>
             </div>
           ) : null}

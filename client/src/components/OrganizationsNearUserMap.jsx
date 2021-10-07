@@ -13,6 +13,8 @@ export default function OrganizationsNearUserMap(props) {
           center: [-35, 30],
           zoom: 1,
         });
+
+        map.addControl(new mapboxgl.NavigationControl());
     
         map.on("load", () => {
           

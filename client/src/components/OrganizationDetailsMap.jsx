@@ -19,6 +19,8 @@ export default function OrganizationDetailsMap(props) {
           zoom: 10,
         });
 
+        map.addControl(new mapboxgl.NavigationControl());
+
         map.on("load", () => {
             // Add a new source from our GeoJSON
             // Add an image to use as a custom marker

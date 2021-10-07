@@ -116,7 +116,7 @@ function OrganizationDetailsPage(props) {
             <button className="button-52">Back to Organizations</button>
           </Link> */}
           <div className="imageContainer">
-            <span>
+            <span className="filterSpan">
               <img src={randomImageUrl()} alt="" className="orgHeaderImg" />
             </span>
           </div>

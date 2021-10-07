@@ -90,7 +90,7 @@ export default function SearchPage(props) {
               <div className="searchContainer">
                 {/* <label htmlFor="categories">Search by category:</label> */}
                 <select
-                  className="searchBarInput customSelect"
+                  className="searchBarInput"
                   name="categories"
                   id="categories"
                   onChange={handleSelectChange}

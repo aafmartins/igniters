@@ -37,7 +37,7 @@ router.put("/:id/edit", (req, res) => {
     return;
   }
 
-  const { name, password, email, country } = req.body;
+  const { name, password, email, country, confirmPassword } = req.body;
 
   if (
     !name ||
@@ -49,7 +49,14 @@ router.put("/:id/edit", (req, res) => {
     !email.includes("@")
   ) {
     res.status(400).json({
-      message: "Please provide email, password and name",
+      message: "Please provide a password",
+    });
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    res.status(400).json({
+      message: "Passwords don't match",
     });
     return;
   }

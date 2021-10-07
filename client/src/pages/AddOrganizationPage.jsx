@@ -48,7 +48,7 @@ function AddOrganizationPage(props) {
         setMainIdiom("");
         setDescription("");
         setUrl("");
-        props.history.push(`/orgs`);
+        props.history.push(`/my-orgs`);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -186,12 +186,13 @@ function AddOrganizationPage(props) {
             />
           </div>
 
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52" type="submit">
               Submit
             </button>
           </div>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
       </div>
     </div>

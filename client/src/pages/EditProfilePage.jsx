@@ -6,6 +6,7 @@ const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 function EditProfilePage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -21,7 +22,6 @@ function EditProfilePage(props) {
       .then((response) => {
         const oneUser = response.data;
         setName(oneUser.name);
-        setPassword(oneUser.password);
         setEmail(oneUser.email);
         setCountry(oneUser.country);
       })
@@ -30,6 +30,7 @@ function EditProfilePage(props) {
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+  const handleConfirmPassword = (e) => setConfirmPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
   const handleCountry = (e) => setCountry(e.target.value);
 
@@ -40,6 +41,7 @@ function EditProfilePage(props) {
       password,
       email,
       country,
+      confirmPassword,
     };
 
     // Send the token through the request "Authorization" Headers
@@ -106,21 +108,30 @@ function EditProfilePage(props) {
               onChange={handlePassword}
             />
           </div>
+          <div className="formInputContainer">
+            <label>Confirm password:</label>
+            <input
+              placeholder="******"
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={handleConfirmPassword}
+            />
+          </div>
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52 " type="submit">
               Save
             </button>
           </div>
-
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-          <div className="formSubmitButtonContainer">
-            <button className="submitButton button-52 " onClick={deleteUser}>
-              Delete Account
-            </button>
-          </div>
         </form>
+        <div className="formSubmitButtonContainer">
+          <button className="submitButton button-52 " onClick={deleteUser}>
+            Delete Account
+          </button>
+        </div>
       </div>
     </div>
   );

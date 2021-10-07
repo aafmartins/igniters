@@ -32,6 +32,11 @@ body {
   padding-top: 70px;
 }
 
+.error-message {
+  text-align: center;
+  color: #ffce46;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -48,6 +53,10 @@ body {
 ::placeholder {
   font-size: 12px;
   color: rgba(34, 24, 59, 0.5);
+}
+
+#categories {
+  background-color: transparent;
 }
 
 .mainContainer {

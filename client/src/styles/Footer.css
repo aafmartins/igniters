@@ -12,7 +12,9 @@
 .footerLinksContainer {
   display: flex;
   align-items: center;
+  /* text-align: center; */
   width: 60px;
+  padding-left: 0;
 }
 
 .footerContainer a {

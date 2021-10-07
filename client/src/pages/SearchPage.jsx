@@ -136,14 +136,16 @@ export default function SearchPage(props) {
           </div>
         </>
       ) : (
-        <div>
-          <p>No organizations found.</p>
-          <p>Would you like to create a page for an organization?</p>
-          <Link to="/orgs/create">
-            <button className="searchButton button-52 ">
-              Create an Organization
-            </button>
-          </Link>
+        <div className="noOrgsFoundContainer">
+          <img src="/images/hero.png" className="heroImg" alt="" />
+          <div className="textContainer">
+            <h4>No organizations found!</h4>
+            <Link to="/orgs/create">
+              <button className="searchButton button-52 ">
+                Create an Organization
+              </button>
+            </Link>
+          </div>
         </div>
       )}
     </div>

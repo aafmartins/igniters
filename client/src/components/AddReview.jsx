@@ -35,96 +35,102 @@ function AddReview(props) {
   };
 
   return (
-    <div className="AddTask">
+    <div className="AddReview">
       {/* <h6>Add a review</h6> */}
 
-      <form onSubmit={handleSubmit}>
-        {/* <label>Comment:</label> */}
-        <input
-          placeholder="Write your review here"
-          type="text"
-          name="review"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        />
+      <form className="reviewForm" onSubmit={handleSubmit}>
+        <div className="reviewFormInputContainer">
+          <label>Comment:</label>
+          <textarea
+            placeholder="Write your review here"
+            type="text"
+            name="review"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+          />
+        </div>
 
-        {/* <label>Rating:</label>
-        <textarea
-          type="Number"
-          name="rating"
-          min="1"
-          max="5"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-        /> */}
-        <fieldset class="starability-basic">
-          {/* <legend>
-            <h6>Rating:</h6>
-          </legend> */}
-          <input
-            type="radio"
-            id="no-rate"
-            class="input-no-rate"
-            name={rating}
-            value="1"
-            checked
-            aria-label="No rating."
-          />
-          <input
-            type="radio"
-            id="first-rate1"
-            name={rating}
-            value="1"
+        <div className="reviewFormInputContainer">
+          <label>Rating:</label>
+          {/* <textarea
+            type="Number"
+            name="rating"
+            min="1"
+            max="5"
+            value={rating}
             onChange={(e) => setRating(e.target.value)}
-          />
-          <label for="first-rate1" title="Terrible">
-            1 star
-          </label>
-          <input
-            type="radio"
-            id="first-rate2"
-            name={rating}
-            value="2"
-            onChange={(e) => setRating(e.target.value)}
-          />
-          <label for="first-rate2" title="Not good">
-            2 stars
-          </label>
-          <input
-            type="radio"
-            id="first-rate3"
-            name={rating}
-            value="3"
-            onChange={(e) => setRating(e.target.value)}
-          />
-          <label for="first-rate3" title="Average">
-            3 stars
-          </label>
-          <input
-            type="radio"
-            id="first-rate4"
-            name={rating}
-            value="4"
-            onChange={(e) => setRating(e.target.value)}
-          />
-          <label for="first-rate4" title="Very good">
-            4 stars
-          </label>
-          <input
-            type="radio"
-            id="first-rate5"
-            name={rating}
-            value="5"
-            onChange={(e) => setRating(e.target.value)}
-          />
-          <label for="first-rate5" title="Amazing">
-            5 stars
-          </label>
-        </fieldset>
+          /> */}
+          <fieldset class="starability-basic">
+            {/* <legend>
+              <h6>Rating:</h6>
+            </legend> */}
+            <input
+              type="radio"
+              id="no-rate"
+              class="input-no-rate"
+              name={rating}
+              value="1"
+              checked
+              aria-label="No rating."
+            />
+            <input
+              type="radio"
+              id="first-rate1"
+              name={rating}
+              value="1"
+              onChange={(e) => setRating(e.target.value)}
+            />
+            <label for="first-rate1" title="Terrible">
+              1 star
+            </label>
+            <input
+              type="radio"
+              id="first-rate2"
+              name={rating}
+              value="2"
+              onChange={(e) => setRating(e.target.value)}
+            />
+            <label for="first-rate2" title="Not good">
+              2 stars
+            </label>
+            <input
+              type="radio"
+              id="first-rate3"
+              name={rating}
+              value="3"
+              onChange={(e) => setRating(e.target.value)}
+            />
+            <label for="first-rate3" title="Average">
+              3 stars
+            </label>
+            <input
+              type="radio"
+              id="first-rate4"
+              name={rating}
+              value="4"
+              onChange={(e) => setRating(e.target.value)}
+            />
+            <label for="first-rate4" title="Very good">
+              4 stars
+            </label>
+            <input
+              type="radio"
+              id="first-rate5"
+              name={rating}
+              value="5"
+              onChange={(e) => setRating(e.target.value)}
+            />
+            <label for="first-rate5" title="Amazing">
+              5 stars
+            </label>
+          </fieldset>
+        </div>
 
-        <button className="button-52" type="submit">
-          Add Review
-        </button>
+        <div className="reviewFormSubmitButtonContainer">
+          <button className="button-52 submitButton" type="submit">
+            Add Review
+          </button>
+        </div>
       </form>
     </div>
   );

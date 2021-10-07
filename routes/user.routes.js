@@ -49,7 +49,7 @@ router.put("/:id/edit", (req, res) => {
     !email.includes("@")
   ) {
     res.status(400).json({
-      message: "Specified id is not valid",
+      message: "Please provide email, password and name",
     });
     return;
   }

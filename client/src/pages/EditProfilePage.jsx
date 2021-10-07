@@ -69,9 +69,6 @@ function EditProfilePage(props) {
   return (
     <div className="EditProfilePage">
       <img src="/images/edit.png" alt="Edit Form" className="images" />
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
       <div className="formContainer">
         <form onSubmit={handleEditSubmit}>
           <div className="formHeading">
@@ -115,6 +112,8 @@ function EditProfilePage(props) {
               Save
             </button>
           </div>
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52 " onClick={deleteUser}>

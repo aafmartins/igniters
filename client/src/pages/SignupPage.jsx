@@ -12,16 +12,18 @@ function SignupPage(props) {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
   const handleCountry = (e) => setCountry(e.target.value);
+  const handleConfirmPassword = (e) => setConfirmPassword(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name, country };
+    const requestBody = { email, password, name, country, confirmPassword };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
@@ -39,7 +41,6 @@ function SignupPage(props) {
     <div className="SignupPage">
       <img src="/images/signup.png" alt="Sign up hero" className="images" />
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="formContainer">
         <form onSubmit={handleSignupSubmit}>
           <div className="formHeading">
@@ -78,6 +79,18 @@ function SignupPage(props) {
               onChange={handlePassword}
             />
           </div>
+          <div className="formInputContainer">
+            <label>Confirm password:</label>
+            <input
+              placeholder="*6+ chars, inc lowercase, uppercase + numbers*"
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={handleConfirmPassword}
+            />
+          </div>
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52 " type="submit">

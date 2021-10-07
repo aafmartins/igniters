@@ -36,7 +36,6 @@ function LoginPage(props) {
   return (
     <div className="LoginPage">
       <img src="/images/login.png" alt="Log in hero" className="images" />
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="formContainer">
         <form onSubmit={handleLoginSubmit}>
           <div className="formHeading">
@@ -67,6 +66,9 @@ function LoginPage(props) {
             </button>
             <GoogleButton buttonText="Login" />
           </div>
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
           <div className="formInputContainer prompt">
             <p>Don't have an account yet?</p>
             <Link className="promptLink" to={"/signup"}>

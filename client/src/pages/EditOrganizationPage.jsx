@@ -13,13 +13,12 @@ function EditOrganizationPage(props) {
   const [mainIdiom, setMainIdiom] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const storedToken = localStorage.getItem("authToken");
 
   const orgId = props.match.params.id;
 
   useEffect(() => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .get(`${API_URL}/orgs/${orgId}`, {
@@ -54,9 +53,6 @@ function EditOrganizationPage(props) {
       url,
     };
 
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .put(`${API_URL}/orgs/edit/${orgId}`, requestBody, {
@@ -64,13 +60,14 @@ function EditOrganizationPage(props) {
       })
       .then((response) => {
         props.history.push(`/orgs/${orgId}`);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
       });
   };
 
   const deleteOrganization = () => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
     // Send the token through the request "Authorization" Headers
     axios
       .delete(`${API_URL}/orgs/delete/${orgId}`, {
@@ -219,6 +216,7 @@ function EditOrganizationPage(props) {
               Delete Organization
             </button>
           </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
       </div>
     </div>

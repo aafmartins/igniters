@@ -26,6 +26,13 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
     url,
   } = req.body;
 
+  if (name === "" || city === "" || country === "" || email === "") {
+    res.status(400).json({
+      message: "Please provide organization's name, city,  country and email",
+    });
+    return;
+  }
+
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
       message: "Specified id is not valid",

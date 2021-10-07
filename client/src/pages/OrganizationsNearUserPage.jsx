@@ -81,7 +81,7 @@ export default function OrganizationsNearUserPage(props) {
   </div> 
   :
     <div className="divContainer">
-      <OrganizationsNearUserMap orgs={orgsForMap}/>
+      <OrganizationsNearUserMap orgs={orgsForMap} {...props}/>
       <p className="paragraph">Hello <b>{user.name}</b>, these are the organizations that we found in <b>{user.country}</b></p>
       <Link to="/orgs/create">
         <button className="button-52">Create an organization</button>

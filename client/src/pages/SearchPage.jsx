@@ -63,7 +63,7 @@ export default function SearchPage(props) {
     <div>
       {orgs.length ? (
         <>
-          <OrganizationsNearUserMap orgs={orgs} />
+          <OrganizationsNearUserMap orgs={orgs} {...props} />
           <div>
             <form
               className="searchFormContainer searchForm"

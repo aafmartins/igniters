@@ -56,13 +56,17 @@ function ReviewCard(props) {
 
   return (
     <div className="ReviewCard">
-      <p class="starability-result" data-rating={rating}>
-        {/* Rated: {rating} stars */}
-      </p>
-      {/* <h6>Comment:</h6> */}
-      <p className="reviewText">
-        {comment} <br /> <i>by: {reviewer.name}</i>
-      </p>
+      {!showForm ? (
+        <>
+          <p class="starability-result" data-rating={rating}>
+            {/* Rated: {rating} stars */}
+          </p>
+          {/* <h6>Comment:</h6> */}
+          <p className="reviewText">
+            {comment} <br /> <i>by: {reviewer.name}</i>
+          </p>
+        </>
+      ) : null}
       {userToken._id === reviewer._id ? (
         <>
           <button className="button-52 reviewButtons" onClick={toggleForm}>

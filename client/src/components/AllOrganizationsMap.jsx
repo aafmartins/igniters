@@ -142,25 +142,16 @@ useEffect(() => {
           zoom: 12,
         });
 
-        // new mapboxgl.Popup()
-        //   .setLngLat(coordinates)
-        //   // .setText(`${process.env.REACT_APP_POPUP_ORIGIN}/orgs/${orgId}`)
-        //   .setHTML(`<a href="${process.env.REACT_APP_POPUP_ORIGIN}/orgs/${orgId}">${orgName}</a>`)
-        //   .addTo(map);
-
-          // create an element with the popup content
-          const PopUpLink = document.createElement('div');
-          PopUpLink.innerHTML = `<button >${orgName}</button>`;
-          PopUpLink.addEventListener('click', (e) => {
-            console.log('Button clicked');
-            console.log("props", props.history)
-            props.history.push(`/orgs/${orgId}`)
-          });
-
-          new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setDOMContent(PopUpLink)
-          .addTo(map);
+        // create an element with the popup content
+        const PopUpLink = document.createElement('div');
+        PopUpLink.innerHTML = `<button >${orgName}</button>`;
+        PopUpLink.addEventListener('click', (e) => {
+          props.history.push(`/orgs/${orgId}`)
+        });
+        new mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setDOMContent(PopUpLink)
+        .addTo(map);
 
       });
 

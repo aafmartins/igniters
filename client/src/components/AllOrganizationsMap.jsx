@@ -144,7 +144,7 @@ useEffect(() => {
 
         // create an element with the popup content
         const PopUpLink = document.createElement('div');
-        PopUpLink.innerHTML = `<button id="popup-map-button" >${orgName}</button>`;
+        PopUpLink.innerHTML =`<button id="popup-map-button" style="border:none;background:none;" >${orgName}</button>`;
         PopUpLink.addEventListener('click', (e) => {
           props.history.push(`/orgs/${orgId}`)
         });

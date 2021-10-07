@@ -69,7 +69,8 @@ export default function OrganizationsNearUserMap(props) {
 
             // create an element with the popup content
             const PopUpLink = document.createElement('div');
-            PopUpLink.innerHTML = `<button >${orgName}</button>`;
+            PopUpLink.setAttribute("id", "popup-map-button-container")
+            PopUpLink.innerHTML = `<button id="popup-map-button" style="border:none;background:none;" >${orgName}</button>`;
             PopUpLink.addEventListener('click', (e) => {
               props.history.push(`/orgs/${orgId}`)
             });

@@ -1,18 +1,27 @@
 .paragraph {
-    padding-top: 10px;
-    font-size: 20px;
-    font-weight: 300;
-    width: 400px;
+  padding-top: 10px;
+  font-size: 20px;
+  font-weight: 200;
+  width: 400px;
 }
 
 .divContainer {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
 .heroImg {
-    height: 300px;
+  height: 300px;
+}
+
+.textContainer {
+  margin: 30px;
+}
+
+.textContainer p,
+.textContainer h4 {
+  margin-bottom: 30px;
+  max-width: 350px;
 }

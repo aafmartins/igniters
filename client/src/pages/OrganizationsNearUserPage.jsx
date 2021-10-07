@@ -2,9 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "./../contexts/auth.context";
 import axios from "axios";
 import OrganizationsNearUserMap from "../components/OrganizationsNearUserMap";
-import "../styles/OrganizationsNearMe.css"
+import "../styles/OrganizationsNearMe.css";
 import { Link } from "react-router-dom";
-
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -70,26 +69,44 @@ export default function OrganizationsNearUserPage(props) {
 
   return (
     <>
-{orgsForMap.length === 0 ?
-  <div className="divContainer">
-      <p className="paragraph">Is there no organizations in your area? Let's create one! </p>
-      <Link to="/orgs/create">
-        <img src="/images/hero.png" className="heroImg" alt="" />
-        <button className="button-52">Create an organization</button>
-      </Link>   
-
-  </div> 
-  :
-    <div className="divContainer">
-      <OrganizationsNearUserMap orgs={orgsForMap}/>
-      <p className="paragraph">Hello <b>{user.name}</b>, these are the organizations that we found in <b>{user.country}</b></p>
-      <Link to="/orgs/create">
-        <button className="button-52">Create an organization</button>
-      </Link>   
-    </div>
-}
-
-</>
-
+      {orgsForMap.length === 0 ? (
+        <div className=" divContainer">
+          <img src="/images/hero.png" className="heroImg" alt="" />
+          <div className="textContainer">
+            <h4>Oops, we didn't find any organizations in your area...</h4>
+            <Link to="/orgs/create">
+              <button className="searchButton button-52 ">
+                Let's create one!
+              </button>
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div className="divContainer">
+          <OrganizationsNearUserMap orgs={orgsForMap} />
+          <div className="textContainer">
+            <p className="paragraph">
+              Hello <b>{user.name}</b>, these are the organizations we found in{" "}
+              <b>{user.country}</b>
+            </p>
+            <Link to="/orgs/create">
+              <button className="button-52">Create another organization</button>
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
+
+// {
+//   /* <div className="divContainer">
+//   <p className="paragraph">
+//     Is there no organizations in your area? Let's create one!{" "}
+//   </p>
+//   <Link to="/orgs/create">
+//     <img src="/images/hero.png" className="heroImg" alt="" />
+//     <button className="button-52">Create an organization</button>
+//   </Link>
+// </div> */
+// }

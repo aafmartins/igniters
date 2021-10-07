@@ -103,7 +103,7 @@ export default function SearchPage(props) {
                     Search by category
                   </option>
                   <option value="Activism">Activism</option>
-                  <option value="Gender Discrimination">
+                  <option value="Gender Descrimination">
                     Gender Discrimination
                   </option>
                   <option value="Human Rights">Human Rights</option>

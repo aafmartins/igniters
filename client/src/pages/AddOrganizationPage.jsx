@@ -157,9 +157,6 @@ function AddOrganizationPage(props) {
                 setCategories(values);
               }}
             >
-              {/* <option disable="true" value="">
-                Select a category from the list
-              </option> */}
               <option value="Activism">Activism</option>
               <option value="Gender Discrimination">
                 Gender Discrimination

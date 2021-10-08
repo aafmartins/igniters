@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN; //process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export default function OrganizationDetailsMap(props) {
     const {org} = props;
@@ -25,7 +25,6 @@ export default function OrganizationDetailsMap(props) {
             // Add a new source from our GeoJSON
             // Add an image to use as a custom marker
             map.loadImage( '/images/lifebuoy.png',
-              //'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
               (error, image) => {
                   if (error) throw error;
                   map.addImage('custom-marker', image);
@@ -52,7 +51,6 @@ export default function OrganizationDetailsMap(props) {
             );                
           });
         }
-
     }, [org]);
 
     return (

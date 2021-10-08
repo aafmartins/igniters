@@ -54,9 +54,6 @@
   margin: 5px 0px 0px 0px;
 }
 
-/* .anchors {
-  color: white;
-} */
 a:not([href]) {
   color: white;
 }

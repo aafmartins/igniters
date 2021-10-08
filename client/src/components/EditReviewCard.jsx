@@ -102,6 +102,7 @@ export default function EditReviewCard(props) {
         </div>
 
         <div className="editReviewFormInputContainer">
+
           {/* <label>Rating:</label>
           <textarea
             type="Number"
@@ -111,6 +112,9 @@ export default function EditReviewCard(props) {
           /> */}
           {/* <fieldset class="starability-basic">
             <legend>Rating:</legend>
+
+          <fieldset class="starability-basic">
+
             <input
               type="radio"
               id="no-rate"

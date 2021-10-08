@@ -1,7 +1,5 @@
 .container-fluid {
-  /* background-color: rgb(124, 94, 241, 0.5); */
   padding: 5px;
-  /* padding: 1px 10px 0px 10px; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -12,8 +10,6 @@
   background-color: white;
   padding: 15px;
   margin: 10px 10px 10px 10px;
-  /* border-radius: 6px; */
-  /* border: 1px solid black; */
   box-shadow: 5px 5px 5px 3px #f5eaf9;
   max-width: 600px;
 }
@@ -39,7 +35,6 @@ p {
 
 hr {
   margin: 0px 0px 6px 0px;
-  /* border: 1px solid; */
   size: 10;
   color: rgb(124, 94, 241, 0.5) !important;
 }

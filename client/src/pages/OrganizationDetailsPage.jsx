@@ -111,10 +111,7 @@ function OrganizationDetailsPage(props) {
       {!org ? (
         <img src="/images/loading.png" alt="Loading" className="images" />
       ) : (
-        <>
-          {/* <Link to="/orgs">
-            <button className="button-52">Back to Organizations</button>
-          </Link> */}
+        <>         
           <div className="imageContainer">
             <span className="filterSpan">
               <img src={randomImageUrl()} alt="" className="orgHeaderImg" />
@@ -129,9 +126,7 @@ function OrganizationDetailsPage(props) {
             <div className="orgContactsAndDetails">
               <div className="orgDetailsSubContainer">
                 <h6>Contact Details</h6>
-                <a href={org.url}>{org.name}</a>
-                {/* <br /> */}
-                {/* <a href={org.email}>{org.email}</a> */}
+                <a href={org.url}>{org.name}</a>                
                 <p>{org.email}</p>
                 <p className="address">
                   {org.street} <br /> {org.city}, {org.country}

@@ -98,15 +98,3 @@ export default function OrganizationsNearUserPage(props) {
     </>
   );
 }
-
-// {
-//   /* <div className="divContainer">
-//   <p className="paragraph">
-//     Is there no organizations in your area? Let's create one!{" "}
-//   </p>
-//   <Link to="/orgs/create">
-//     <img src="/images/hero.png" className="heroImg" alt="" />
-//     <button className="button-52">Create an organization</button>
-//   </Link>
-// </div> */
-// }

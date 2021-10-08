@@ -24,7 +24,6 @@ function AddReview(props) {
     // Send the token through the request "Authorization" Headers
     axios
       .post(
-        //    `${API_URL}/org/${orgId}/reviews`,
         `${API_URL}/reviews`,
         requestBody,
         { headers: { Authorization: `Bearer ${storedToken}` } }
@@ -41,8 +40,6 @@ function AddReview(props) {
 
   return (
     <div className="AddReview">
-      {/* <h6>Add a review</h6> */}
-
       <form className="reviewForm" onSubmit={handleSubmit}>
         <div className="reviewFormInputContainer">
           <label>Comment:</label>
@@ -57,6 +54,7 @@ function AddReview(props) {
 
         <div className="reviewFormInputContainer">
           <label>Rating:</label>
+
           {/* <textarea
             type="Number"
             name="rating"
@@ -69,6 +67,9 @@ function AddReview(props) {
             <legend>
               <h6>Rating:</h6>
             </legend>
+
+          <fieldset class="starability-basic">
+
             <input
               type="radio"
               id="no-rate"

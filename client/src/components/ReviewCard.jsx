@@ -2,7 +2,6 @@ import { AuthContext } from "./../contexts/auth.context";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import EditReviewCard from "./../components/EditReviewCard";
-import "../styles/reviews.css";
 import StarRatings from "react-star-ratings";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
@@ -35,21 +34,6 @@ function ReviewCard(props) {
     getReview();
   }, []);
 
-  // const deleteReview = () => {
-  //   // Get the token from the localStorage
-  //   const storedToken = localStorage.getItem("authToken");
-
-  //   // Send the token through the request "Authorization" Headers
-  //   axios
-  //     .delete(`${API_URL}/reviews/delete/${reviewId}`, {
-  //       headers: { Authorization: `Bearer ${storedToken}` },
-  //     })
-  //     .then(() => {
-  //       props.refreshOrg();
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   //function to toggle the form AddReview hidden or showing style
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -59,9 +43,7 @@ function ReviewCard(props) {
     <div className="ReviewCard">
       {!showForm ? (
         <>
-          {/* <p class="starability-result" data-rating={rating}>
-            Rated: {rating} stars
-          </p> */}
+<p>
           <StarRatings
             rating={rating}
             starRatedColor="rgba(124, 94, 241, 0.5)"
@@ -73,7 +55,9 @@ function ReviewCard(props) {
             name='rating'
             isSelectable='false'
           />
-          {/* <h6>Comment:</h6> */}
+
+          </p>
+
           <p className="reviewText">
             {comment} <br /> <i>by: {reviewer.name}</i>
           </p>
@@ -92,12 +76,6 @@ function ReviewCard(props) {
                 toggleForm={toggleForm}
                 reviewId={reviewId}
               />
-              {/* <button
-                className="button-52 reviewButtons"
-                onClick={deleteReview}
-              >
-                Delete
-              </button> */}
             </div>
           ) : null}
         </>

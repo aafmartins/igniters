@@ -8,15 +8,11 @@ const geocoder = mbxGeocoding({
 });
 const Organization = require("../models/Organization.model");
 
-const {
-  isAuthenticated
-} = require("../middleware/jwt.middleware"); // <== IMPORT
+const { isAuthenticated } = require("../middleware/jwt.middleware"); // <== IMPORT
 
 // PUT  /orgs/edit/:orgId" -  Updates a specific organization by id
 router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
-  const {
-    orgId
-  } = req.params;
+  const { orgId } = req.params;
 
   const {
     name,
@@ -54,22 +50,24 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
       const geometry = response.body.features[0].geometry;
 
       Organization.findByIdAndUpdate(
-          orgId, {
-            name,
-            country,
-            city,
-            street,
-            email,
-            categories,
-            mainIdiom,
-            description,
-            url,
-            creator: req.payload._id,
-            geometry,
-          }, {
-            new: true,
-          }
-        )
+        orgId,
+        {
+          name,
+          country,
+          city,
+          street,
+          email,
+          categories,
+          mainIdiom,
+          description,
+          url,
+          creator: req.payload._id,
+          geometry,
+        },
+        {
+          new: true,
+        }
+      )
         .then((updatedOrg) => res.json(updatedOrg))
         .catch((error) => {
           console.log("Organization not updated", error);
@@ -84,9 +82,7 @@ router.put("/orgs/edit/:orgId", isAuthenticated, (req, res, next) => {
 
 // DELETE  /orgs/delete/:orgId  -  Deletes a specific organization by id
 router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
-  const {
-    orgId
-  } = req.params;
+  const { orgId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
@@ -106,10 +102,7 @@ router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
 
 //  GET /api/orgs/:orgId -  Retrieves a specific organization by id
 router.get("/orgs/:orgId", (req, res, next) => {
-  const {
-    orgId
-  } = req.params;
-   console.log("this is the req", req)
+  const { orgId } = req.params;
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
       message: "Specified id is not valid",
@@ -173,18 +166,18 @@ router.post("/orgs", isAuthenticated, (req, res, next) => {
       const geometry = response.body.features[0].geometry;
 
       Organization.create({
-          name,
-          country,
-          city,
-          street,
-          email,
-          categories,
-          mainIdiom,
-          description,
-          url,
-          creator: req.payload._id,
-          geometry,
-        })
+        name,
+        country,
+        city,
+        street,
+        email,
+        categories,
+        mainIdiom,
+        description,
+        url,
+        creator: req.payload._id,
+        geometry,
+      })
         .then((response) => {
           res.status(200).json(response);
         })

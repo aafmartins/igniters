@@ -60,14 +60,14 @@ function LoginPage(props) {
             />
           </div>
 
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52 " type="submit">
               Login
             </button>
             <GoogleButton buttonText="Login" />
           </div>
-
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <div className="formInputContainer prompt">
             <p>Don't have an account yet?</p>

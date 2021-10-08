@@ -52,7 +52,13 @@ function HomePage(props) {
                 <button className=" button-52">Organizations near you</button>
               </Link>
             </div>
-          ) : null}
+          ) : (
+            <div className="orgsNearYouLinkContainer">
+              <Link className="nav-link" to="/signup">
+                <button className="button-52">Sign Up</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

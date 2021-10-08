@@ -1,7 +1,7 @@
 import "./App.css";
 import "./components/stars.css";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 
@@ -27,6 +27,7 @@ import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/Footer";
 
 import { AuthContext } from "./contexts/auth.context";
+import ScrollToTop from "./components/ScrollToTop";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -34,6 +35,7 @@ function App(props) {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const { logInUser } = useContext(AuthContext);
+  const { pathname } = useLocation();
 
   const handleGoogleSuccess = (data) => {
     const { givenName, email } = data.profileObj;
@@ -64,6 +66,7 @@ function App(props) {
 
   return (
     <div className="App">
+      <ScrollToTop />
       <Navbar
         onGoogleSuccess={handleGoogleSuccess}
         onGoogleFailure={handleGoogleFailure}
@@ -116,7 +119,7 @@ function App(props) {
           <Route component={ErrorPage} />
         </Switch>
       </div>
-      <Footer />
+      {pathname === "/" ? null : <Footer />}
     </div>
   );
 }

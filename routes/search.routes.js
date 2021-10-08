@@ -6,7 +6,6 @@ const Organization = require("../models/Organization.model");
 router.get("/", (req, res) => {
   // you can access the query from req.query
   const { q, category } = req.query;
-  // console.log("This is the data from our query:", req.query);
 
   let query;
 
@@ -19,8 +18,6 @@ router.get("/", (req, res) => {
   } else if (q === "" && category === "") {
     query = null;
   }
-
-  // console.log("This is the data from our query:", query);
 
   Organization.find(query)
     .then((organizationsFound) => res.status(200).json(organizationsFound))

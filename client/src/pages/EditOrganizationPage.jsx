@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
@@ -73,7 +74,9 @@ function EditOrganizationPage(props) {
       .delete(`${API_URL}/orgs/delete/${orgId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then(() => props.history.push("/"))
+      .then(() => {
+        props.history.push({ pathname: "/orgs" });
+      })
       .catch((err) => console.log(err));
   };
 
@@ -203,21 +206,23 @@ function EditOrganizationPage(props) {
             />
           </div>
 
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
           <div className="formSubmitButtonContainer">
             <button className="submitButton button-52" type="submit">
               Save
             </button>
           </div>
-          <div className="formSubmitButtonContainer">
-            <button
-              className="submitButton button-52"
-              onClick={deleteOrganization}
-            >
-              Delete Organization
-            </button>
-          </div>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
+
+        <div className="formSubmitButtonContainer">
+          <button
+            className="submitButton button-52"
+            onClick={deleteOrganization}
+          >
+            Delete Organization
+          </button>
+        </div>
       </div>
     </div>
   );

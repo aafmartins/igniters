@@ -2,7 +2,6 @@ import { AuthContext } from "./../contexts/auth.context";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import EditReviewCard from "./../components/EditReviewCard";
-import "../styles/reviews.css";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 

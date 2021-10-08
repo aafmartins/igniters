@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import StarRatings from "react-star-ratings";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -13,6 +14,10 @@ export default function EditReviewCard(props) {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(1);
   const { reviewId } = props;
+
+  const changeRating = ( newRating ) => {
+    setRating(newRating)
+  }
 
   useEffect(() => {
     // Get the token from the localStorage
@@ -97,7 +102,19 @@ export default function EditReviewCard(props) {
         </div>
 
         <div className="editReviewFormInputContainer">
+
+          {/* <label>Rating:</label>
+          <textarea
+            type="Number"
+            name="rating"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+          /> */}
+          {/* <fieldset class="starability-basic">
+            <legend>Rating:</legend>
+
           <fieldset class="starability-basic">
+
             <input
               type="radio"
               id="no-rate"
@@ -162,7 +179,20 @@ export default function EditReviewCard(props) {
             <label for="first-rate5" title="Amazing">
               5 stars
             </label>
-          </fieldset>
+          </fieldset> */}
+
+          <StarRatings
+            rating={rating}
+            starRatedColor="rgba(124, 94, 241, 0.5)"
+            starHoverColor="rgba(124, 94, 241, 0.5)"	
+            starEmptyColor='rgb(140, 140, 140)'
+            starDimension='30px'
+            starSpacing="0"
+            changeRating={changeRating}
+            numberOfStars={5}
+            name='rating'
+          />
+
         </div>
 
         <div className="editReviewFormButtonContainer ">

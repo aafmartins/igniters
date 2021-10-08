@@ -20,6 +20,7 @@ router.get("/", (req, res) => {
   }
 
   Organization.find(query)
+    .populate("reviews")
     .then((organizationsFound) => res.status(200).json(organizationsFound))
     .catch((err) => {
       console.log("Review not updated: ", err);

@@ -28,9 +28,6 @@ function HomePage(props) {
         <div>
           <form onSubmit={handleClick}>
             <div className="searchBarContainer">
-              {/* <label htmlFor="nameOrLocation">
-                Search by Name or Location:
-              </label> */}
               <input
                 className="searchBarInput"
                 type="text"

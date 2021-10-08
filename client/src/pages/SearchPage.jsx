@@ -70,9 +70,6 @@ export default function SearchPage(props) {
               onSubmit={handleClick}
             >
               <div className="searchContainer">
-                {/* <label htmlFor="nameOrLocation">
-                  Search by name or location:
-                </label> */}
                 <input
                   className="searchInput searchPagePlaceholder"
                   type="text"
@@ -88,7 +85,6 @@ export default function SearchPage(props) {
                 />
               </div>
               <div className="searchContainer">
-                {/* <label htmlFor="categories">Search by category:</label> */}
                 <select
                   className="searchBarInput"
                   name="categories"
@@ -96,7 +92,6 @@ export default function SearchPage(props) {
                   onChange={handleSelectChange}
                 >
                   <option
-                    // style="font-size: 20px; color:#4a54f1; text-align:center; padding-top:100px;"
                     disable="true"
                     value=""
                   >

@@ -5,13 +5,11 @@
   padding: 10px 30px;
   font-size: 10px;
   flex-shrink: 0;
-  /* align-items: center; */
 }
 
 .footerLinksContainer {
   display: flex;
   align-items: center;
-  /* text-align: center; */
   width: 60px;
   padding-left: 0;
 }
@@ -20,8 +18,6 @@
   color: #22183b;
 }
 
-.headerForNames {
-}
 
 .namesMainContainer a {
   margin: 6px;
@@ -43,13 +39,4 @@
     color: transparent;
     width: 10px;
   }
-
-  /* .footerContainer {
-    height: 0;
-    background-color: transparent;
-  }
-
-  .footerContainer a {
-    color: transparent;
-  } */
 }

@@ -21,7 +21,6 @@ export default function OrganizationsNearUserMap(props) {
           // Add a new source from our GeoJSON
           // Add an image to use as a custom marker
           map.loadImage( './images/lifebuoy.png',
-            // 'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
             (error, image) => {
                 if (error) throw error;
                 map.addImage('custom-marker', image);
@@ -96,13 +95,9 @@ export default function OrganizationsNearUserMap(props) {
                 });
                 map.fitBounds(bounds, {padding : 80});
             }
-          }
-    
-    
-        });
-    
-      },[orgs]);
-    
+          }      
+        });    
+      },[orgs]);    
 
     return (
         <div id="map" style={{ width: "100%", height: "0", padding: "0 0 56% 0" }}></div>

@@ -34,21 +34,6 @@ function ReviewCard(props) {
     getReview();
   }, []);
 
-  // const deleteReview = () => {
-  //   // Get the token from the localStorage
-  //   const storedToken = localStorage.getItem("authToken");
-
-  //   // Send the token through the request "Authorization" Headers
-  //   axios
-  //     .delete(`${API_URL}/reviews/delete/${reviewId}`, {
-  //       headers: { Authorization: `Bearer ${storedToken}` },
-  //     })
-  //     .then(() => {
-  //       props.refreshOrg();
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   //function to toggle the form AddReview hidden or showing style
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -59,9 +44,7 @@ function ReviewCard(props) {
       {!showForm ? (
         <>
           <p class="starability-result" data-rating={rating}>
-            {/* Rated: {rating} stars */}
           </p>
-          {/* <h6>Comment:</h6> */}
           <p className="reviewText">
             {comment} <br /> <i>by: {reviewer.name}</i>
           </p>
@@ -80,12 +63,6 @@ function ReviewCard(props) {
                 toggleForm={toggleForm}
                 reviewId={reviewId}
               />
-              {/* <button
-                className="button-52 reviewButtons"
-                onClick={deleteReview}
-              >
-                Delete
-              </button> */}
             </div>
           ) : null}
         </>

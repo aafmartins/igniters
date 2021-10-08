@@ -20,7 +20,7 @@ export default function AboutUs() {
         <h6>Proudly made by:</h6>
         <div className="namesMainContainer">
           <a
-            href="https://www.linkedin.com/in/monika-geiger/"
+            href="https://github.com/hribu"
             className="anchorsInMadeBy"
           >
             Flavian Albert
@@ -29,7 +29,7 @@ export default function AboutUs() {
             href="https://www.linkedin.com/in/monika-geiger/"
             className="anchorsInMadeBy"
           >
-            Monika Geiger
+            Mónika Geiger
           </a>
           <a
             href="https://www.linkedin.com/in/ana-af-martins/"

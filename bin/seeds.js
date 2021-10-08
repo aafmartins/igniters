@@ -8,19 +8,6 @@ const orgs = require("./data");
 
 const Organization = require("./../models/Organization.model");
 
-// Organization.deleteMany()
-//   .then((deletedOrgs) =>
-//     console.log(`Deleted ${deletedOrgs.deletedCount} organizations`)
-//   )
-//   .then(
-//     Organization.insertMany(orgs).then((insertedOrgs) => {
-//       console.log(`Created ${insertedOrgs.length} organizations`);
-//       mongoose.connection.close();
-//     })
-//   )
-//   .catch((err) =>
-//     console.log(`An error occurred seeding organizations to the DB: ${err}`)
-//   );
 
 const importData = async () => {
   try {

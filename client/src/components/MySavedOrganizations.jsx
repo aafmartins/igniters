@@ -58,18 +58,6 @@ function MySavedOrganizations(props) {
     }
     
     </div>
-
-
-
-
-
-//   <div className="" >
-//       {savedOrgs.map((organization) => (
-//         <div className="container-fluid" >
-//           <OrganizationCard key={organization._id} {...organization} />
-//         </div>
-//       ))}
-// </div>
   );
 }
 

@@ -78,97 +78,116 @@ Search Service
 
 ### Models
 
-#### User model(schema)
-
-```javascript
-{
-	email: {
-		type: String,
-		required: true
-	},
-	password: {
-		type: String,
-		required: true
-	},
-	name: {
-		type: String,
-		required: true,
-		unique: true
-	},
-	savedOrganizations: [{
-		type: Schema.Types.ObjectId,
-		ref: 'Organization',
-		default: []
-	}]
-}
-```
-
 #### organization model(schema)
 
 ```javascript
 {
-  review: {
-    type: String,
-    required: false,
-  }, //not required
-  rating: {
-    type: Number,
-    required: true,
-  }, //required
-  reviewer: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-}
+    name: {
+      type: String,
+      required: true,
+    }, //required
+    country: {
+      type: String,
+      required: true,
+    }, //required
+    city: {
+      type: String,
+      required: true,
+    }, //required
+    street: {
+      type: String,
+    }, //not required
+    email: {
+      type: String,
+      required: true,
+    }, //required
+    categories: {
+      type: [String],
+    }, //not required
+    mainIdiom: {
+      type: String,
+    }, //not required
+    description: {
+      type: String,
+    }, //not required
+    url: {
+      type: String,
+    }, //not required
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+        default: [],
+      },
+    ],
+    geometry: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+  }
 ```
 
 #### review model(schema)
 
 ```javascript
 {
-  name: {
-    type: String,
-    required: true,
-  }, //required
-  country: {
-    type: String,
-    required: true,
-  }, //required
-  city: {
-    type: String,
-    required: true,
-  }, //required
-  street: {
+  review: {
     type: String,
     required: false,
-  }, //not required
-  email: {
-    type: String,
-    required: true,
-  }, //required
-  categories: {
-    type: [String],
-    required: false,
-  }, //not required
-  mainIdiom: {
-    type: String,
-    required: false,
-  }, //not required
-  description: {
-    type: String,
-    required: false,
-  }, //required
-  creator: {
+    maxlength: 500
+  },
+  rating: {
+    type: Number,
+  },
+  reviewer: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  reviews: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Review",
-      default: [],
-    },
-  ],
+}, {
+  timestamps: true
+}
+```
+
+#### User model(schema)
+
+```javascript
+{
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  country: {
+    type: String,
+    default: "unknown",
+  },
+  savedOrganizations: [{
+    type: Schema.Types.ObjectId,
+    ref: "Organization",
+    default: [],
+  }, ],
+  username: {
+    type: String,
+  }
 }
 ```
 

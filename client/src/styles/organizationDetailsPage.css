@@ -123,10 +123,6 @@
   border-radius: 2px;
 }
 
-/* .editReviewFormInputContainer input {
-  width: 100px;
-} */
-
 .reviewFormSubmitButtonContainer {
   display: flex;
   justify-content: space-evenly;
@@ -149,6 +145,7 @@
     margin: 30px auto;
     max-width: 700px;
   }
+
   .buttonsContainer {
     display: flex;
     justify-content: flex-start;

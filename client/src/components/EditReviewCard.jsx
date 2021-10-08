@@ -97,15 +97,7 @@ export default function EditReviewCard(props) {
         </div>
 
         <div className="editReviewFormInputContainer">
-          {/* <label>Rating:</label>
-          <textarea
-            type="Number"
-            name="rating"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-          /> */}
           <fieldset class="starability-basic">
-            {/* <legend>Rating:</legend> */}
             <input
               type="radio"
               id="no-rate"

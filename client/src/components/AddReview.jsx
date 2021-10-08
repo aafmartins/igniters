@@ -1,11 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
+import StarRatings from "react-star-ratings";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 function AddReview(props) {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(1);
+
+  const changeRating = ( newRating ) => {
+    setRating(newRating)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,10 +65,10 @@ function AddReview(props) {
             value={rating}
             onChange={(e) => setRating(e.target.value)}
           /> */}
-          <fieldset class="starability-basic">
-            {/* <legend>
+          {/* <fieldset class="starability-basic">
+            <legend>
               <h6>Rating:</h6>
-            </legend> */}
+            </legend>
             <input
               type="radio"
               id="no-rate"
@@ -123,7 +128,20 @@ function AddReview(props) {
             <label for="first-rate5" title="Amazing">
               5 stars
             </label>
-          </fieldset>
+          </fieldset> */}
+
+          <StarRatings
+            rating={rating}
+            starRatedColor="rgba(124, 94, 241, 0.5)"
+            starHoverColor="rgba(124, 94, 241, 0.5)"	
+            starEmptyColor='rgb(140, 140, 140)'
+            starDimension='30px'
+            starSpacing="0"
+            changeRating={changeRating}
+            numberOfStars={5}
+            name='rating'
+          />
+
         </div>
 
         <div className="reviewFormSubmitButtonContainer">

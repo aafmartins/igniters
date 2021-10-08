@@ -2,6 +2,7 @@ import { AuthContext } from "./../contexts/auth.context";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import EditReviewCard from "./../components/EditReviewCard";
+import StarRatings from "react-star-ratings";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -42,8 +43,21 @@ function ReviewCard(props) {
     <div className="ReviewCard">
       {!showForm ? (
         <>
-          <p class="starability-result" data-rating={rating}>
+<p>
+          <StarRatings
+            rating={rating}
+            starRatedColor="rgba(124, 94, 241, 0.5)"
+            starHoverColor="rgba(124, 94, 241, 0.5)"	
+            starEmptyColor='rgb(140, 140, 140)'
+            starDimension='30px'
+            starSpacing="0"
+            numberOfStars={5}
+            name='rating'
+            isSelectable='false'
+          />
+
           </p>
+
           <p className="reviewText">
             {comment} <br /> <i>by: {reviewer.name}</i>
           </p>

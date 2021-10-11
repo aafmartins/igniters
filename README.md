@@ -231,7 +231,7 @@ A repository of women's rights organizations, Igniters is a power tool for women
 
 ### Team
 
-[Ana Martins](https://github.com/aafmartins)
-[Monika Geiger](https://github.com/monikageiger)
-[Osvaldo Picazo](https://github.com/OsvaldoPicazo)
+[Ana Martins](https://github.com/aafmartins),
+[Monika Geiger](https://github.com/monikageiger),
+[Osvaldo Picazo](https://github.com/OsvaldoPicazo),
 [Flavian Albert](https://github.com/Hribu)

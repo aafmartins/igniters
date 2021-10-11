@@ -1,4 +1,6 @@
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config({
+  path: "../"
+});
 // ℹ️ package responsible to make the connection with mongodb
 // https://www.npmjs.com/package/mongoose
 const mongoose = require("mongoose");
@@ -7,7 +9,7 @@ const mongoose = require("mongoose");
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
 const MONGODB_URI = `${process.env.MONGODB_URL}/${process.env.DB_NAME}`;
-
+console.log("mongodb url", MONGODB_URI)
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,

@@ -1,8 +1,12 @@
+// require("dotenv").config({
+//   path: "../.env"
+// });
+
 // require database configuration
 require("./../config/db");
 
 // bin/seeds.js
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 const orgs = require("./data");
 

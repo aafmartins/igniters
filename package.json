@@ -14,8 +14,8 @@
     "dev:all": "concurrently \"PORT=3000 nodemon ./bin/www\" \"PORT=5000 npm run start -w client\"",
     "dev:front": "PORT=5000 npm run start -w client",
     "dev:back": "PORT=3000 nodemon ./bin/www",
-    "seed:atlas": "MONGODB_URL=mongodb+srv://globrtrotters:HCZ1b3WaxnWjkd1X@cluster0.1yh39.mongodb.net   node ./bin/seeds.js",
-    "seed:dev": "node ./bin/seeds.js",
+    "seed:atlas": "MONGODB_URL=mongodb+srv://globrtrotters:HCZ1b3WaxnWjkd1X@cluster0.1yh39.mongodb.net node -r dotenv/config ./bin/seeds.js",
+    "seed:dev": "node -r dotenv/config ./bin/seeds.js",
     "build": "npm run build -w client"
   },
   "dependencies": {

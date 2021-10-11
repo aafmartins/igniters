@@ -25,6 +25,10 @@ function HomePage(props) {
       <img className="heroImage" src="/images/hero.png" alt="Rocket Lady" />
       <div className="homeButtonsContainer">
         <h2 className="homePageSlogan">Welcome to Igniters</h2>
+        <p className="aboutUsInHomePage">A repository of women's rights organizations, <b>Igniters</b> is a power
+        tool for women around the world! 💪 Users can search and review
+        organizations, save useful resources, and create a page for their own
+        organization.</p>
         <div>
           <form onSubmit={handleClick}>
             <div className="searchBarContainer">

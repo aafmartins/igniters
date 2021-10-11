@@ -1,5 +1,5 @@
 import "./App.css";
-import "./components/stars.css";
+import "../src/styles/stars.css";
 
 import { Route, Switch, useLocation } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
@@ -23,7 +23,6 @@ import OrganizationsNearUserPage from "./pages/OrganizationsNearUserPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-
 
 function App() {
   const { pathname } = useLocation();

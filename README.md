@@ -1,30 +1,36 @@
 # Igniters
 
+[The App](https://globtrotters-igniters.herokuapp.com/)
+
 ## Description
 
-A repository of women's rights organizations, NAME OF APP is a power tool for women around the world! 💪 Everyone can search for organizations and users are able to save useful resources, review organizations, as well as create a page for their own organization.
+A repository of women's rights organizations, Igniters is a power tool for women around the world! 💪 Users can search and review organizations, save useful resources, and create a page for their own organization.
 
 ## User Stories
 
-404: As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
-Signup: As an anon I can sign up in the platform so that I can start saving, reviewing and creating organizations.
-Login: As a user I can login to the platform so that I can see my saved, review, edit and create organizations
-Logout: As a user I can logout from the platform so no one else can use it
-Add organizations: As a user I can add an organization so that I can share it with the community
-Search Organizations: As a user I can search for organizations by name, language, service or location
-List all organizations: As a user I can see a list of all organizations
-Add to favorites: As a user I want to add an organization as a resource
-See resources: As a user I want to see my saved organizations
+- 404: As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
+- Signup: As an anon I can sign up in the platform so that I can start saving, reviewing and creating organizations.
+- Login: As a user I can login to the platform so that I can see my saved, review, edit and create organizations
+- Logout: As a user I can logout from the platform so no one else can use it
+- Add organizations: As a user I can add an organization so that I can share it with the community
+- Search Organizations: As a user I can search for organizations by name, language, service or location
+- List all organizations: As a user I can see a list of all organizations
+- Add to favorites: As a user I want to add an organization as a resource
+- See resources: As a user I want to see my saved organizations
+
+## Items accomlished from Backlog
+
+- Geo location: See organizations in a map
+- About page
 
 ## Backlog
 
-Geo location: See organizations in a map
-About page
-Upload with scroll
+- Upload with scroll
+- Chat form
 
 ## Client/Frontend
 
-## React Router Routes (React App)
+### React Router Routes (React App)
 
 | Path               | Component                            | Permissions                 | Behavior                                                           |
 | ------------------ | ------------------------------------ | --------------------------- | ------------------------------------------------------------------ |
@@ -42,43 +48,53 @@ Upload with scroll
 
 ### Pages
 
-Home Page (anon/user)
-Sign Up Page (anon only)
-Log in Page (anon only)
-Organizations List Page (anon/user)
-Organization Create (user only)
-Organization Edit (owner only)
-Organization Detail Page (user only)
-My Profile Page (user only)
-404 Page (user)
+- About Us
+- Home Page (anon/user)
+- Sign Up (anon only)
+- Log In (anon only)
+- Organizations List (anon/user)
+- Organization Details (user only)
+- Organizations Near User (user only)
+- Add Organization (user only)
+- Edit Organization (owner only)
+- Organization Detail (user only)
+- Profile (user only)
+- Edit Profile (user only)
+- My Organizations (user only)
+- Search (anon/user)
+- 404 Page (user)
 
 ### Components
 
-Navbar
-UserDetails
-OrganizationCards (search and list all)
-AddOrganization
-AddReview
-Search component
-Footer
-ProfileEditForm
+- AddReview
+- AllOrganizationsMap
+- AnonRoute
+- EditReviewCard
+- Footer
+- Google Button
+- My Created Organizations
+- My Saved Organizations
+- Navbar
+- Navbar Anon
+- Navbar Private
+- Organization Cards (search and list all)
+- Organization Details Map
+- Organizations Near User Map
+- Private Route
+- Scroll To Top
+- Review card
+- ScrollToTop
 
 ### Services
 
-Auth Service
-auth.login(user)
-auth.signup(user)
-auth.logout()
-auth.me()
-auth.getUser() // synchronous
-Localisation: External Map API
-Search Service
+- Auth Service
+- Localisation: Mabox API
+- Search Service
+- React Google LogIn
 
 ## Server
 
 ### Models
-
-#### organization model(schema)
 
 ```javascript
 {
@@ -195,20 +211,27 @@ Search Service
 
 ### Wireframes
 
-[Link to your whimsical](https://whimsical.com/BnwoEhQR9ER8CcNtfSE3w7)
+[Whimsical](https://whimsical.com/BnwoEhQR9ER8CcNtfSE3w7)
 
 ### Trello
 
-[Link to your trello](https://trello.com/b/eAbJNkXd/project-3)
+[Trello](https://trello.com/b/eAbJNkXd/project-3)
 
 ### Git
 
-[Link to your git hub repo](https://github.com/monikageiger/project3)
+[Github](https://github.com/monikageiger/project3)
 
 ### Deploy Link
 
-[Link to your Heroku]()
+[The App](https://globtrotters-igniters.herokuapp.com/)
 
 ### Slides Link
 
-[Link to your Slides]()
+[Slides](https://docs.google.com/presentation/d/1B9DtmqGqxgoENpObGjUfKBKUKTnaFYYmJ8Azzb9K0_I/edit)
+
+### Team
+
+[Ana Martins](https://github.com/aafmartins)
+[Monika Geiger](https://github.com/monikageiger)
+[Osvaldo Picazo](https://github.com/OsvaldoPicazo)
+[Flavian Albert](https://github.com/Hribu)

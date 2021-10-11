@@ -61,6 +61,16 @@ export default function NavBarPrivate() {
           <li className="nav-item ulLi">
             <Link
               className="nav-link"
+              to="/about"
+              data-toggle="collapse"
+              data-target="#navbarText"
+            >
+              <a className="anchors">About us</a>
+            </Link>
+          </li>
+          <li className="nav-item ulLi">
+            <Link
+              className="nav-link"
               to="/profile"
               data-toggle="collapse"
               data-target="#navbarText"

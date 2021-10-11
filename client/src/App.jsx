@@ -23,6 +23,8 @@ import OrganizationsNearUserPage from "./pages/OrganizationsNearUserPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollButton from "./components/ScrollButton";
+// import ScrollButton from "./components/ScrollButton";
 
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
 
   return (
     <div className="App">
+     <ScrollButton />
       <ScrollToTop />
       <Navbar />
       <div className="mainContainer">
@@ -78,6 +81,7 @@ function App() {
           <Route exact path="/orgs" component={OrganizationListPage} />
           <Route exact path="/" component={HomePage} />
           <Route component={ErrorPage} />
+           {/* <ScrollButton /> */}
         </Switch>
       </div>
       {pathname === "/" ? null : <Footer />}

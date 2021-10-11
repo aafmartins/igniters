@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OrganizationCard from "../components/OrganizationCard";
-import OrganizationsNearUserMap from "../components/OrganizationsNearUserMap";
+import AllOrganizationsMap from "../components/AllOrganizationsMap";
 
 import "../styles/searchPage.css";
 
@@ -63,7 +63,7 @@ export default function SearchPage(props) {
     <div>
       {orgs.length ? (
         <>
-          <OrganizationsNearUserMap orgs={orgs} {...props} />
+          <AllOrganizationsMap orgs={orgs} {...props} />
           <div>
             <form
               className="searchFormContainer searchForm"

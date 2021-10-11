@@ -1,4 +1,42 @@
-.aboutUsPage p {
-  padding: 55px;
-  text-align: left;
+.aboutUsDescription {
+  margin: 30px 50px;
+  font-size: large;
+  text-align: justify;
+  max-width: 700px;
+  font-weight: 300;
+}
+
+.creditsMainContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  align-items: center;
+  margin: 30px 30px 10px 30px;
+}
+
+.namesMainContainer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.namesMainContainer a {
+  padding: 0;
+}
+
+.creditsMainContainer h6 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.illustrationsCredits {
+  text-align: center;
+}
+
+@media only screen and (min-width: 600px) {
+  .aboutUsDescription {
+    margin: 30px auto;
+  }
+  .creditsMainContainer {
+    margin: 30px auto;
+  }
 }

@@ -23,6 +23,5 @@ mongoose
     );
   })
   .catch((err) => {
-    console.log("url", MONGODB_URI);
     console.error("Error connecting to mongo: ", err);
   });

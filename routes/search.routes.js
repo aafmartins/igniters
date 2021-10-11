@@ -6,7 +6,6 @@ const Organization = require("../models/Organization.model");
 router.get("/", (req, res) => {
   // you can access the query from req.query
   const { q, category } = req.query;
-  // console.log("This is the data from our query:", req.query);
 
   let query;
 
@@ -20,9 +19,8 @@ router.get("/", (req, res) => {
     query = null;
   }
 
-  // console.log("This is the data from our query:", query);
-
   Organization.find(query)
+    .populate("reviews")
     .then((organizationsFound) => res.status(200).json(organizationsFound))
     .catch((err) => {
       console.log("Review not updated: ", err);

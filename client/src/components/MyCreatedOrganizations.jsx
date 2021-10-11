@@ -10,7 +10,7 @@ const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 function MyCreatedOrganizations() {
   const [myCreatedOrgs, setmyCreatedOrgs] = useState([]);
 
-  const getmyCreatedOrgs = () => {
+  const getMyCreatedOrgs = () => {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
@@ -27,10 +27,10 @@ function MyCreatedOrganizations() {
       .catch((error) => console.log(error));
   };
 
-  // We set this effect will run only once, after the initial renderz
+  // We set this effect will run only once, after the initial renders
   // by setting the empty dependency array - []
   useEffect(() => {
-    getmyCreatedOrgs();
+    getMyCreatedOrgs();
   }, []);
 
   return (

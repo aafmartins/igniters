@@ -20,7 +20,7 @@ const organizationSchema = new Schema(
     }, //required
     city: {
       type: String,
-      required: true
+      required: true,
     }, //required
     street: {
       type: String,
@@ -72,6 +72,14 @@ organizationSchema.index({ name: "text", country: "text", city: "text" });
 // virtual property that is displayed when an org is clicked in the cluster map
 organizationSchema.virtual("properties.popUpMarkup").get(function () {
   return `<a href="/orgs/${this._id}">${this.name}</a>`;
+});
+
+organizationSchema.virtual("properties.id").get(function () {
+  return this._id;
+});
+
+organizationSchema.virtual("properties.name").get(function () {
+  return this.name;
 });
 
 const Organization = model("Organization", organizationSchema);

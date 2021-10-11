@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-mapboxgl.accessToken = "pk.eyJ1IjoiaHJpYnUiLCJhIjoiY2t1Nmsycm5tMmg3MTJucGNoamJxODBrMCJ9.aT4XOnLfqTr3V4EowsmtSg";
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export default function OrganizationsNearUserMap(props) {
     const {orgs} = props;
@@ -21,7 +21,6 @@ export default function OrganizationsNearUserMap(props) {
           // Add a new source from our GeoJSON
           // Add an image to use as a custom marker
           map.loadImage( './images/lifebuoy.png',
-            // 'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
             (error, image) => {
                 if (error) throw error;
                 map.addImage('custom-marker', image);
@@ -51,7 +50,8 @@ export default function OrganizationsNearUserMap(props) {
           // the location of the feature, with
           // description HTML from its properties.
           map.on("click", "points", (e) => {
-            const popUpMarkup = e.features[0].properties.popUpMarkup;
+            const orgId = e.features[0].properties.id;
+            const orgName = e.features[0].properties.name;
             const coordinates = e.features[0].geometry.coordinates.slice();
     
             // Ensure that if the map is zoomed out such that
@@ -65,11 +65,18 @@ export default function OrganizationsNearUserMap(props) {
               center: e.features[0].geometry.coordinates.slice(),
               zoom: 10,
             });
-    
+
+            // create an element with the popup content
+            const PopUpLink = document.createElement('div');
+            PopUpLink.setAttribute("id", "popup-map-button-container")
+            PopUpLink.innerHTML = `<button id="popup-map-button" style="border:none;background:none;" >${orgName}</button>`;
+            PopUpLink.addEventListener('click', (e) => {
+              props.history.push(`/orgs/${orgId}`)
+            });
             new mapboxgl.Popup()
-              .setLngLat(coordinates)
-              .setHTML(popUpMarkup)
-              .addTo(map);
+            .setLngLat(coordinates)
+            .setDOMContent(PopUpLink)
+            .addTo(map);
     
           });
           
@@ -88,13 +95,9 @@ export default function OrganizationsNearUserMap(props) {
                 });
                 map.fitBounds(bounds, {padding : 80});
             }
-          }
-    
-    
-        });
-    
-      },[orgs]);
-    
+          }      
+        });    
+      },[orgs]);    
 
     return (
         <div id="map" style={{ width: "100%", height: "0", padding: "0 0 56% 0" }}></div>

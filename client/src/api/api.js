@@ -7,7 +7,7 @@ class Api {
     })
   }
 
-  // CHANGE THE PATHS ACCORIDNG TO API DOCUEMNTATION
+  // CHANGE THE PATHS ACCORDING TO API DOCUMENTATION
   getAll = () => this.api.get("/")
   getOne = (id) => this.api.get(`/${id}`)
   createOne = (newEntityValues) => this.api.post("/", newEntityValues)

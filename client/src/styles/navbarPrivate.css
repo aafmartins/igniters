@@ -30,7 +30,6 @@
 
 .active {
   background-color: rgb(124, 94, 241, 0.7);
-  /* border-radius: 3px; */
 }
 
 .ulLi {
@@ -51,9 +50,6 @@
   margin: 5px 0px 0px 0px;
 }
 
-/* .lastLink {
-  color: gray;
-} */
 .navbar-light .navbar-nav .nav-link {
   color: white;
 }

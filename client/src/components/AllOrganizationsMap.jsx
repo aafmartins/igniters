@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-mapboxgl.accessToken = "pk.eyJ1IjoiaHJpYnUiLCJhIjoiY2t1Nmsycm5tMmg3MTJucGNoamJxODBrMCJ9.aT4XOnLfqTr3V4EowsmtSg";
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export default function AllOrganizationsMap (props) {
   const {orgs} = props;
@@ -24,7 +24,6 @@ useEffect(() => {
       // Add a new source from our GeoJSON data and
       // set the 'cluster' option to true. GL-JS will
       // add the point_count property to your source data.
-
       // orgs data has to be passed as a features property inside an object
       const orgsString = { features: orgs };
 
@@ -126,7 +125,8 @@ useEffect(() => {
       // the location of the feature, with
       // description HTML from its properties.
       map.on("click", "unclustered-point", (e) => {
-        const popUpMarkup = e.features[0].properties.popUpMarkup;
+        const orgId = e.features[0].properties.id;
+        const orgName = e.features[0].properties.name;
         const coordinates = e.features[0].geometry.coordinates.slice();
 
         // Ensure that if the map is zoomed out such that
@@ -141,10 +141,16 @@ useEffect(() => {
           zoom: 12,
         });
 
+        // create an element with the popup content
+        const PopUpLink = document.createElement('div');
+        PopUpLink.innerHTML =`<button id="popup-map-button" style="border:none;background:none;" >${orgName}</button>`;
+        PopUpLink.addEventListener('click', (e) => {
+          props.history.push(`/orgs/${orgId}`)
+        });
         new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(popUpMarkup)
-          .addTo(map);
+        .setLngLat(coordinates)
+        .setDOMContent(PopUpLink)
+        .addTo(map);
 
       });
 
@@ -166,66 +172,12 @@ useEffect(() => {
       map.on("mouseleave", "clusters", () => {
         map.getCanvas().style.cursor = "";
       });
-
-      /*
-      const mapButton = document.getElementById('map-button');
-
-      mapButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log("handle button")
-        const featuresLoaded = map.getSource('organizations')._options.data.features;
-        if(featuresLoaded.length !== 0) {
-          const bounds = new mapboxgl.LngLatBounds();
-          const mySource = map.getSource('organizations');
-          mySource._options.data.features.forEach((feature) => {
-            bounds.extend(feature.geometry.coordinates);
-          });
-          map.fitBounds(bounds, {padding : 30});
-        }
-      }, false)
-
-      class ToggleControl extends mapboxgl.GeolocateControl {
-            _onSuccess(position) {
-                this.map.flyTo({
-                    center: [position.coords.longitude, position.coords.latitude],
-                    zoom: 17,
-                    bearing: 0,
-                    pitch: 0
-                });
-            }
-
-            onAdd(map, cs) {
-                this.map = map;
-                this.container = document.createElement('div');
-                this.container.className = `mapboxgl-ctrl`;
-                const button = this._createButton('monitor_button')
-                this.container.appendChild(button);
-                return this.container;
-            }
-
-            _createButton(className) {
-                const el = window.document.createElement('button')
-                el.className = className;
-                el.textContent = 'Use my location';
-                el.addEventListener('click', () => {
-                    this.trigger();
-                });
-                this._setup = true;
-                return el;
-            }
-        }
-        const toggleControl = new ToggleControl({})
-        map.addControl(toggleControl, 'top-left')
-        */
-
     });
-
   },[orgs]);
 
   return (
     <>
       <div id="map" style={{ width: "100%", height: "0", padding: "0 0 56% 0" }}></div>
-      {/* <button id="map-button">Home</button> */}
     </>
   )
 

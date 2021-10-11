@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OrganizationCard from "../components/OrganizationCard";
-import OrganizationsNearUserMap from "../components/OrganizationsNearUserMap";
+import AllOrganizationsMap from "../components/AllOrganizationsMap";
+
+import "../styles/searchPage.css";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -59,64 +61,86 @@ export default function SearchPage(props) {
 
   return (
     <div>
-      <h1>Search Page</h1>
-      <form onSubmit={handleClick}>
-        <div>
-          <label htmlFor="nameOrLocation">Search by Name or Location:</label>
-          <input
-            type="text"
-            placeholder="Search here"
-            name="nameOrLocation"
-            value={searchInput}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="categories">Search by Category:</label>
-          <select
-            name="categories"
-            id="categories"
-            onChange={handleSelectChange}
-          >
-            <option disable="true" value="">
-              Select a category from the list
-            </option>
-            <option value="Activism">Activism</option>
-            <option value="Gender Discrimination">Gender Discrimination</option>
-            <option value="Human Rights">Human Rights</option>
-            <option value="Inequality">Inequality</option>
-            <option value="Malnutrition">Malnutrition</option>
-            <option value="Maternal Health">Maternal Health</option>
-            <option value="Reproductive Rights">Reproductive Rights</option>
-            <option value="Social Solidarity">Social Solidarity</option>
-            <option value="Victim Support">Victim Support</option>
-            <option value="Victim Protection">Victim Protection</option>
-            <option value="Women in Tech">Women in Tech</option>
-          </select>
-        </div>
-        <button type="submit">Search</button>
-      </form>
       {orgs.length ? (
         <>
-          <OrganizationsNearUserMap 
-            orgs={orgs}
-          />
-          {orgs.map((organization) => (
-            <div className="container-fluid">
+          <AllOrganizationsMap orgs={orgs} {...props} />
+          <div>
+            <form
+              className="searchFormContainer searchForm"
+              onSubmit={handleClick}
+            >
+              <div className="searchContainer">
+                <input
+                  className="searchInput searchPagePlaceholder"
+                  type="text"
+                  placeholder="Search by name or location"
+                  name="nameOrLocation"
+                  value={searchInput}
+                  onChange={handleChange}
+                />
+                <img
+                  src="/images/telescope.png"
+                  className="searchImg searchImgInSearchPage"
+                  alt=""
+                />
+              </div>
+              <div className="searchContainer">
+                <select
+                  className="searchBarInput"
+                  name="categories"
+                  id="categories"
+                  onChange={handleSelectChange}
+                >
+                  <option
+                    disable="true"
+                    value=""
+                  >
+                    Search by category
+                  </option>
+                  <option value="Activism">Activism</option>
+                  <option value="Gender Descrimination">
+                    Gender Discrimination
+                  </option>
+                  <option value="Human Rights">Human Rights</option>
+                  <option value="Inequality">Inequality</option>
+                  <option value="Malnutrition">Malnutrition</option>
+                  <option value="Maternal Health">Maternal Health</option>
+                  <option value="Reproductive Rights">
+                    Reproductive Rights
+                  </option>
+                  <option value="Social Solidarity">Social Solidarity</option>
+                  <option value="Victim Support">Victim Support</option>
+                  <option value="Victim Protection">Victim Protection</option>
+                  <option value="Women in Tech">Women in Tech</option>
+                </select>
+                <img
+                  src="/images/telescope.png"
+                  className="searchImg searchImgInSearchPage"
+                  alt=""
+                />
+              </div>
+              <button className="searchPageButton button-52 " type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+          <div className="container-fluid">
+            {orgs.map((organization) => (
               <OrganizationCard key={organization._id} {...organization} />
-            </div>
-          ))}
+            ))}
+          </div>
         </>
       ) : (
-        <div>
-          <p>No organizations found.</p>
-          <p>
-            Would you like to create a page for an organization at this
-            location?
-          </p>
-          <Link to="/orgs/create">
-            <button>Create an organization</button>
-          </Link>
+        <div className="noOrgsFoundContainer">
+          <img src="/images/hero.png" className="heroImg" alt="" />
+          <div className="textContainer">
+            <h4>No organizations found!</h4>
+            <Link to="/orgs/create">
+              <button className="searchButton button-52 ">
+                Create an Organization
+              </button>
+            </Link>
+          </div>
         </div>
       )}
     </div>

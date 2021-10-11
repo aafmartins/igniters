@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
-const mapBoxToken = process.env.MAPBOX_TOKEN;
+const mapBoxToken = process.env.REACT_APP_MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({
   accessToken: mapBoxToken,
 });
@@ -103,7 +103,6 @@ router.delete("/orgs/delete/:orgId", isAuthenticated, (req, res, next) => {
 //  GET /api/orgs/:orgId -  Retrieves a specific organization by id
 router.get("/orgs/:orgId", (req, res, next) => {
   const { orgId } = req.params;
-
   if (!mongoose.Types.ObjectId.isValid(orgId)) {
     res.status(400).json({
       message: "Specified id is not valid",

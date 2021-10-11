@@ -1,15 +1,33 @@
 .orgDetailsPage {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+}
+
+.filterSpan {
+  position: relative;
 }
 
 .orgHeaderImg {
   width: 100%;
+  position: relative;
+  display: block;
+  object-fit: cover;
+  filter: grayscale(1) opacity(0.8);
+}
+
+.filterSpan::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  position: absolute;
+  background: rgba(124, 94, 241, 0.5);
+  top: 0;
+  left: 0;
 }
 
 .mainDetailsContainer {
-  margin: 20px 20px;
+  margin: 30px 20px;
   max-width: 700px;
 }
 
@@ -25,11 +43,6 @@
   list-style: none;
   margin-left: 0;
   padding-left: 0;
-}
-
-.map-container {
-  width: 50vw;
-  height: 50vw;
 }
 
 .orgContactsAndDetails {
@@ -53,21 +66,96 @@
   margin-bottom: 5px;
 }
 
+.orgDetailsSubContainer {
+  max-width: 150px;
+}
+
 .address {
   margin-top: 10px;
-}
-.mapAndButtonsContainer {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 20px;
-  max-width: 700px;
 }
 
 .buttonsContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
+  margin: 20px;
 }
 
 .orgDetailsButtons {
-  width: 100px;
+  max-width: 200px;
+  margin: 5px;
+}
+
+.reviewCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.reviewButtons {
+  font-size: 10px;
+  padding: 5px 10px;
+}
+
+.reviewButtons::after {
+  background-color: #b1b1ff;
+  top: 4px;
+  left: 5px;
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.reviewFormInputContainer {
+  margin-bottom: 10px;
+}
+
+.editReviewFormInputContainer textarea,
+.reviewFormInputContainer textarea {
+  display: flex;
+  flex-direction: column;
+  width: 286px;
+  padding: 8px 12px;
+  border: 1px solid rgba(34, 24, 59, 0.25);
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.reviewFormSubmitButtonContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.editReviewFormButtonContainer button {
+  margin: 5px;
+}
+
+.reviewText {
+  max-width: 150px;
+}
+
+.ReviewCard {
+  margin: 20px 0;
+}
+
+@media only screen and (min-width: 600px) {
+  .mainDetailsContainer {
+    margin: 30px auto;
+    max-width: 700px;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 30px;
+    max-width: 700px;
+    margin: 30px auto;
+  }
+}
+
+.AddReview {
+  display: flex;
+  justify-content: center;
 }

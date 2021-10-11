@@ -1,6 +1,8 @@
-const { Schema, model } = require("mongoose");
+const {
+  Schema,
+  model
+} = require("mongoose");
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema({
   email: {
     type: String,
@@ -19,16 +21,13 @@ const userSchema = new Schema({
     type: String,
     default: "unknown",
   },
-  savedOrganizations: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Organization",
-      default: [],
-    },
-  ],
+  savedOrganizations: [{
+    type: Schema.Types.ObjectId,
+    ref: "Organization",
+    default: [],
+  }, ],
   username: {
     type: String,
-    // unique: true -> Ideally, should be unique, but its up to you
   }
 });
 

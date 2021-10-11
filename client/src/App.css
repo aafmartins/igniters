@@ -9,7 +9,7 @@ yellow: #FFCE46
 
 Star rating color
     filter: hue-rotate(
-206deg);
+195deg);
 */
 
 /* fonts:
@@ -32,6 +32,11 @@ body {
   padding-top: 70px;
 }
 
+.error-message {
+  text-align: center;
+  color: #ffce46;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -45,6 +50,15 @@ body {
   margin: 0 auto;
 }
 
+::placeholder {
+  font-size: 12px;
+  color: rgba(34, 24, 59, 0.5);
+}
+
+#categories {
+  background-color: transparent;
+}
+
 .mainContainer {
   flex: 1 0 auto;
 }
@@ -56,8 +70,8 @@ body {
   margin: 0 auto;
 }
 
-/* CSS */
 .button-52 {
+  color: #22183b;
   font-weight: 200;
   letter-spacing: 1px;
   padding: 10px 17px 10px;
@@ -65,12 +79,11 @@ body {
   cursor: pointer;
   position: relative;
   background-color: rgba(0, 0, 0, 0);
-  /* user-select: none; */
-  /* -webkit-user-select: none; */
   touch-action: manipulation;
 }
 
 .button-52:after {
+  color: #22183b;
   content: "";
   background-color: #f5eaf9;
   width: 100%;
@@ -89,45 +102,6 @@ body {
 
 @media (min-width: 768px) {
   .button-52 {
-    padding: 13px 50px 13px;
-  }
-}
-
-/* CSS */
-.button-53 {
-  font-size: 16px;
-  font-weight: 200;
-  letter-spacing: 1px;
-  padding: 13px 20px 13px;
-  outline: 0;
-  border: 1px solid black;
-  cursor: pointer;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-53:after {
-  content: "";
-  background-color: #f5eaf9;
-  width: 100%;
-  z-index: -1;
-  position: absolute;
-  height: 100%;
-  bottom: 7px;
-  left: 7px;
-  transition: 0.2s;
-}
-
-.button-53:hover:after {
-  bottom: 0px;
-  left: 0px;
-}
-
-@media (min-width: 768px) {
-  .button-53 {
     padding: 13px 50px 13px;
   }
 }

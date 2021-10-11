@@ -29,27 +29,52 @@ export default function NavBarPrivate() {
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto ul">
           <li className="nav-item active firstLink">
-            <Link className="nav-link " to="/orgs">
+            <Link
+              className="nav-link "
+              to="/orgs"
+              data-toggle="collapse"
+              data-target="#navbarText"
+            >
               <a className="anchors">Organizations</a>
             </Link>
           </li>
           <li li className="nav-item ulLi">
-            <Link className="nav-link" to={`/my-orgs`}>
+            <Link
+              className="nav-link"
+              to={`/my-orgs`}
+              data-toggle="collapse"
+              data-target="#navbarText"
+            >
               <a className="anchors">My Organizations</a>
             </Link>
           </li>
           <li className="nav-item ulLi">
-            <Link className="nav-link" to="/orgs/create">
+            <Link
+              className="nav-link"
+              to="/orgs/create"
+              data-toggle="collapse"
+              data-target="#navbarText"
+            >
               <a className="anchors">Create an organization</a>
             </Link>
           </li>
           <li className="nav-item ulLi">
-            <Link className="nav-link" to="/profile">
+            <Link
+              className="nav-link"
+              to="/profile"
+              data-toggle="collapse"
+              data-target="#navbarText"
+            >
               <a className="anchors">Profile</a>
             </Link>
           </li>
           <li className="nav-item lastLink ulLi">
-            <a className="nav-link" onClick={logOutUser}>
+            <a
+              className="nav-link"
+              onClick={logOutUser}
+              data-toggle="collapse"
+              data-target="#navbarText"
+            >
               Logout
             </a>
           </li>

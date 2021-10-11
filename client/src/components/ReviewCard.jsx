@@ -2,7 +2,7 @@ import { AuthContext } from "./../contexts/auth.context";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import EditReviewCard from "./../components/EditReviewCard";
-import "../styles/reviews.css";
+import StarRatings from "react-star-ratings";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
@@ -34,38 +34,37 @@ function ReviewCard(props) {
     getReview();
   }, []);
 
-  const deleteReview = () => {
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem("authToken");
-
-    // Send the token through the request "Authorization" Headers
-    axios
-      .delete(`${API_URL}/reviews/delete/${reviewId}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then(() => {
-        props.refreshOrg();
-      })
-      .catch((err) => console.log(err));
-  };
-
   //function to toggle the form AddReview hidden or showing style
   const toggleForm = () => {
     setShowForm(!showForm);
   };
 
   return (
-    <div className="ReviewCard card">
-      <h5>Reviews</h5>
-      <p class="starability-result" data-rating={rating}>
-        Rated: {rating} stars
-      </p>
+    <div className="ReviewCard">
+      {!showForm ? (
+        <>
+<p>
+          <StarRatings
+            rating={rating}
+            starRatedColor="rgba(124, 94, 241, 0.5)"
+            starHoverColor="rgba(124, 94, 241, 0.5)"	
+            starEmptyColor='rgb(140, 140, 140)'
+            starDimension='30px'
+            starSpacing="0"
+            numberOfStars={5}
+            name='rating'
+            isSelectable='false'
+          />
 
-      {/* <h6>Comment:</h6> */}
-      <p>{comment}</p>
-      <p>by: {reviewer.name}</p>
+          </p>
+
+          <p className="reviewText">
+            {comment} <br /> <i>by: {reviewer.name}</i>
+          </p>
+        </>
+      ) : null}
       {userToken._id === reviewer._id ? (
-        <div>
+        <>
           <button className="button-52 reviewButtons" onClick={toggleForm}>
             {showForm ? "Cancel" : "Edit"}
           </button>
@@ -77,15 +76,9 @@ function ReviewCard(props) {
                 toggleForm={toggleForm}
                 reviewId={reviewId}
               />
-              <button
-                className="button-52 reviewButtons"
-                onClick={deleteReview}
-              >
-                Delete
-              </button>
             </div>
           ) : null}
-        </div>
+        </>
       ) : (
         ""
       )}

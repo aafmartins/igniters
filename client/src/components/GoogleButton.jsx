@@ -19,7 +19,7 @@ export default function GoogleButton(props) {
         const requestBody = {
           email,
           name: givenName,
-          password: "GoogleUser1234"
+          password: process.env.REACT_APP_GOOGLE_USER_PASSWORD
         }
     
         axios

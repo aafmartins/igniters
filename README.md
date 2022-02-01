@@ -88,7 +88,7 @@ A repository of women's rights organizations, Igniters is a power tool for women
 ### Services
 
 - Auth Service
-- Localisation: Mabox API
+- Localisation: Mapbox API
 - Search Service
 - React Google LogIn
 
